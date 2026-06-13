@@ -32,8 +32,11 @@ const entrenadoresDefault = [
     { 
         id: "e2", name: "Oscar", role: "Coaching Team", score: 88, lastAudit: "2026-06-13 09:15", status: "good", focus: "Revisar MyZone.",
         clients: [
-            { id: "c3", name: "Marc Vila", compliance: [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c4", name: "Elena Soler", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1] }
+            { id: "c3", name: "Jose Antonio Gonzalez Arroyo", compliance: [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c4", name: "Montserrat Aguilar", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1] },
+            { id: "c7", name: "Sheila de Carmen", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c8", name: "Oriol Bacells", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c9", name: "Lisandro Melendez", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
         ]
     },
     { 
@@ -42,11 +45,23 @@ const entrenadoresDefault = [
             { id: "c5", name: "Ivan E.", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1] },
             { id: "c6", name: "Teresa D.", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1] }
         ]
+    },
+    { 
+        id: "e7", name: "Anna", role: "Coaching Team", score: 90, lastAudit: "2026-06-13 12:00", status: "good", focus: "Mantener seguimiento proactivo.",
+        clients: [
+            { id: "c10", name: "ANA MARIN MARTIN", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c11", name: "MONTSERRAT GARRIGA", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c12", name: "SELENE FERRER", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c13", name: "MONTSERRAT RUIZ GRIBAU", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0] },
+            { id: "c14", name: "GUILLERMO VERA", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c15", name: "CESAR DAVID SOLORZANO QUIÑE", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+            { id: "c16", name: "CRISTINA BATALLER BATALLER", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
+        ]
     }
 ];
 
 const auditoriasDefault = [
-    { id: "a1", date: "2026-06-13 09:15", coach: "Oscar", client: "Marc Vila", score: 88, shift: "Revisión Semanal", obs: "Falta entrega MyZone." }
+    { id: "a1", date: "2026-06-13 09:15", coach: "Oscar", client: "Jose Antonio Gonzalez Arroyo", score: 88, shift: "Revisión Semanal", obs: "Falta entrega MyZone." }
 ];
 
 // Carga desde Almacenamiento Local
