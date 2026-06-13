@@ -12,20 +12,19 @@ tailwind.config = {
     }
 }
 
-// Mapeo de Etiquetas para el Informe
 const PUNTOS_LABELS = {
     p1: "Coach en Membr", p2: "Valoración Fitness", p3: "Programa Asignado", p4: "Enviado por App", p5: "Completa Programas",
     p6: "Escaneo Evolt", p7: "Test Movilidad", p8: "Mejora Física", p9: "Registro Notas",
     p12: "Uso MyZone", p13: "Participación Reto", p14: "Grupo MyZone", p15: "Interacción Grupal"
 };
 
-// --- BASE DE DATOS REAL AF SANT ADRIÀ ---
 const entrenadoresDefault = [
     { 
         id: "e1", name: "Tomas", role: "Head Coach", score: 95,
         clients: [
             { id: "c_t1", name: "JOSE LUIS GIMENEZ", compliance: Array(22).fill(1) },
-            { id: "c_t2", name: "MARIA CARMEN RUIZ", compliance: Array(22).fill(1) }
+            { id: "c_t2", name: "MARIA CARMEN RUIZ", compliance: Array(22).fill(1) },
+            { id: "c_t3", name: "ANTONIO LOPEZ", compliance: Array(22).fill(1) }
         ]
     },
     { 
@@ -34,14 +33,42 @@ const entrenadoresDefault = [
             { id: "c_o1", name: "JOSE ANTONIO GONZALEZ ARROYO", compliance: Array(22).fill(1) },
             { id: "c_o2", name: "MONTSERRAT AGUILAR", compliance: Array(22).fill(1) },
             { id: "c_o3", name: "SHEILA DE CARMEN", compliance: Array(22).fill(1) },
-            { id: "c_o4", name: "ORIOL BACELLS", compliance: Array(22).fill(1) }
+            { id: "c_o4", name: "ORIOL BACELLS", compliance: Array(22).fill(1) },
+            { id: "c_o5", name: "LISANDRO MELENDEZ", compliance: Array(22).fill(1) },
+            { id: "c_o6", name: "JORGE MANUEL DOMINGUEZ", compliance: Array(22).fill(1) },
+            { id: "c_o7", name: "MIBEL RIBAS", compliance: Array(22).fill(1) },
+            { id: "c_o8", name: "YOLANDA FERNANDEZ", compliance: Array(22).fill(1) },
+            { id: "c_o9", name: "ANA MARIN MARTIN", compliance: Array(22).fill(1) },
+            { id: "c_o10", name: "RAUL VEGA GARCIA", compliance: Array(22).fill(1) },
+            { id: "c_o11", name: "XAVI CATALAN", compliance: Array(22).fill(1) },
+            { id: "c_o12", name: "SELENE FERRER", compliance: Array(22).fill(1) },
+            { id: "c_o13", name: "MONTSERRAT GARRIGA", compliance: Array(22).fill(1) },
+            { id: "c_o14", name: "LLUIS GASSO", compliance: Array(22).fill(1) },
+            { id: "c_o15", name: "LAURA MASSOT", compliance: Array(22).fill(1) },
+            { id: "c_o16", name: "SAMUEL RODRIGUEZ DA SILVA", compliance: Array(22).fill(1) },
+            { id: "c_o17", name: "MONTSERRAT RUIZ GRIBAU", compliance: Array(22).fill(1) },
+            { id: "c_o18", name: "GUILLERMO VERA", compliance: Array(22).fill(1) },
+            { id: "c_o19", name: "EDUARD FALCON", compliance: Array(22).fill(1) },
+            { id: "c_o20", name: "SEIDY GARCIA ISISDRO", compliance: Array(22).fill(1) },
+            { id: "c_o21", name: "CLAUDIA SOUZA DA SILVA", compliance: Array(22).fill(1) },
+            { id: "c_o22", name: "MONICA ESCAÑO VIAN", compliance: Array(22).fill(1) },
+            { id: "c_o23", name: "CESAR DAVID SOLORZANO QUIÑE", compliance: Array(22).fill(1) },
+            { id: "c_o24", name: "AUDRY DOTEL", compliance: Array(22).fill(1) },
+            { id: "c_o25", name: "CRISTINA BATALLER BATALLER", compliance: Array(22).fill(1) },
+            { id: "c_o26", name: "ALEX GIL RAFELS", compliance: Array(22).fill(1) },
+            { id: "c_o27", name: "YERAY MELLADO GARCIA", compliance: Array(22).fill(1) },
+            { id: "c_o28", name: "NATALIA BELEN DIAZ", compliance: Array(22).fill(1) },
+            { id: "c_o29", name: "ADOLFO ROSA RUIZ", compliance: Array(22).fill(1) },
+            { id: "c_o30", name: "PAOLA ALONZO ALVAREZ", compliance: Array(22).fill(1) },
+            { id: "c_o31", name: "CHAYMAE HOUNAINE", compliance: Array(22).fill(1) },
+            { id: "c_o32", name: "WISAL KHAN", compliance: Array(22).fill(1) },
+            { id: "c_o33", name: "LIZ PAOLA CANDIA", compliance: Array(22).fill(1) }
         ]
     },
     { 
         id: "e3", name: "Ruben", role: "Coach", score: 82,
         clients: [
-            { id: "c_r1", name: "ALUMNO RUBEN 1", compliance: Array(22).fill(1) },
-            { id: "c_r2", name: "ALUMNO RUBEN 2", compliance: Array(22).fill(1) }
+            { id: "c_r1", name: "ALUMNO RUBEN 1", compliance: Array(22).fill(1) }
         ]
     },
     { 
@@ -50,12 +77,49 @@ const entrenadoresDefault = [
             { id: "c_a1", name: "LUISA FERNANDA GOMEZ", compliance: Array(22).fill(1) },
             { id: "c_a2", name: "MARIA ISABEL PEREZ", compliance: Array(22).fill(1) }
         ]
+    },
+    { 
+        id: "e5", name: "Robert", role: "Coach", score: 85,
+        clients: [
+            { id: "c_ro1", name: "SHEILA DE CARMEN", compliance: Array(22).fill(1) },
+            { id: "c_ro2", name: "ORIOL BACELLS", compliance: Array(22).fill(1) },
+            { id: "c_ro3", name: "LISANDRO MELÉNDEZ", compliance: Array(22).fill(1) },
+            { id: "c_ro4", name: "JORGE MANUEL DOMÍNGUEZ", compliance: Array(22).fill(1) },
+            { id: "c_ro5", name: "MIBEL RIBAS", compliance: Array(22).fill(1) },
+            { id: "c_ro6", name: "YOLANDA FERNÁNDEZ", compliance: Array(22).fill(1) },
+            { id: "c_ro7", name: "ANA MARÍN MARTÍN", compliance: Array(22).fill(1) },
+            { id: "c_ro8", name: "RAÚL VEGA GARCÍA", compliance: Array(22).fill(1) },
+            { id: "c_ro9", name: "XAVI CATALÁN", compliance: Array(22).fill(1) },
+            { id: "c_ro10", name: "SELENE FERRER", compliance: Array(22).fill(1) },
+            { id: "c_ro11", name: "MONTSERRAT GARRIGA", compliance: Array(22).fill(1) },
+            { id: "c_ro12", name: "LLUÍS GASSÓ", compliance: Array(22).fill(1) },
+            { id: "c_ro13", name: "LAURA MASSOT", compliance: Array(22).fill(1) },
+            { id: "c_ro14", name: "SAMUEL RODRÍGUEZ DA SILVA", compliance: Array(22).fill(1) },
+            { id: "c_ro15", name: "MONTSERRAT RUIZ GRIBAU", compliance: Array(22).fill(1) },
+            { id: "c_ro16", name: "GUILLERMO VERA", compliance: Array(22).fill(1) },
+            { id: "c_ro17", name: "EDUARD FALCÓN", compliance: Array(22).fill(1) },
+            { id: "c_ro18", name: "SEIDY GARCÍA ISIDRO", compliance: Array(22).fill(1) },
+            { id: "c_ro19", name: "CLAUDIA SOUZA DA SILVA", compliance: Array(22).fill(1) },
+            { id: "c_ro20", name: "MÓNICA ESCAÑO VIAN", compliance: Array(22).fill(1) },
+            { id: "c_ro21", name: "CÉSAR DAVID SOLÓRZANO QUIÑE", compliance: Array(22).fill(1) },
+            { id: "c_ro22", name: "AUDRY DOTEL", compliance: Array(22).fill(1) },
+            { id: "c_ro23", name: "CRISTINA BATALLER BATALLER", compliance: Array(22).fill(1) },
+            { id: "c_ro24", name: "ALEX GIL RAFELS", compliance: Array(22).fill(1) },
+            { id: "c_ro25", name: "YERAY MELLADO GARCÍA", compliance: Array(22).fill(1) },
+            { id: "c_ro26", name: "NATALIA BELÉN DÍAZ", compliance: Array(22).fill(1) },
+            { id: "c_ro27", name: "ADOLFO ROSA RUIZ", compliance: Array(22).fill(1) },
+            { id: "c_ro28", name: "PAOLA ALONZO ÁLVAREZ", compliance: Array(22).fill(1) },
+            { id: "c_ro29", name: "CHAYMAE HOUNAINE", compliance: Array(22).fill(1) },
+            { id: "c_ro30", name: "WISAL KHAN", compliance: Array(22).fill(1) },
+            { id: "c_ro31", name: "LIZ PAOLA CANDIA", compliance: Array(22).fill(1) }
+        ]
     }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v11')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v11')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v12')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v12')) || [];
 let formParamValues = {};
+let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxtS5k9QSY7KanAx6rgCAnF9iPr8gtsyplfpiMo5YA-HAp-q-YqwLs17vL_gg6Odi57/exec";
 
 function resetFormParams() { for(let i = 1; i <= 22; i++) formParamValues[`p${i}`] = 1; }
 resetFormParams();
@@ -90,7 +154,6 @@ function setParam(id, val, btn) {
 }
 
 function renderDashboard() {
-    // Calcular Estadísticas
     const totalAudits = auditorias.length;
     const avgScore = totalAudits > 0 ? Math.round(auditorias.reduce((acc, a) => acc + a.score, 0) / totalAudits) : 0;
     const alerts = auditorias.filter(a => a.score < 80).length;
@@ -107,7 +170,7 @@ function renderDashboard() {
             <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-3">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold">${e.name[0]}</div>
-                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p></div>
+                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase">${e.role}</p></div>
                 </div>
                 <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Compliance: ${e.score}%</span></div>
                 <div class="w-full bg-brandDark h-1.5 rounded-full overflow-hidden border border-brandBorder"><div class="h-full ${color}" style="width: ${e.score}%"></div></div>
@@ -160,12 +223,27 @@ function procesarNuevaAuditoria(e) {
         score: score,
         prevScore: prevScore,
         compliance: complianceArray,
-        observations: observations
+        observations: observations,
+        techData: {
+            objetivo: document.getElementById('val_objetivo').value,
+            obs_programa: document.getElementById('val_obs_programa').value,
+            obs_evolt: document.getElementById('val_obs_evolt').value
+        }
     };
 
     auditorias.unshift(nuevaAuditoria);
-    localStorage.setItem('af_audits_v11', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v11', JSON.stringify(entrenadores));
+
+    // Inyectar datos al Google Sheet y marcar fila
+    if (googleScriptUrl) {
+        fetch(googleScriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({...nuevaAuditoria, action: "updateAndHighlight"})
+        });
+    }
+
+    localStorage.setItem('af_audits_v12', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v12', JSON.stringify(entrenadores));
 
     generarInforme(nuevaAuditoria);
 }
@@ -204,7 +282,7 @@ function generarInforme(aud) {
         </div>
         <div class="bg-brandDark/40 p-5 rounded-2xl border border-brandBorder space-y-2">
             <h5 class="text-xs font-bold text-white uppercase tracking-widest">Diagnóstico AF Sant Adrià</h5>
-            <p class="text-[11px] italic">Gestión de <strong>${aud.coach}</strong> con el alumno <strong>${aud.client}</strong> calificada como ${aud.score >= 85 ? 'Satisfactoria' : 'Revisable'}.</p>
+            <p class="text-[11px] italic italic text-brandText">Gestión de <strong>${aud.coach}</strong> con <strong>${aud.client}</strong> calificada como ${aud.score >= 85 ? 'Satisfactoria' : 'Revisable'}.</p>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
 }
