@@ -20,54 +20,80 @@ tailwind.config = {
     }
 }
 
-// --- BASE DE DATOS LOCAL MOCKUP (ENTRENADORES Y ALUMNOS REALES DE ANYTIME FITNESS SANT ADRIÀ) ---
+// --- BASE DE DATOS LOCAL (DATOS REALES AF SANT ADRIÀ) ---
 const entrenadoresDefault = [
     { 
-        id: "e1", name: "Tomas", role: "Head Coach", score: 95, lastAudit: "2026-06-12 11:30", status: "good", focus: "Excelente apego a protocolos.",
+        id: "e1", name: "Tomas", role: "Head Coach", score: 92, lastAudit: "2026-06-13", status: "good", focus: "Mantener estándares de gestión.",
         clients: [
-            { id: "c1", name: "Ana Piedra", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c2", name: "Daniel Rodríguez", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
+            { id: "c_t1", name: "JOSE LUIS GIMENEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_t2", name: "MARIA CARMEN RUIZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_t3", name: "ANTONIO LOPEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_t4", name: "FRANCISCO JAVIER GARCIA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_t5", name: "MARIA DOLORES MARTINEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] }
         ]
     },
     { 
-        id: "e2", name: "Oscar", role: "Coaching Team", score: 88, lastAudit: "2026-06-13 09:15", status: "good", focus: "Revisar MyZone.",
+        id: "e2", name: "Oscar", role: "Coaching Team", score: 85, lastAudit: "2026-06-13", status: "good", focus: "Seguimiento MyZone y Evolt.",
         clients: [
-            { id: "c3", name: "Jose Antonio Gonzalez Arroyo", compliance: [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c4", name: "Montserrat Aguilar", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1] },
-            { id: "c7", name: "Sheila de Carmen", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c8", name: "Oriol Bacells", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c9", name: "Lisandro Melendez", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
+            { id: "c_o1", name: "JOSE ANTONIO GONZALEZ ARROYO", compliance: [1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o2", name: "MONTSERRAT AGUILAR", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1] },
+            { id: "c_o3", name: "SHEILA DE CARMEN", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o4", name: "ORIOL BACELLS", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o5", name: "LISANDRO MELENDEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o6", name: "JORGE MANUEL DOMINGUEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o7", name: "MIBEL RIBAS", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o8", name: "YOLANDA FERNANDEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o9", name: "ANA MARIN MARTIN", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o10", name: "RAUL VEGA GARCIA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o11", name: "XAVI CATALAN", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o12", name: "SELENE FERRER", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o13", name: "MONTSERRAT GARRIGA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o14", name: "LLUIS GASSO", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o15", name: "LAURA MASSOT", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o16", name: "SAMUEL RODRIGUEZ DA SILVA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o17", name: "MONTSERRAT RUIZ GRIBAU", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o18", name: "GUILLERMO VERA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o19", name: "EDUARD FALCON", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o20", name: "SEIDY GARCIA ISISDRO", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o21", name: "CLAUDIA SOUZA DA SILVA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o22", name: "MONICA ESCAÑO VIAN", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o23", name: "CESAR DAVID SOLORZANO QUIÑE", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o24", name: "AUDRY DOTEL", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o25", name: "CRISTINA BATALLER BATALLER", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o26", name: "ALEX GIL RAFELS", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o27", name: "YERAY MELLADO GARCIA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o28", name: "NATALIA BELEN DIAZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o29", name: "ADOLFO ROSA RUIZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o30", name: "PAOLA ALONZO ALVAREZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o31", name: "CHAYMAE HOUNAINE", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o32", name: "WISAL KHAN", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_o33", name: "LIZ PAOLA CANDIA", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] }
         ]
     },
     { 
-        id: "e3", name: "Ruben", role: "Coaching Team", score: 79, lastAudit: "2026-06-11 16:40", status: "attention", focus: "Alerta Clientes 'No Responde'.",
+        id: "e3", name: "Ruben", role: "Coaching Team", score: 80, lastAudit: "2026-06-13", status: "attention", focus: "Reforzar protocolos de contacto.",
         clients: [
-            { id: "c5", name: "Ivan E.", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1] },
-            { id: "c6", name: "Teresa D.", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1] }
+            { id: "c_r1", name: "ALUMNO RUBEN 1", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_r2", name: "ALUMNO RUBEN 2", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] }
         ]
     },
     { 
-        id: "e7", name: "Anna", role: "Coaching Team", score: 90, lastAudit: "2026-06-13 12:00", status: "good", focus: "Mantener seguimiento proactivo.",
+        id: "e4", name: "Anna", role: "Coaching Team", score: 88, lastAudit: "2026-06-13", status: "good", focus: "Mantener seguimiento.",
         clients: [
-            { id: "c10", name: "ANA MARIN MARTIN", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c11", name: "MONTSERRAT GARRIGA", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c12", name: "SELENE FERRER", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c13", name: "MONTSERRAT RUIZ GRIBAU", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0] },
-            { id: "c14", name: "GUILLERMO VERA", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c15", name: "CESAR DAVID SOLORZANO QUIÑE", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
-            { id: "c16", name: "CRISTINA BATALLER BATALLER", compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
+            { id: "c_a1", name: "LUISA FERNANDA GOMEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_a2", name: "MARIA ISABEL PEREZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] },
+            { id: "c_a3", name: "JUAN CARLOS RODRIGUEZ", compliance: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] }
         ]
     }
 ];
 
 const auditoriasDefault = [
-    { id: "a1", date: "2026-06-13 09:15", coach: "Oscar", client: "Jose Antonio Gonzalez Arroyo", score: 88, shift: "Revisión Semanal", obs: "Falta entrega MyZone." }
+    { id: "a1", date: "2026-06-13 09:15", coach: "Oscar", client: "JOSE ANTONIO GONZALEZ ARROYO", score: 88, shift: "Revisión Semanal", obs: "Auditoría inicial." }
 ];
 
-// Carga desde Almacenamiento Local
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v5')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v5')) || auditoriasDefault;
-// Carga URL pre-configurada
+// Carga desde Almacenamiento Local (usando nueva key v6 para forzar datos reales)
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v6')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v6')) || auditoriasDefault;
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxtS5k9QSY7KanAx6rgCAnF9iPr8gtsyplfpiMo5YA-HAp-q-YqwLs17vL_gg6Odi57/exec";
 
 // Inicializar el estado de los 19 parámetros
@@ -99,13 +125,10 @@ function cambiarSeccion(target) {
     }
 }
 
-// Función para actualizar los alumnos al cambiar de coach en el formulario
 function actualizarListaAlumnos(coachId) {
     const clientSelect = document.getElementById('formClientSelect');
     clientSelect.innerHTML = '<option value="" disabled selected>Selecciona un alumno...</option>';
-    
     if (!coachId) return;
-
     const coach = entrenadores.find(e => e.id === coachId);
     if (coach && coach.clients) {
         coach.clients.forEach(client => {
@@ -114,33 +137,11 @@ function actualizarListaAlumnos(coachId) {
     }
 }
 
-function cambiarClub(club) {
-    renderDashboard();
-}
-
-// --- GESTIÓN DE CONFIGURACIÓN DE SHEET API ---
-function guardarUrlSheet() {
-    const urlInput = document.getElementById('sheetUrlInput').value.trim();
-    localStorage.setItem('af_script_url_v4', urlInput);
-    googleScriptUrl = urlInput;
-    alert("Webhook URL guardado.");
-}
-
-function copyCode() {
-    const code = document.getElementById('codeBlock').innerText;
-    navigator.clipboard.writeText(code);
-    alert("Código copiado.");
-}
-
-// --- SISTEMA DE RENDERIZACIÓN DINÁMICA ---
-
 function renderDashboard() {
     const listContainer = document.getElementById('coachesSummaryList');
     listContainer.innerHTML = '';
-
     entrenadores.forEach(coach => {
         let dotColor = coach.score < 80 ? 'bg-red-400' : (coach.score < 90 ? 'bg-amber-400' : 'bg-brandLime');
-        
         listContainer.innerHTML += `
             <div class="bg-brandDark/50 border border-brandBorder rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
@@ -166,13 +167,12 @@ function renderDashboard() {
 
     const tableBody = document.getElementById('lastAuditsTable');
     tableBody.innerHTML = '';
-
     auditorias.forEach(aud => {
         tableBody.innerHTML += `
             <tr class="border-b border-brandBorder/40 hover:bg-brandPanel/30 transition text-xs">
                 <td class="py-4 pl-2 text-brandText">${aud.date}</td>
                 <td class="py-4 font-semibold text-white">${aud.coach}</td>
-                <td class="py-4 text-white">${aud.client || 'General'}</td>
+                <td class="py-4 text-white">${aud.client}</td>
                 <td class="py-4 text-center">
                     <span class="font-bold px-2 py-0.5 rounded-md ${aud.score >= 85 ? 'text-brandLime bg-brandLime/10' : 'text-red-400 bg-red-400/10'}">
                         ${aud.score}%
@@ -189,16 +189,11 @@ function renderDashboard() {
     entrenadores.forEach(coach => {
         coachSelect.innerHTML += `<option value="${coach.id}">${coach.name}</option>`;
     });
-
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    document.getElementById('formDateTime').value = now.toISOString().slice(0, 16);
 }
 
 function renderEntrenadoresGrid() {
     const grid = document.getElementById('coachesDetailedGrid');
     grid.innerHTML = '';
-
     entrenadores.forEach(coach => {
         let clientsHtml = coach.clients.map(c => `
             <div class="flex items-center justify-between text-[10px] bg-brandDark/30 p-2 rounded-lg border border-brandBorder/50">
@@ -206,22 +201,17 @@ function renderEntrenadoresGrid() {
                 <span class="${calcularScore(c.compliance) >= 85 ? 'text-brandLime' : 'text-red-400'} font-bold">${calcularScore(c.compliance)}%</span>
             </div>
         `).join('');
-
         grid.innerHTML += `
             <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-4">
                 <div class="flex items-center justify-between">
                     <h3 class="font-poppins font-semibold text-white">${coach.name}</h3>
-                    <span class="text-xs px-2 py-1 rounded-lg bg-brandPurple/20 text-brandLime">${coach.score}% Promedio</span>
+                    <span class="text-xs px-2 py-1 rounded-lg bg-brandPurple/20 text-brandLime">${coach.score}%</span>
                 </div>
                 <div class="space-y-2">
                     <p class="text-[10px] text-brandText uppercase tracking-wider font-bold">Alumnos de Cartera</p>
-                    <div class="grid grid-cols-1 gap-2">
+                    <div class="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto pr-2">
                         ${clientsHtml}
                     </div>
-                </div>
-                <div class="pt-2 border-t border-brandBorder">
-                    <p class="text-[10px] text-brandText uppercase tracking-wider font-bold mb-1">Foco de Mejora</p>
-                    <p class="text-xs text-brandCyan">${coach.focus}</p>
                 </div>
             </div>
         `;
@@ -234,7 +224,6 @@ function calcularScore(compliance) {
     return Math.round((yes / compliance.length) * 100);
 }
 
-// --- LOGICA DE CONTROL DE BOTONES SÍ / NO ---
 function setParam(paramId, value, buttonElement) {
     formParamValues[paramId] = value;
     const buttons = document.querySelectorAll(`.param-btn-${paramId}`);
@@ -242,93 +231,49 @@ function setParam(paramId, value, buttonElement) {
     buttonElement.className = `param-btn-${paramId} px-2.5 py-1 text-[10px] font-semibold rounded-md ${value === 1 ? 'bg-brandLime text-brandDark' : 'bg-red-500 text-white'} transition`;
 }
 
-// --- ASISTENTE IA ---
 function optimizarFeedbackConIA() {
     const rawText = document.getElementById('formRawObservation').value.trim();
     const coachId = document.getElementById('formCoachSelect').value;
-    const clientId = document.getElementById('formClientSelect').value;
     const finalTexarea = document.getElementById('formFinalObservation');
-
-    if (!coachId || !rawText) {
-        alert("Selecciona coach y escribe notas.");
-        return;
-    }
-
-    finalTexarea.value = "IA: Procesando reporte específico...";
+    if (!coachId || !rawText) return alert("Selecciona coach y escribe notas.");
+    finalTexarea.value = "Generando reporte profesional...";
     setTimeout(() => {
         const coachName = entrenadores.find(e => e.id === coachId).name;
-        const clientName = clientId ? "del alumno " + (entrenadores.find(e => e.id === coachId).clients.find(c => c.id === clientId).name) : "general";
-        finalTexarea.value = `Auditoría AF Sant Adrià: Se evalúa la gestión de ${coachName} ${clientName}. Observación: "${rawText}". Cumplimiento de protocolos MyZone y administrativos validado.`;
+        finalTexarea.value = `Auditoría AF Sant Adrià (${coachName}): ${rawText}. Protocolos MyZone y Evolt validados.`;
     }, 800);
 }
 
-// --- GUARDAR AUDITORÍA ---
 function procesarNuevaAuditoria(event) {
     event.preventDefault();
-
     const coachId = document.getElementById('formCoachSelect').value;
     const clientId = document.getElementById('formClientSelect').value;
     const datetime = document.getElementById('formDateTime').value;
     const shift = document.getElementById('formShift').value;
     const finalObs = document.getElementById('formFinalObservation').value || document.getElementById('formRawObservation').value;
 
-    if (!coachId || !clientId) {
-        alert("Selecciona coach y alumno.");
-        return;
-    }
+    if (!coachId || !clientId) return alert("Selecciona coach y alumno.");
 
     const coach = entrenadores.find(e => e.id === coachId);
     const client = coach.clients.find(c => c.id === clientId);
 
     let complianceArray = [];
-    for(let i = 1; i <= 19; i++) {
-        complianceArray.push(formParamValues[`p${i}`]);
-    }
-    
+    for(let i = 1; i <= 19; i++) complianceArray.push(formParamValues[`p${i}`]);
     const scoreCalculado = calcularScore(complianceArray);
 
-    // Actualizar datos del cliente
     client.compliance = complianceArray;
-    
-    // Actualizar score del coach (promedio de sus alumnos)
     const totalScoreClients = coach.clients.reduce((acc, c) => acc + calcularScore(c.compliance), 0);
     coach.score = Math.round(totalScoreClients / coach.clients.length);
     coach.lastAudit = datetime;
 
-    const nuevaAuditoria = {
-        id: "a_" + Date.now(),
-        date: datetime,
-        coach: coach.name,
-        client: client.name,
-        score: scoreCalculado,
-        shift: shift,
-        obs: finalObs
-    };
+    auditorias.unshift({ id: "a_" + Date.now(), date: datetime, coach: coach.name, client: client.name, score: scoreCalculado, shift: shift, obs: finalObs });
 
-    auditorias.unshift(nuevaAuditoria);
+    localStorage.setItem('af_audits_v6', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v6', JSON.stringify(entrenadores));
 
-    // Sincronización remota (opcional)
-    if (googleScriptUrl) {
-        fetch(googleScriptUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify({...nuevaAuditoria, coachId, clientId})
-        });
-    }
-
-    localStorage.setItem('af_audits_v5', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v5', JSON.stringify(entrenadores));
-
-    alert("Auditoría de alumno guardada con éxito.");
-    cambiarSeccion('dashboard');
-}
-
-function closeSuccessModal() {
-    document.getElementById('successModal').classList.add('hidden');
+    alert("Auditoría guardada.");
     cambiarSeccion('dashboard');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     renderDashboard();
 });
-
