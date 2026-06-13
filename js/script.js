@@ -66,58 +66,53 @@ const entrenadoresDefault = [
         ]
     },
     { 
-        id: "e3", name: "Ruben", role: "Coach", score: 82,
+        id: "e3", name: "Ruben", role: "Coach", score: 85,
         clients: [
-            { id: "c_r1", name: "ALUMNO RUBEN 1", compliance: Array(22).fill(1) }
+            { id: "c_r1", name: "SHEILA DE CARMEN", compliance: Array(22).fill(1) },
+            { id: "c_r2", name: "ORIOL BACELLS", compliance: Array(22).fill(1) },
+            { id: "c_r3", name: "LISANDRO MELÉNDEZ", compliance: Array(22).fill(1) },
+            { id: "c_r4", name: "JORGE MANUEL DOMÍNGUEZ", compliance: Array(22).fill(1) },
+            { id: "c_r5", name: "MIBEL RIBAS", compliance: Array(22).fill(1) },
+            { id: "c_r6", name: "YOLANDA FERNÁNDEZ", compliance: Array(22).fill(1) },
+            { id: "c_r7", name: "ANA MARÍN MARTÍN", compliance: Array(22).fill(1) },
+            { id: "c_r8", name: "RAÚL VEGA GARCÍA", compliance: Array(22).fill(1) },
+            { id: "c_r9", name: "XAVI CATALÁN", compliance: Array(22).fill(1) },
+            { id: "c_r10", name: "SELENE FERRER", compliance: Array(22).fill(1) },
+            { id: "c_r11", name: "MONTSERRAT GARRIGA", compliance: Array(22).fill(1) },
+            { id: "c_r12", name: "LLUÍS GASSÓ", compliance: Array(22).fill(1) },
+            { id: "c_r13", name: "LAURA MASSOT", compliance: Array(22).fill(1) },
+            { id: "c_r14", name: "SAMUEL RODRIGUEZ DA SILVA", compliance: Array(22).fill(1) },
+            { id: "c_r15", name: "MONTSERRAT RUIZ GRIBAU", compliance: Array(22).fill(1) },
+            { id: "c_r16", name: "GUILLERMO VERA", compliance: Array(22).fill(1) },
+            { id: "c_r17", name: "EDUARD FALCÓN", compliance: Array(22).fill(1) },
+            { id: "c_r18", name: "SEIDY GARCÍA ISIDRO", compliance: Array(22).fill(1) },
+            { id: "c_r19", name: "CLAUDIA SOUZA DA SILVA", compliance: Array(22).fill(1) },
+            { id: "c_r20", name: "MÓNICA ESCAÑO VIAN", compliance: Array(22).fill(1) },
+            { id: "c_r21", name: "CÉSAR DAVID SOLÓRZANO QUIÑE", compliance: Array(22).fill(1) },
+            { id: "c_r22", name: "AUDRY DOTEL", compliance: Array(22).fill(1) },
+            { id: "c_r23", name: "CRISTINA BATALLER BATALLER", compliance: Array(22).fill(1) },
+            { id: "c_r24", name: "ALEX GIL RAFELS", compliance: Array(22).fill(1) },
+            { id: "c_r25", name: "YERAY MELLADO GARCÍA", compliance: Array(22).fill(1) },
+            { id: "c_r26", name: "NATALIA BELÉN DÍAZ", compliance: Array(22).fill(1) },
+            { id: "c_r27", name: "ADOLFO ROSA RUIZ", compliance: Array(22).fill(1) },
+            { id: "c_r28", name: "PAOLA ALONZO ÁLVAREZ", compliance: Array(22).fill(1) },
+            { id: "c_r29", name: "CHAYMAE HOUNAINE", compliance: Array(22).fill(1) },
+            { id: "c_r30", name: "WISAL KHAN", compliance: Array(22).fill(1) },
+            { id: "c_r31", name: "LIZ PAOLA CANDIA", compliance: Array(22).fill(1) }
         ]
     },
     { 
         id: "e4", name: "Anna", role: "Coach", score: 90,
         clients: [
             { id: "c_a1", name: "LUISA FERNANDA GOMEZ", compliance: Array(22).fill(1) },
-            { id: "c_a2", name: "MARIA ISABEL PEREZ", compliance: Array(22).fill(1) }
-        ]
-    },
-    { 
-        id: "e5", name: "Robert", role: "Coach", score: 85,
-        clients: [
-            { id: "c_ro1", name: "SHEILA DE CARMEN", compliance: Array(22).fill(1) },
-            { id: "c_ro2", name: "ORIOL BACELLS", compliance: Array(22).fill(1) },
-            { id: "c_ro3", name: "LISANDRO MELÉNDEZ", compliance: Array(22).fill(1) },
-            { id: "c_ro4", name: "JORGE MANUEL DOMÍNGUEZ", compliance: Array(22).fill(1) },
-            { id: "c_ro5", name: "MIBEL RIBAS", compliance: Array(22).fill(1) },
-            { id: "c_ro6", name: "YOLANDA FERNÁNDEZ", compliance: Array(22).fill(1) },
-            { id: "c_ro7", name: "ANA MARÍN MARTÍN", compliance: Array(22).fill(1) },
-            { id: "c_ro8", name: "RAÚL VEGA GARCÍA", compliance: Array(22).fill(1) },
-            { id: "c_ro9", name: "XAVI CATALÁN", compliance: Array(22).fill(1) },
-            { id: "c_ro10", name: "SELENE FERRER", compliance: Array(22).fill(1) },
-            { id: "c_ro11", name: "MONTSERRAT GARRIGA", compliance: Array(22).fill(1) },
-            { id: "c_ro12", name: "LLUÍS GASSÓ", compliance: Array(22).fill(1) },
-            { id: "c_ro13", name: "LAURA MASSOT", compliance: Array(22).fill(1) },
-            { id: "c_ro14", name: "SAMUEL RODRÍGUEZ DA SILVA", compliance: Array(22).fill(1) },
-            { id: "c_ro15", name: "MONTSERRAT RUIZ GRIBAU", compliance: Array(22).fill(1) },
-            { id: "c_ro16", name: "GUILLERMO VERA", compliance: Array(22).fill(1) },
-            { id: "c_ro17", name: "EDUARD FALCÓN", compliance: Array(22).fill(1) },
-            { id: "c_ro18", name: "SEIDY GARCÍA ISIDRO", compliance: Array(22).fill(1) },
-            { id: "c_ro19", name: "CLAUDIA SOUZA DA SILVA", compliance: Array(22).fill(1) },
-            { id: "c_ro20", name: "MÓNICA ESCAÑO VIAN", compliance: Array(22).fill(1) },
-            { id: "c_ro21", name: "CÉSAR DAVID SOLÓRZANO QUIÑE", compliance: Array(22).fill(1) },
-            { id: "c_ro22", name: "AUDRY DOTEL", compliance: Array(22).fill(1) },
-            { id: "c_ro23", name: "CRISTINA BATALLER BATALLER", compliance: Array(22).fill(1) },
-            { id: "c_ro24", name: "ALEX GIL RAFELS", compliance: Array(22).fill(1) },
-            { id: "c_ro25", name: "YERAY MELLADO GARCÍA", compliance: Array(22).fill(1) },
-            { id: "c_ro26", name: "NATALIA BELÉN DÍAZ", compliance: Array(22).fill(1) },
-            { id: "c_ro27", name: "ADOLFO ROSA RUIZ", compliance: Array(22).fill(1) },
-            { id: "c_ro28", name: "PAOLA ALONZO ÁLVAREZ", compliance: Array(22).fill(1) },
-            { id: "c_ro29", name: "CHAYMAE HOUNAINE", compliance: Array(22).fill(1) },
-            { id: "c_ro30", name: "WISAL KHAN", compliance: Array(22).fill(1) },
-            { id: "c_ro31", name: "LIZ PAOLA CANDIA", compliance: Array(22).fill(1) }
+            { id: "c_a2", name: "MARIA ISABEL PEREZ", compliance: Array(22).fill(1) },
+            { id: "c_a3", name: "JUAN CARLOS RODRIGUEZ", compliance: Array(22).fill(1) }
         ]
     }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v12')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v12')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v13')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v13')) || [];
 let formParamValues = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxtS5k9QSY7KanAx6rgCAnF9iPr8gtsyplfpiMo5YA-HAp-q-YqwLs17vL_gg6Odi57/exec";
 
@@ -185,7 +180,7 @@ function renderDashboard() {
                 <td class="py-4 pl-2 text-brandText">${a.date.split('T')[0]}</td>
                 <td class="py-4 font-bold text-white">${a.coach}</td>
                 <td class="py-4 text-white">${a.client}</td>
-                <td class="py-4 text-center"><span class="px-2 py-1 rounded-lg text-[10px] font-bold ${a.score >= 85 ? 'bg-brandLime/10 text-brandLime' : 'bg-red-500/10 text-red-500'}">${a.score}%</span></td>
+                <td class="py-4 text-center"><span class="px-2 py-1 rounded-lg text-[10px] font-bold ${a.score >= 85 ? 'text-brandLime bg-brandLime/10' : 'text-red-400 bg-red-400/10'}">${a.score}%</span></td>
                 <td class="py-4 text-center"><button onclick="verInformePrevio('${a.id}')" class="text-brandPurple hover:text-white transition"><i class="fa-solid fa-file-invoice"></i></button></td>
             </tr>`;
     });
@@ -223,17 +218,11 @@ function procesarNuevaAuditoria(e) {
         score: score,
         prevScore: prevScore,
         compliance: complianceArray,
-        observations: observations,
-        techData: {
-            objetivo: document.getElementById('val_objetivo').value,
-            obs_programa: document.getElementById('val_obs_programa').value,
-            obs_evolt: document.getElementById('val_obs_evolt').value
-        }
+        observations: observations
     };
 
     auditorias.unshift(nuevaAuditoria);
 
-    // Inyectar datos al Google Sheet y marcar fila
     if (googleScriptUrl) {
         fetch(googleScriptUrl, {
             method: 'POST',
@@ -242,8 +231,8 @@ function procesarNuevaAuditoria(e) {
         });
     }
 
-    localStorage.setItem('af_audits_v12', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v12', JSON.stringify(entrenadores));
+    localStorage.setItem('af_audits_v13', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v13', JSON.stringify(entrenadores));
 
     generarInforme(nuevaAuditoria);
 }
@@ -282,7 +271,7 @@ function generarInforme(aud) {
         </div>
         <div class="bg-brandDark/40 p-5 rounded-2xl border border-brandBorder space-y-2">
             <h5 class="text-xs font-bold text-white uppercase tracking-widest">Diagnóstico AF Sant Adrià</h5>
-            <p class="text-[11px] italic italic text-brandText">Gestión de <strong>${aud.coach}</strong> con <strong>${aud.client}</strong> calificada como ${aud.score >= 85 ? 'Satisfactoria' : 'Revisable'}.</p>
+            <p class="text-[11px] italic text-brandText">Gestión de <strong>${aud.coach}</strong> con <strong>${aud.client}</strong> calificada como ${aud.score >= 85 ? 'Satisfactoria' : 'Revisable'}.</p>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
 }
