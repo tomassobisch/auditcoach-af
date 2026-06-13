@@ -264,15 +264,21 @@
                 <!-- Formulario -->
                 <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="space-y-6">
                     <!-- Datos Generales de la Sesión -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Coach Evaluado</label>
-                            <select id="formCoachSelect" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
+                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
                                 <!-- Renderizado dinámico de entrenadores -->
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Fecha y Hora de Auditoría</label>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Alumno / Cliente</label>
+                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
+                                <option value="" disabled selected>Selecciona un coach primero...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Fecha y Hora</label>
                             <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white">
                         </div>
                         <div>
