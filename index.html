@@ -3,126 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AF Sant Adrià - Auditoría Pro con Informe</title>
+    <title>Anytime Fitness Sant Adrià - Auditoría 38 Col</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col md:flex-row bg-[#0B0813]">
+<body class="font-sans antialiased min-h-screen flex flex-col md:flex-row">
 
+    <!-- MENÚ LATERAL (Estética Original) -->
     <aside class="w-full md:w-64 bg-brandPanel border-b md:border-b-0 md:border-r border-brandBorder flex flex-col shrink-0">
-        <div class="p-6 border-b border-brandBorder flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brandPurple to-brandLime flex items-center justify-center text-white"><i class="fa-solid fa-running"></i></div>
-            <div>
-                <h1 class="font-poppins font-bold text-sm text-white">AF Sant Adrià</h1>
-                <span class="text-[9px] text-brandLime tracking-widest uppercase font-semibold">Pro Auditor v2</span>
+        <div class="p-6 border-b border-brandBorder flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brandPurple to-brandLime flex items-center justify-center text-brandDark font-bold text-xl font-poppins">
+                    <i class="fa-solid fa-running text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-poppins font-bold text-base leading-tight text-white">Anytime Fitness</h1>
+                    <span class="text-[10px] text-brandLime tracking-wider uppercase font-semibold">Sant Adrià</span>
+                </div>
             </div>
         </div>
+
         <nav class="flex-grow p-4 space-y-1.5">
-            <button onclick="cambiarSeccion('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white transition active-nav">
-                <i class="fa-solid fa-chart-line"></i><span class="text-sm">Dashboard</span>
+            <button onclick="cambiarSeccion('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition active-nav">
+                <i class="fa-solid fa-chart-line w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Dashboard</span>
             </button>
-            <button onclick="cambiarSeccion('auditar')" id="nav-auditar" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white transition">
-                <i class="fa-solid fa-clipboard-check"></i><span class="text-sm">Auditar</span>
+            <button onclick="cambiarSeccion('auditar')" id="nav-auditar" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
+                <i class="fa-solid fa-square-plus w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Auditar Coaching</span>
             </button>
-            <button onclick="cambiarSeccion('entrenadores')" id="nav-entrenadores" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white transition">
-                <i class="fa-solid fa-users"></i><span class="text-sm">Coaches</span>
+            <button onclick="cambiarSeccion('entrenadores')" id="nav-entrenadores" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
+                <i class="fa-solid fa-users-gear w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Fichas de Coaches</span>
             </button>
         </nav>
     </aside>
 
     <main class="flex-grow flex flex-col min-w-0">
-        <header class="h-16 border-b border-brandBorder bg-brandPanel px-6 flex items-center justify-between">
-            <h2 id="sectionTitle" class="font-poppins font-semibold text-white">Panel de Control AF</h2>
+        <header class="h-16 border-b border-brandBorder bg-brandPanel px-6 flex items-center justify-between shrink-0">
+            <h2 id="sectionTitle" class="font-poppins font-semibold text-base sm:text-lg text-white">Dashboard de Auditorías</h2>
             <div class="flex items-center gap-3">
-                <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Inteligente Activo
-                </span>
+                <div class="w-10 h-10 rounded-full border border-brandBorder bg-brandDark flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield text-brandLime"></i>
+                </div>
             </div>
         </header>
 
         <div class="flex-grow p-6 overflow-y-auto">
-            <!-- VISTA DASHBOARD -->
+
+            <!-- VISTA DASHBOARD (Original) -->
             <section id="view-dashboard" class="space-y-6">
-                <div id="coachesSummaryList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                <div id="coachesSummaryList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                 <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
-                    <h3 class="text-white font-poppins font-semibold mb-4 text-xs uppercase tracking-widest">Auditorías Recientes</h3>
-                    <div class="overflow-x-auto"><table class="w-full text-left text-xs"><tbody id="lastAuditsTable"></tbody></table></div>
+                    <h3 class="font-poppins font-semibold text-white mb-4">Últimas Auditorías (38 Col)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-brandBorder text-[11px] text-brandText uppercase font-semibold">
+                                    <th class="pb-3">Fecha</th>
+                                    <th class="pb-3">Coach</th>
+                                    <th class="pb-3">Alumno</th>
+                                    <th class="pb-3 text-center">Score</th>
+                                    <th class="pb-3 text-center">Informe</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lastAuditsTable" class="text-sm"></tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
-            <!-- VISTA AUDITAR -->
-            <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-6 pb-20">
+            <!-- VISTA AUDITAR (38 COL con OBSERVACIONES) -->
+            <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-6">
                 <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="space-y-6">
-                    <!-- Cabecera -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-[10px] text-brandText uppercase font-bold mb-2">Entrenador Responsable</label>
-                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandLime"></select>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Coach</label>
+                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white"></select>
                         </div>
                         <div>
-                            <label class="block text-[10px] text-brandText uppercase font-bold mb-2">Alumno a Evaluar</label>
-                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandLime"></select>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Alumno</label>
+                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white"></select>
                         </div>
                         <div>
-                            <label class="block text-[10px] text-brandText uppercase font-bold mb-2">Fecha y Hora</label>
-                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandLime">
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Fecha</label>
+                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white">
                         </div>
                     </div>
 
-                    <!-- Puntos de Auditoría (Generados dinámicamente para incluir observaciones) -->
-                    <div id="puntosAuditoriaContainer" class="space-y-6">
-                        <!-- Bloque 1: Gestión -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
-                            <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest pb-2 border-b border-brandBorder">1. Gestión de Membr y Programa</h4>
-                            <div class="grid grid-cols-1 gap-4" id="seccion-1-puntos"></div>
+                    <!-- Bloque 1: Gestión -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">1. Gestión y Programa</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <!-- Punto con Observación -->
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Coach asignado en Membr?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p1', 1, this)" class="param-btn-p1 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p1', 0, this)" class="param-btn-p1 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p1" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Valoración Fitness Realizada?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p2', 1, this)" class="param-btn-p2 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p2', 0, this)" class="param-btn-p2 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p2" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] text-brandText uppercase mb-1">Objetivo del Cliente (Col E)</label>
+                                    <input type="text" id="val_objetivo" class="w-full bg-brandDark border border-brandBorder rounded-lg p-2.5 text-xs text-white">
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Programa Asignado?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p3', 1, this)" class="param-btn-p3 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p3', 0, this)" class="param-btn-p3 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p3" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Enviado por App?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p4', 1, this)" class="param-btn-p4 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p4', 0, this)" class="param-btn-p4 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p4" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Cliente Completa Programas?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p5', 1, this)" class="param-btn-p5 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p5', 0, this)" class="param-btn-p5 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p5" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                            </div>
                         </div>
-                        <!-- Bloque 2: Evolt -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
-                            <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest pb-2 border-b border-brandBorder">2. Evolt y Movilidad</h4>
-                            <div class="grid grid-cols-1 gap-4" id="seccion-2-puntos"></div>
-                        </div>
-                        <!-- Bloque 3: MyZone -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
-                            <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest pb-2 border-b border-brandBorder">3. Ecosistema Digital y MyZone</h4>
-                            <div class="grid grid-cols-1 gap-4" id="seccion-3-puntos"></div>
-                        </div>
-                        <!-- Bloque 4: Seguimiento -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
-                            <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest pb-2 border-b border-brandBorder">4. Seguimiento Mensajes App</h4>
-                            <div class="grid grid-cols-1 gap-4" id="seccion-4-puntos"></div>
+                        <textarea id="val_obs_programa" rows="2" placeholder="Observaciones Generales de Programa (Col G)..." class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white"></textarea>
+                    </div>
+
+                    <!-- Bloque 2: Evolt y Movilidad -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">2. Evolt y Movilidad</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Se hizo el Escaneo Evolt?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p6', 1, this)" class="param-btn-p6 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p6', 0, this)" class="param-btn-p6 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p6" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Test de Movilidad Realizado?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p7', 1, this)" class="param-btn-p7 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p7', 0, this)" class="param-btn-p7 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p7" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Mejora desde última evaluación?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p8', 1, this)" class="param-btn-p8 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p8', 0, this)" class="param-btn-p8 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p8" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Datos añadidos en Notas?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p9', 1, this)" class="param-btn-p9 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p9', 0, this)" class="param-btn-p9 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p9" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <textarea id="val_obs_evolt" rows="3" placeholder="Observaciones Evolt (Grasa, Músculo...) Col L..." class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white"></textarea>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex justify-end gap-4">
-                        <button type="button" onclick="cambiarSeccion('dashboard')" class="px-8 py-3 text-brandText text-xs font-bold">Cancelar</button>
+                    <!-- Bloque 3: MyZone -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">3. Ecosistema MyZone</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Uso de MyZone Regular?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p12', 1, this)" class="param-btn-p12 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p12', 0, this)" class="param-btn-p12 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p12" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Participación Último Reto?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p13', 1, this)" class="param-btn-p13 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p13', 0, this)" class="param-btn-p13 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p13" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Introducido en Grupo MZ?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p14', 1, this)" class="param-btn-p14 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p14', 0, this)" class="param-btn-p14 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p14" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-white">Interacción Grupal MZ?</span>
+                                        <div class="flex gap-1">
+                                            <button type="button" onclick="setParam('p15', 1, this)" class="param-btn-p15 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button>
+                                            <button type="button" onclick="setParam('p15', 0, this)" class="param-btn-p15 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="obs_p15" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-4 pb-20">
+                        <button type="button" onclick="cambiarSeccion('dashboard')" class="px-8 py-3 text-brandText text-xs font-bold transition">Cancelar</button>
                         <button type="submit" class="bg-brandPurple text-white px-10 py-3 rounded-xl font-bold text-xs shadow-lg hover:scale-105 transition">Finalizar Registro y Generar Informe</button>
                     </div>
                 </form>
             </section>
 
-            <section id="view-entrenadores" class="hidden space-y-6"></section>
+            <section id="view-entrenadores" class="hidden space-y-6">
+                <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+            </section>
         </div>
     </main>
 
-    <!-- MODAL DE INFORME FINAL -->
-    <div id="modalInforme" class="fixed inset-0 bg-brandDark/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <!-- MODAL DE INFORME FINAL (Estética de la Aplicación) -->
+    <div id="modalInforme" class="fixed inset-0 bg-brandDark/90 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-brandPanel border border-brandBorder w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="p-6 border-b border-brandBorder bg-gradient-to-r from-brandPurple/20 to-transparent flex justify-between items-center">
-                <h3 class="text-white font-poppins font-bold text-lg">Informe de Rendimiento Auditoría</h3>
-                <button onclick="cerrarModalInforme()" class="text-brandText hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="p-6 border-b border-brandBorder bg-gradient-to-r from-brandPurple/20 to-transparent flex justify-between items-center text-white">
+                <h3 class="font-poppins font-bold text-lg">Informe de Rendimiento Auditoría</h3>
+                <button onclick="cerrarModalInforme()"><i class="fa-solid fa-xmark text-xl text-brandText hover:text-white"></i></button>
             </div>
-            <div id="contenidoInforme" class="p-8 overflow-y-auto text-sm space-y-6 text-brandText leading-relaxed">
-                <!-- Se inyecta por JS -->
-            </div>
+            <div id="contenidoInforme" class="p-8 overflow-y-auto text-sm text-brandText leading-relaxed space-y-6"></div>
             <div class="p-6 border-t border-brandBorder flex gap-4">
-                <button onclick="descargarInforme()" class="flex-grow bg-brandDark border border-brandBorder text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-file-pdf"></i> Guardar como PDF
-                </button>
-                <button onclick="cerrarModalInforme()" class="flex-grow bg-brandLime text-brandDark py-3 rounded-xl font-bold text-xs">
-                    Entendido, Volver
-                </button>
+                <button onclick="cerrarModalInforme()" class="w-full bg-brandLime text-brandDark py-3 rounded-xl font-bold text-xs">Cerrar Informe</button>
             </div>
         </div>
     </div>
