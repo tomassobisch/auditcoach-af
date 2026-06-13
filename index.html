@@ -3,710 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anytime Fitness Sant Adrià - Portal de Auditorías de Coaching</title>
-    <!-- Tailwind CSS para diseño moderno, adaptativo y ultra-rápido -->
+    <title>AF Sant Adrià - Auditoría 38 Columnas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Poppins (Títulos corporativos) e Inter (Lectura limpia) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Iconos de FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Configuración y Estilos Externos -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col md:flex-row">
 
-    <!-- ==========================================
-         1. MENÚ LATERAL DE NAVEGACIÓN (RESPONSIVE)
-         ========================================== -->
     <aside class="w-full md:w-64 bg-brandPanel border-b md:border-b-0 md:border-r border-brandBorder flex flex-col shrink-0">
-        <!-- Logo de Anytime Fitness / Sant Adrià -->
-        <div class="p-6 border-b border-brandBorder flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brandPurple to-brandLime flex items-center justify-center text-brandDark font-bold text-xl font-poppins">
-                    <i class="fa-solid fa-running text-white text-lg"></i>
-                </div>
-                <div>
-                    <h1 class="font-poppins font-bold text-base leading-tight text-white">Anytime Fitness</h1>
-                    <span class="text-[10px] text-brandLime tracking-wider uppercase font-semibold">Sant Adrià</span>
-                </div>
-            </div>
-            <span class="hidden lg:inline-block bg-brandPurple/20 text-brandLime border border-brandLime/20 text-[9px] px-2 py-0.5 rounded-full font-bold">
-                Equipo Activo
-            </span>
-        </div>
-
-        <!-- Selector de Club -->
-        <div class="p-4 border-b border-brandBorder">
-            <label class="block text-[10px] uppercase tracking-wider text-brandText mb-1.5 font-medium">Club / Gimnasio Evaluado</label>
-            <div class="relative">
-                <select id="clubSelector" onchange="cambiarClub(this.value)" class="w-full bg-brandDark border border-brandBorder text-xs rounded-lg py-2 pl-3 pr-8 focus:outline-none focus:border-brandPurple text-white appearance-none cursor-pointer">
-                    <option value="AF Sant Adrià" selected>💜 AF Sant Adrià</option>
-                </select>
-                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-brandText">
-                    <i class="fa-solid fa-chevron-down text-xs"></i>
-                </div>
+        <div class="p-6 border-b border-brandBorder flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brandPurple to-brandLime flex items-center justify-center text-white"><i class="fa-solid fa-running"></i></div>
+            <div>
+                <h1 class="font-poppins font-bold text-sm text-white">AF Sant Adrià</h1>
+                <span class="text-[9px] text-brandLime tracking-widest uppercase font-semibold">Auditoría 38 Col</span>
             </div>
         </div>
-
-        <!-- Links del Menú Lateral -->
         <nav class="flex-grow p-4 space-y-1.5">
-            <button onclick="cambiarSeccion('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition active-nav">
-                <i class="fa-solid fa-chart-line w-5 text-center text-lg"></i>
-                <span class="font-medium text-sm">Dashboard General</span>
+            <button onclick="cambiarSeccion('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white transition active-nav">
+                <i class="fa-solid fa-chart-line"></i><span class="text-sm">Dashboard</span>
             </button>
-            <button onclick="cambiarSeccion('auditar')" id="nav-auditar" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
-                <i class="fa-solid fa-square-plus w-5 text-center text-lg"></i>
-                <span class="font-medium text-sm">Auditar Coaching</span>
+            <button onclick="cambiarSeccion('auditar')" id="nav-auditar" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white transition">
+                <i class="fa-solid fa-square-plus"></i><span class="text-sm">Nueva Auditoría</span>
             </button>
-            <button onclick="cambiarSeccion('entrenadores')" id="nav-entrenadores" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
-                <i class="fa-solid fa-users-gear w-5 text-center text-lg"></i>
-                <span class="font-medium text-sm">Fichas de Coaches</span>
-            </button>
-            <button onclick="cambiarSeccion('config')" id="nav-config" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
-                <i class="fa-solid fa-cloud-arrow-up w-5 text-center text-lg"></i>
-                <span class="font-medium text-sm">Configurar Sheet</span>
+            <button onclick="cambiarSeccion('entrenadores')" id="nav-entrenadores" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white transition">
+                <i class="fa-solid fa-users-gear"></i><span class="text-sm">Coaches</span>
             </button>
         </nav>
-
-        <!-- Indicador de API de Google Sheets en tiempo real -->
-        <div class="p-4 border-t border-brandBorder bg-brandDark/40">
-            <div class="flex items-center justify-between mb-1.5">
-                <span class="text-[11px] text-brandText">Conexión a Planilla</span>
-                <span id="syncStatusBadge" class="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Activo
-                </span>
-            </div>
-            <p class="text-[10px] text-brandText leading-snug">Cada envío registra las métricas de gestión y MyZone en tu hoja de Sheets.</p>
-        </div>
     </aside>
 
-    <!-- ==========================================
-         2. CONTENIDO PRINCIPAL (VISTAS DINÁMICAS)
-         ========================================== -->
     <main class="flex-grow flex flex-col min-w-0">
-        <!-- Header de la Aplicación -->
-        <header class="h-16 border-b border-brandBorder bg-brandPanel px-6 flex items-center justify-between shrink-0">
-            <div class="flex items-center gap-4">
-                <h2 id="sectionTitle" class="font-poppins font-semibold text-base sm:text-lg text-white">Dashboard de Auditorías de Coaching</h2>
-            </div>
+        <header class="h-16 border-b border-brandBorder bg-brandPanel px-6 flex items-center justify-between">
+            <h2 id="sectionTitle" class="font-poppins font-semibold text-white">Gestión de Auditorías Reales</h2>
             <div class="flex items-center gap-3">
-                <div class="hidden sm:flex flex-col text-right">
-                    <span class="text-xs font-semibold text-white">Auditor: AF Sant Adrià</span>
-                    <span class="text-[10px] text-brandLime font-medium">Anytime Fitness</span>
-                </div>
-                <div class="w-10 h-10 rounded-full border border-brandBorder bg-brandDark flex items-center justify-center text-white">
-                    <i class="fa-solid fa-user-shield text-brandLime"></i>
-                </div>
+                <span id="syncStatusBadge" class="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado
+                </span>
             </div>
         </header>
 
-        <!-- Área de las Vistas (Scrollable) -->
         <div class="flex-grow p-6 overflow-y-auto">
-
-            <!-- ==========================================
-                 VISTA A: DASHBOARD GENERAL
-                 ========================================== -->
+            <!-- VISTA DASHBOARD -->
             <section id="view-dashboard" class="space-y-6">
-                <!-- Tarjetas de Métricas Principales -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
-                        <div>
-                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Auditorías Totales</span>
-                            <h3 id="statTotalAudits" class="text-3xl font-poppins font-bold text-white mt-1">45</h3>
-                            <span class="text-xs text-brandLime flex items-center gap-1 mt-1 font-medium">
-                                <i class="fa-solid fa-arrow-trend-up"></i> +6 este mes
-                            </span>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-brandLime/10 border border-brandLime/20 flex items-center justify-center text-brandLime text-2xl">
-                            <i class="fa-solid fa-clipboard-check"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
-                        <div>
-                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Score Global Equipo</span>
-                            <h3 id="statAvgScore" class="text-3xl font-poppins font-bold text-white mt-1">87.5%</h3>
-                            <span class="text-xs text-brandLime flex items-center gap-1 mt-1 font-medium">
-                                <i class="fa-solid fa-circle-check"></i> Meta Alcanzada (Mínimo: 85%)
-                            </span>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-brandPurple/20 border border-brandPurple/30 flex items-center justify-center text-brandLime text-2xl">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
-                        <div>
-                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Alertas Retención</span>
-                            <h3 id="statActiveAlerts" class="text-3xl font-poppins font-bold text-red-400 mt-1">2</h3>
-                            <span class="text-xs text-red-400 flex items-center gap-1 mt-1 font-medium">
-                                <i class="fa-solid fa-triangle-exclamation"></i> Protocolo "No Responde"
-                            </span>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-2xl">
-                            <i class="fa-solid fa-bell"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
-                        <div>
-                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Sincronización Sheets</span>
-                            <h3 class="text-2xl font-poppins font-bold text-white mt-1 truncate">Fila #128</h3>
-                            <span class="text-xs text-emerald-400 flex items-center gap-1 mt-1 font-medium">
-                                <i class="fa-solid fa-sync"></i> Transmisión automática
-                            </span>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl">
-                            <i class="fa-solid fa-database"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sección Dos Columnas: Entrenadores & Diagnóstico IA -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Columna Izquierda: Tarjetas de Entrenadores (Semáforos) -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 lg:col-span-2 space-y-4">
-                        <div class="flex items-center justify-between mb-2">
-                            <div>
-                                <h3 class="font-poppins font-semibold text-base sm:text-lg text-white">Monitoreo Directo de Coaches</h3>
-                                <p class="text-xs text-brandText">Basado en Contratos, MyZone, Retención y Valoraciones (19 parámetros).</p>
-                            </div>
-                            <button onclick="cambiarSeccion('auditar')" class="bg-brandLime hover:bg-brandLime/90 text-brandDark font-bold text-xs px-3.5 py-2.5 rounded-lg transition flex items-center gap-1.5">
-                                <i class="fa-solid fa-plus"></i> Evaluar Ahora
-                            </button>
-                        </div>
-
-                        <!-- Lista de Entrenadores -->
-                        <div id="coachesSummaryList" class="space-y-3">
-                            <!-- Los datos se inyectarán dinámicamente con JS -->
-                        </div>
-                    </div>
-
-                    <!-- Columna Derecha: Alerta de IA y Enlace Sincronizado -->
-                    <div class="space-y-6">
-                        <!-- Card de Recomendación / Alerta IA -->
-                        <div class="bg-gradient-to-br from-brandPanel to-brandDark border border-brandBorder rounded-2xl p-6 relative overflow-hidden">
-                            <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-brandPurple/10 rounded-full pointer-events-none"></div>
-                            <div class="flex items-center gap-2 text-brandLime mb-3">
-                                <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
-                                <h4 class="font-poppins font-semibold text-xs uppercase tracking-wider">Copiloto IA Anytime Fitness</h4>
-                            </div>
-                            <p class="text-sm text-white font-medium mb-1.5">Alerta en Protocolos de Seguimiento</p>
-                            <p class="text-xs text-brandText leading-relaxed mb-4">
-                                Rubén presenta 7 clientes marcados como "NO RESPONDE" y un 53% de programas no finalizados. Se sugiere ejecutar urgente el protocolo de 3 intentos (Llamada, WhatsApp, Correo) para evitar bajas este mes.
-                            </p>
-                            <div class="border-t border-brandBorder pt-3 flex items-center justify-between text-[11px] text-brandCyan">
-                                <span>Análisis basado en Sheet "Clientes Coaching"</span>
-                                <span class="font-semibold cursor-pointer hover:underline">Ver Diagnóstico <i class="fa-solid fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-
-                        <!-- Estado del Sheet de Google -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
-                            <h4 class="font-poppins font-semibold text-xs uppercase tracking-widest text-brandLime flex items-center gap-2">
-                                <i class="fa-solid fa-file-excel"></i> Planilla Vinculada (Google Sheets)
-                            </h4>
-                            <div class="bg-brandDark border border-brandBorder rounded-xl p-3 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-lg">
-                                    <i class="fa-solid fa-table"></i>
-                                </div>
-                                <div class="min-w-0 flex-grow">
-                                    <p class="text-xs font-semibold text-white truncate">Seguimiento_Coaching_AF</p>
-                                    <p class="text-[10px] text-brandText truncate">Sincronización de Auditorías Activa</p>
-                                </div>
-                                <a href="https://docs.google.com/spreadsheets/d/1FAZcYcTYiHv6RE6PmB14tRX-KkZUzg5WCv0OddTsedI/edit?gid=889030629#gid=889030629" target="_blank" class="w-8 h-8 rounded-lg hover:bg-brandBorder flex items-center justify-center text-brandText hover:text-white transition" title="Ver en Google Sheets">
-                                    <i class="fa-solid fa-up-right-from-square text-xs"></i>
-                                </a>
-                            </div>
-                            <p class="text-[11px] text-brandText leading-relaxed">
-                                Evalúa a tus coaches en la correcta entrega de cinturones MyZone, firma de contratos y agendamiento de revisiones a 30 días para impulsar la retención.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Historial de Últimas Auditorías Cargadas -->
+                <div id="coachesSummaryList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                 <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
-                    <h3 class="font-poppins font-semibold text-base sm:text-lg text-white mb-4">Últimas Auditorías Registradas en el Club</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="border-b border-brandBorder text-[11px] text-brandText font-semibold uppercase tracking-wider">
-                                    <th class="pb-3 pl-2">Fecha y Hora</th>
-                                    <th class="pb-3">Entrenador</th>
-                                    <th class="pb-3">Turno/Sesión</th>
-                                    <th class="pb-3 text-center">Score Final</th>
-                                    <th class="pb-3">Última Observación de Campo (Filtro IA)</th>
-                                    <th class="pb-3 text-center">API Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="lastAuditsTable" class="text-sm">
-                                <!-- Filas de auditoría cargadas dinámicamente -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <h3 class="text-white font-poppins font-semibold mb-4 text-sm uppercase">Últimos Registros (38 Puntos)</h3>
+                    <div class="overflow-x-auto"><table class="w-full text-left text-xs"><tbody id="lastAuditsTable"></tbody></table></div>
                 </div>
             </section>
 
-            <!-- ==========================================
-                 VISTA B: NUEVA AUDITORÍA (MÉTRICAS REALES COACHING - 19 PARÁMETROS)
-                 ========================================== -->
-            <section id="view-auditar" class="hidden max-w-4xl mx-auto space-y-6">
-                <!-- Banner Informativo -->
-                <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
-                    <h3 class="font-poppins font-semibold text-lg text-white mb-1">Auditoría de Gestión de Cartera - AF Sant Adrià</h3>
-                    <p class="text-xs text-brandText">Evalúa el cumplimiento administrativo, tecnológico y de retención de los clientes (Contratos, MyZone, Seguimiento a 30 días).</p>
-                </div>
-
-                <!-- Formulario -->
+            <!-- VISTA AUDITAR (38 PUNTOS) -->
+            <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-6">
                 <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="space-y-6">
-                    <!-- Datos Generales de la Sesión -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Cabecera -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Coach Evaluado</label>
-                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
-                                <!-- Renderizado dinámico de entrenadores -->
-                            </select>
+                            <label class="block text-[10px] text-brandText uppercase font-bold mb-1">Coach</label>
+                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none"></select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Alumno / Cliente</label>
-                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
-                                <option value="" disabled selected>Selecciona un coach primero...</option>
-                            </select>
+                            <label class="block text-[10px] text-brandText uppercase font-bold mb-1">Alumno</label>
+                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none"></select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Fecha y Hora</label>
-                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Tipo de Revisión</label>
-                            <select id="formShift" class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
-                                <option value="Revisión Semanal">📊 Revisión Semanal</option>
-                                <option value="Cierre de Mes">📅 Cierre de Mes</option>
-                                <option value="Auditoría Sorpresa">⚡ Auditoría Sorpresa</option>
-                            </select>
+                            <label class="block text-[10px] text-brandText uppercase font-bold mb-1">Fecha Auditoría</label>
+                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none">
                         </div>
                     </div>
 
-                    <!-- Checklist de Auditoría Directa - MÉTRICAS REALES SHEET -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-8">
-                        <h4 class="font-poppins font-semibold text-base text-white pb-3 border-b border-brandBorder flex items-center justify-between">
-                            <span>Checklist de Gestión de Cartera (22 Puntos Reales)</span>
-                            <span class="text-xs text-brandLime font-normal">Sincronizado con Google Sheets AF Sant Adrià</span>
-                        </h4>
-
-                        <!-- Sección 1: Gestión y Programación -->
-                        <div class="space-y-4">
-                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
-                                <i class="fa-solid fa-user-check text-brandPurpleLight"></i> 1. Gestión y Programación
-                            </h5>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">1.1 Coach en Membr</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Asignado correctamente en plataforma?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p1', 1, this)" class="param-btn-p1 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p1', 0, this)" class="param-btn-p1 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                    <!-- Bloque 1: Gestión y Programa (Col C-J) -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-poppins font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">1. Gestión de Membr y Programa</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Coach asignado en Membr?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p1', 1, this)" class="param-btn-p1 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p1', 0, this)" class="param-btn-p1 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">1.2 Valoración Fitness</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Evaluación inicial completada?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p2', 1, this)" class="param-btn-p2 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p2', 0, this)" class="param-btn-p2 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Valoración Fitness Realizada?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p2', 1, this)" class="param-btn-p2 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p2', 0, this)" class="param-btn-p2 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">1.3 Programa Asignado</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Tiene rutina de entrenamiento activa?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p3', 1, this)" class="param-btn-p3 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p3', 0, this)" class="param-btn-p3 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div>
+                                    <label class="block text-[10px] text-brandText uppercase mb-1">Objetivo del Cliente</label>
+                                    <input type="text" id="val_objetivo" placeholder="Ej: Pérdida peso, Fuerza..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2.5 text-xs text-white">
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">1.4 Enviado por App</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Recibió el programa en su móvil?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p4', 1, this)" class="param-btn-p4 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p4', 0, this)" class="param-btn-p4 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Programa Asignado (Apto/Muy Apto)?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p3', 1, this)" class="param-btn-p3 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p3', 0, this)" class="param-btn-p3 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">1.5 Completa Programas</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Está ejecutando los entrenos?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p5', 1, this)" class="param-btn-p5 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p5', 0, this)" class="param-btn-p5 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Enviado por App?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p4', 1, this)" class="param-btn-p4 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p4', 0, this)" class="param-btn-p4 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
+                                </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Cliente Completa Programas?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p5', 1, this)" class="param-btn-p5 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p5', 0, this)" class="param-btn-p5 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
                             </div>
                         </div>
+                        <textarea id="val_obs_programa" rows="2" placeholder="Observaciones de programa y opinión..." class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white"></textarea>
+                    </div>
 
-                        <!-- Sección 2: Evolt y Movilidad -->
-                        <div class="space-y-4 pt-4 border-t border-brandBorder">
-                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
-                                <i class="fa-solid fa-weight-scale text-brandPurpleLight"></i> 2. Evolt y Movilidad
-                            </h5>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">2.1 Escaneo Evolt</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Se realizó el pesaje corporal?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p6', 1, this)" class="param-btn-p6 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p6', 0, this)" class="param-btn-p6 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                    <!-- Bloque 2: Evolt y Movilidad (Col K-Q) -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-poppins font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">2. Evolt y Movilidad</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Se hizo el Escaneo Evolt?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p6', 1, this)" class="param-btn-p6 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p6', 0, this)" class="param-btn-p6 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">2.2 Test de Movilidad</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Prueba de movilidad ejecutada?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p7', 1, this)" class="param-btn-p7 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p7', 0, this)" class="param-btn-p7 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Test de Movilidad Realizado?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p7', 1, this)" class="param-btn-p7 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p7', 0, this)" class="param-btn-p7 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">2.3 Mejora vs Anterior</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Hay progreso en grasa/músculo?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p8', 1, this)" class="param-btn-p8 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p8', 0, this)" class="param-btn-p8 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Mejora desde última evaluación?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p8', 1, this)" class="param-btn-p8 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p8', 0, this)" class="param-btn-p8 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">2.4 Registro en Notas</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Entrevista y test volcados al sistema?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p9', 1, this)" class="param-btn-p9 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p9', 0, this)" class="param-btn-p9 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Datos añadidos en Notas?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p9', 1, this)" class="param-btn-p9 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p9', 0, this)" class="param-btn-p9 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] text-brandText uppercase mb-1">Fecha Valoración/Test Realizado</label>
+                                    <input type="date" id="val_fecha_realizada" class="w-full bg-brandDark border border-brandBorder rounded-lg p-2.5 text-xs text-white">
                                 </div>
                             </div>
                         </div>
+                        <textarea id="val_obs_evolt" rows="2" placeholder="Observaciones Evolt (Grasa, Músculo, Edad Metabólica)..." class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white"></textarea>
+                    </div>
 
-                        <!-- Sección 3: Ecosistema MyZone y Apps -->
-                        <div class="space-y-4 pt-4 border-t border-brandBorder">
-                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
-                                <i class="fa-solid fa-heart-pulse text-brandPurpleLight"></i> 3. Ecosistema Digital
-                            </h5>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.1 Apps Descargadas</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Tiene AF App, MyZone y Evolt?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p10', 1, this)" class="param-btn-p10 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p10', 0, this)" class="param-btn-p10 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.2 Uso MyZone</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Usa el cinturón regularmente?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p11', 1, this)" class="param-btn-p11 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p11', 0, this)" class="param-btn-p11 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.3 Participación Reto</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Involucrado en el último reto?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p12', 1, this)" class="param-btn-p12 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p12', 0, this)" class="param-btn-p12 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.4 Grupo MyZone</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Introducido en comunidad grupal?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p13', 1, this)" class="param-btn-p13 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p13', 0, this)" class="param-btn-p13 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.5 Interacción Grupal</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Participación activa en el grupo?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p14', 1, this)" class="param-btn-p14 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p14', 0, this)" class="param-btn-p14 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.6 Mensajes Individuales</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Envío de feedback MyZone por app?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p15', 1, this)" class="param-btn-p15 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p15', 0, this)" class="param-btn-p15 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.7 Likes MyZone</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Interacción social activa (Likes)?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p16', 1, this)" class="param-btn-p16 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p16', 0, this)" class="param-btn-p16 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-medium text-white">3.8 Prueba de Esfuerzo</p>
-                                        <p class="text-[10px] text-brandText mt-0.5">¿Test de esfuerzo MyZone realizado?</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
-                                        <button type="button" onclick="setParam('p17', 1, this)" class="param-btn-p17 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p17', 0, this)" class="param-btn-p17 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
-                                </div>
+                    <!-- Bloque 3: Próximas Citas y Apps (Col R-V) -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-poppins font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">3. Planificación y Apps</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-[10px] text-brandText uppercase mb-1">Próximo Escaneo (4 sem)</label>
+                                <input type="date" id="val_prox_escaneo" class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-brandText uppercase mb-1">Próxima Revisión (6 sem)</label>
+                                <input type="date" id="val_prox_revision" class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-xs text-white">
+                            </div>
+                            <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                <span class="text-xs text-white">Apps Descargadas?</span>
+                                <div class="flex gap-1"><button type="button" onclick="setParam('p10', 1, this)" class="param-btn-p10 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p10', 0, this)" class="param-btn-p10 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                             </div>
                         </div>
+                        <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                            <span class="text-xs text-white">Status Apps (MyZone . Evolt . AF App)</span>
+                            <div class="flex gap-1"><button type="button" onclick="setParam('p11', 1, this)" class="param-btn-p11 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">OK</button><button type="button" onclick="setParam('p11', 0, this)" class="param-btn-p11 px-3 py-1 text-[10px] rounded-md text-brandText">PENDIENTE</button></div>
+                        </div>
+                    </div>
 
-                        <!-- Sección 4: Seguimiento Mensajes App -->
-                        <div class="space-y-4 pt-4 border-t border-brandBorder">
-                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
-                                <i class="fa-solid fa-message text-brandPurpleLight"></i> 4. Seguimiento Mensajes App (Semanal)
-                            </h5>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex flex-col items-center justify-center gap-2">
-                                    <p class="text-[10px] font-bold text-white uppercase">Semana 1</p>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg">
-                                        <button type="button" onclick="setParam('p18', 1, this)" class="param-btn-p18 px-3 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p18', 0, this)" class="param-btn-p18 px-3 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                    <!-- Bloque 4: MyZone y Engagement (Col W-AF) -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-poppins font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">4. Ecosistema MyZone</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Uso de MyZone (Regularidad)?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p12', 1, this)" class="param-btn-p12 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">ALTO</button><button type="button" onclick="setParam('p12', 0, this)" class="param-btn-p12 px-3 py-1 text-[10px] rounded-md text-brandText">BAJO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex flex-col items-center justify-center gap-2">
-                                    <p class="text-[10px] font-bold text-white uppercase">Semana 2</p>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg">
-                                        <button type="button" onclick="setParam('p19', 1, this)" class="param-btn-p19 px-3 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p19', 0, this)" class="param-btn-p19 px-3 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Participación Último Reto?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p13', 1, this)" class="param-btn-p13 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p13', 0, this)" class="param-btn-p13 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex flex-col items-center justify-center gap-2">
-                                    <p class="text-[10px] font-bold text-white uppercase">Semana 3</p>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg">
-                                        <button type="button" onclick="setParam('p20', 1, this)" class="param-btn-p20 px-3 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p20', 0, this)" class="param-btn-p20 px-3 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Introducido en Grupo MZ?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p14', 1, this)" class="param-btn-p14 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p14', 0, this)" class="param-btn-p14 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
                                 </div>
-                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex flex-col items-center justify-center gap-2">
-                                    <p class="text-[10px] font-bold text-white uppercase">Semana 4</p>
-                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg">
-                                        <button type="button" onclick="setParam('p21', 1, this)" class="param-btn-p21 px-3 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                                        <button type="button" onclick="setParam('p21', 0, this)" class="param-btn-p21 px-3 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
-                                    </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Interacción Grupal / Status?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p15', 1, this)" class="param-btn-p15 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">ACTIVO</button><button type="button" onclick="setParam('p15', 0, this)" class="param-btn-p15 px-3 py-1 text-[10px] rounded-md text-brandText">INACTIVO</button></div>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Comunidad Individual (Mensajes)?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p16', 1, this)" class="param-btn-p16 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p16', 0, this)" class="param-btn-p16 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
+                                </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Interacción de Likes?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p17', 1, this)" class="param-btn-p17 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p17', 0, this)" class="param-btn-p17 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
+                                </div>
+                                <div class="flex items-center justify-between bg-brandDark/40 p-3 rounded-xl border border-brandBorder">
+                                    <span class="text-xs text-white">Prueba Esfuerzo MZ Realizada?</span>
+                                    <div class="flex gap-1"><button type="button" onclick="setParam('p18', 1, this)" class="param-btn-p18 px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p18', 0, this)" class="param-btn-p18 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button></div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] text-brandText uppercase mb-1">Resultados Prueba Esfuerzo</label>
+                                    <input type="text" id="val_resultados_esfuerzo" placeholder="Ej: 185 ppm max..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-xs text-white">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Asistente de Observaciones Inteligente (IA Engine) -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-poppins font-semibold text-base text-white flex items-center gap-2">
-                                <i class="fa-solid fa-wand-magic-sparkles text-brandLime"></i> Redacción de Feedback Corporativo (Soporte IA)
-                            </h4>
-                            <span class="text-[9px] bg-brandLime/25 text-brandLime border border-brandLime/20 px-2 py-0.5 rounded-md uppercase font-bold tracking-wider">
-                                Anytime IA Motor
-                            </span>
-                        </div>
-                        <p class="text-xs text-brandText font-light">Escribe comentarios rápidos sobre las métricas que acabas de ver en el Google Sheet del coach. La IA los convertirá en un reporte formal impecable.</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Input Rápido del Auditor -->
-                            <div class="space-y-2">
-                                <label class="block text-xs font-semibold text-brandText uppercase tracking-wider">Tus Notas del Campo (Abreviadas)</label>
-                                <textarea id="formRawObservation" rows="4" placeholder="Ej: tiene 7 clientes que no responden y no completó la entrega de varios MyZone de las nuevas altas. Debe mejorar la atención de bajas." class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple placeholder-brandText/45"></textarea>
-                                <button type="button" onclick="optimizarFeedbackConIA()" class="w-full bg-brandDark hover:bg-brandBorder border border-brandLime text-brandLime hover:text-white font-semibold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-magic"></i> Optimizar Redacción con IA
-                                </button>
+                    <!-- Bloque 5: Seguimiento Semanal (Col AG-AL) -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-6">
+                        <h4 class="text-brandLime font-poppins font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">5. Seguimiento Semanal y Final</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-brandDark/40 p-3 rounded-xl border border-brandBorder text-center">
+                                <p class="text-[9px] text-brandText uppercase mb-2">1ª Sem</p>
+                                <div class="flex justify-center gap-1"><button type="button" onclick="setParam('p19', 1, this)" class="param-btn-p19 px-2.5 py-1 text-[9px] rounded bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p19', 0, this)" class="param-btn-p19 px-2.5 py-1 text-[9px] rounded text-brandText">NO</button></div>
                             </div>
-
-                            <!-- Output IA Procesado (Para Google Sheets) -->
-                            <div class="space-y-2">
-                                <label class="block text-xs font-semibold text-brandLime uppercase tracking-wider flex items-center gap-1">
-                                    <i class="fa-solid fa-file-signature"></i> Observación Optimizada (Fila Directiva)
-                                </label>
-                                <textarea id="formFinalObservation" rows="4" readonly placeholder="La observación procesada por el motor IA de Anytime Fitness se generará aquí..." class="w-full bg-brandDark/40 border border-brandBorder rounded-xl p-3 text-xs text-brandLime focus:outline-none cursor-default"></textarea>
-                                <p class="text-[10px] text-brandText italic font-light">Nota: Este campo de texto consolidado se insertará en la columna "Observaciones IA" de tu Google Sheet.</p>
+                            <div class="bg-brandDark/40 p-3 rounded-xl border border-brandBorder text-center">
+                                <p class="text-[9px] text-brandText uppercase mb-2">2ª Sem</p>
+                                <div class="flex justify-center gap-1"><button type="button" onclick="setParam('p20', 1, this)" class="param-btn-p20 px-2.5 py-1 text-[9px] rounded bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p20', 0, this)" class="param-btn-p20 px-2.5 py-1 text-[9px] rounded text-brandText">NO</button></div>
+                            </div>
+                            <div class="bg-brandDark/40 p-3 rounded-xl border border-brandBorder text-center">
+                                <p class="text-[9px] text-brandText uppercase mb-2">3ª Sem</p>
+                                <div class="flex justify-center gap-1"><button type="button" onclick="setParam('p21', 1, this)" class="param-btn-p21 px-2.5 py-1 text-[9px] rounded bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p21', 0, this)" class="param-btn-p21 px-2.5 py-1 text-[9px] rounded text-brandText">NO</button></div>
+                            </div>
+                            <div class="bg-brandDark/40 p-3 rounded-xl border border-brandBorder text-center">
+                                <p class="text-[9px] text-brandText uppercase mb-2">4ª Sem</p>
+                                <div class="flex justify-center gap-1"><button type="button" onclick="setParam('p22', 1, this)" class="param-btn-p22 px-2.5 py-1 text-[9px] rounded bg-brandLime text-brandDark">SÍ</button><button type="button" onclick="setParam('p22', 0, this)" class="param-btn-p22 px-2.5 py-1 text-[9px] rounded text-brandText">NO</button></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <label class="block text-[10px] text-brandText uppercase mb-1">Método de Contacto</label>
+                                <select id="val_metodo_contacto" class="w-full bg-brandDark border border-brandBorder rounded-lg p-2.5 text-xs text-white">
+                                    <option value="Dashboard">Dashboard</option>
+                                    <option value="Presencial">Presencial</option>
+                                    <option value="WhatsApp">WhatsApp / App</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-brandText uppercase mb-1">Valoración Genérica Coach</label>
+                                <input type="text" id="val_generica" placeholder="Conclusión final..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2.5 text-xs text-white">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Botones de Acción del Formulario -->
-                    <div class="flex items-center justify-end gap-4">
-                        <button type="button" onclick="cambiarSeccion('dashboard')" class="bg-transparent hover:bg-brandBorder border border-brandBorder hover:text-white text-brandText font-semibold text-xs px-6 py-3 rounded-xl transition">
-                            Cancelar
-                        </button>
-                        <button type="submit" class="bg-brandLime hover:bg-brandLime/90 text-brandDark font-bold text-xs px-8 py-3 rounded-xl transition shadow-lg shadow-brandLime/10 flex items-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Guardar y Sincronizar Fila
-                        </button>
+                    <div class="flex justify-end gap-4 pb-12">
+                        <button type="button" onclick="cambiarSeccion('dashboard')" class="px-8 py-3 text-brandText text-xs font-bold hover:text-white transition">Cancelar</button>
+                        <button type="submit" class="bg-brandLime text-brandDark px-10 py-3 rounded-xl font-bold text-xs shadow-lg shadow-brandLime/20 hover:scale-105 transition">Guardar Auditoría Completa (38 Col)</button>
                     </div>
                 </form>
             </section>
 
-            <!-- ==========================================
-                 VISTA C: FICHAS DE ENTRENADORES (STATISTICS)
-                 ========================================== -->
             <section id="view-entrenadores" class="hidden space-y-6">
-                <!-- Grid de las Fichas Detalladas de los Entrenadores -->
-                <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    <!-- Las fichas de los entrenadores se cargarán dinámicamente -->
-                </div>
+                <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
             </section>
-
-            <!-- ==========================================
-                 VISTA D: CONFIGURACIÓN GOOGLE SHEETS
-                 ========================================== -->
-            <section id="view-config" class="hidden max-w-4xl mx-auto space-y-6">
-                <!-- Estado Actual de la Conexión -->
-                <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
-                    <h3 class="font-poppins font-semibold text-lg text-white mb-2">Conectar a la Planilla de AF Sant Adrià</h3>
-                    <p class="text-xs text-brandText font-light">Conecta esta aplicación de forma nativa con tu Google Sheet real. Cuando guardes una auditoría en tu móvil, los datos se actualizarán al segundo.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Configuración del URL del Script -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 md:col-span-1 space-y-4">
-                        <h4 class="font-poppins font-semibold text-sm text-white">Webhook URL</h4>
-                        <div class="space-y-2">
-                            <label class="block text-xs text-brandText">Google Apps Script Web App URL</label>
-                            <input type="url" id="sheetUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandLime">
-                        </div>
-                        <button onclick="guardarUrlSheet()" class="w-full bg-brandPurple hover:bg-brandPurpleLight text-white font-semibold text-xs py-3 rounded-xl transition flex items-center justify-center gap-1.5">
-                            <i class="fa-solid fa-save"></i> Guardar Webhook
-                        </button>
-                        <p class="text-[10px] text-brandText leading-relaxed font-light">
-                            Utiliza el endpoint configurado para procesar registros de Anytime Fitness Sant Adrià.
-                        </p>
-                    </div>
-
-                    <!-- Código de Google Apps Script e Instrucciones -->
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 md:col-span-2 space-y-4">
-                        <h4 class="font-poppins font-semibold text-sm text-white">Instrucciones: Conexión en 2 Minutos</h4>
-                        
-                        <div class="space-y-3 text-xs text-brandText">
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">1</span>
-                                <p>En tu Google Sheet, ve a la barra superior, selecciona <strong>Extensiones</strong> &gt; <strong>Apps Script</strong>.</p>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">2</span>
-                                <p>Reemplaza todo el código vacío por el siguiente script mapeado para vuestras columnas:</p>
-                            </div>
-                        </div>
-
-                        <!-- Bloque de Código de Google Apps Script listo para copiar -->
-                        <div class="bg-brandDark border border-brandBorder p-4 rounded-xl relative">
-                            <button onclick="copyCode()" class="absolute right-3 top-3 text-brandText hover:text-white transition" title="Copiar Código">
-                                <i class="fa-solid fa-copy"></i>
-                            </button>
-                            <pre id="codeBlock" class="text-[10px] text-brandCyan font-mono overflow-x-auto select-all max-h-40">function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var params = JSON.parse(e.postData.contents);
-  
-  // Agrega una fila nueva mapeando exactamente los 19 ítems de gestión de Coaching
-  sheet.appendRow([
-    new Date(params.fecha), 
-    params.entrenador, 
-    params.turno,
-    params.p1 ? "SÍ" : "NO",
-    params.p2 ? "SÍ" : "NO",
-    params.p3 ? "SÍ" : "NO",
-    params.p4 ? "SÍ" : "NO",
-    params.p5 ? "SÍ" : "NO",
-    params.p6 ? "SÍ" : "NO",
-    params.p7 ? "SÍ" : "NO",
-    params.p8 ? "SÍ" : "NO",
-    params.p9 ? "SÍ" : "NO",
-    params.p10 ? "SÍ" : "NO",
-    params.p11 ? "SÍ" : "NO",
-    params.p12 ? "SÍ" : "NO",
-    params.p13 ? "SÍ" : "NO",
-    params.p14 ? "SÍ" : "NO",
-    params.p15 ? "SÍ" : "NO",
-    params.p16 ? "SÍ" : "NO",
-    params.p17 ? "SÍ" : "NO",
-    params.p18 ? "SÍ" : "NO",
-    params.p19 ? "SÍ" : "NO",
-    params.score + "%", 
-    params.observacionesIA
-  ]);
-  
-  return ContentService.createTextOutput(JSON.stringify({"status": "success", "row": sheet.getLastRow()})).setMimeType(ContentService.MimeType.JSON);
-}</pre>
-                        </div>
-
-                        <div class="space-y-3 text-xs text-brandText">
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">3</span>
-                                <p>Haz clic arriba en <strong>Implementar</strong> &gt; <strong>Nueva implementación</strong>.</p>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">4</span>
-                                <p>Elige tipo <strong>Aplicación Web</strong>. Configura acceso para: <strong>Cualquiera</strong>. Esto es indispensable para habilitar el guardado remoto.</p>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">5</span>
-                                <p>Copia el URL asignado por Google y pégalo en el panel izquierdo de esta sección.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
         </div>
     </main>
 
-    <!-- Modal de Éxito de Sincronización de Auditoría -->
-    <div id="successModal" class="fixed inset-0 bg-brandDark/80 flex items-center justify-center z-50 p-4 hidden">
-        <div class="bg-brandPanel border border-brandBorder max-w-sm w-full rounded-2xl p-6 text-center space-y-4">
-            <div class="w-16 h-16 bg-brandLime/10 border border-brandLime/30 rounded-full flex items-center justify-center text-brandLime text-3xl mx-auto">
-                <i class="fa-solid fa-cloud-check"></i>
-            </div>
-            <h3 class="font-poppins font-semibold text-lg text-white">Sincronización Completada</h3>
-            <p id="successModalText" class="text-xs text-brandText leading-relaxed">Los 19 ítems han sido ponderados y la fila se ha inyectado con éxito en la planilla directiva de Anytime Fitness Sant Adrià.</p>
-            <button onclick="closeSuccessModal()" class="w-full bg-brandLime text-brandDark font-bold py-3 rounded-xl transition">
-                Volver al Panel
-            </button>
-        </div>
-    </div>
-
-    <!-- Scripts Externos -->
     <script src="js/script.js"></script>
-
 </body>
 </html>
