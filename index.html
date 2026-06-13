@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anytime Fitness Sant Adrià - Auditoría 38 Col</title>
+    <title>Anytime Fitness Sant Adrià - Portal Auditorías</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col md:flex-row">
+<body class="font-sans antialiased min-h-screen flex flex-col md:flex-row bg-[#0B0813]">
 
     <!-- MENÚ LATERAL (Estética Original) -->
     <aside class="w-full md:w-64 bg-brandPanel border-b md:border-b-0 md:border-r border-brandBorder flex flex-col shrink-0">
@@ -41,11 +41,20 @@
                 <span class="font-medium text-sm">Fichas de Coaches</span>
             </button>
         </nav>
+
+        <div class="p-4 border-t border-brandBorder bg-brandDark/40">
+            <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[11px] text-brandText">Conexión Real</span>
+                <span class="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Activo
+                </span>
+            </div>
+        </div>
     </aside>
 
     <main class="flex-grow flex flex-col min-w-0">
         <header class="h-16 border-b border-brandBorder bg-brandPanel px-6 flex items-center justify-between shrink-0">
-            <h2 id="sectionTitle" class="font-poppins font-semibold text-base sm:text-lg text-white">Dashboard de Auditorías</h2>
+            <h2 id="sectionTitle" class="font-poppins font-semibold text-base sm:text-lg text-white">Dashboard General</h2>
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full border border-brandBorder bg-brandDark flex items-center justify-center text-white">
                     <i class="fa-solid fa-user-shield text-brandLime"></i>
@@ -55,16 +64,57 @@
 
         <div class="flex-grow p-6 overflow-y-auto">
 
-            <!-- VISTA DASHBOARD (Original) -->
+            <!-- VISTA DASHBOARD (Restaurando Estadísticas) -->
             <section id="view-dashboard" class="space-y-6">
+                <!-- Tarjetas de Métricas Principales -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Auditorías</span>
+                            <h3 id="statTotalAudits" class="text-3xl font-poppins font-bold text-white mt-1">--</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-brandLime/10 border border-brandLime/20 flex items-center justify-center text-brandLime text-2xl">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                    </div>
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Score Equipo</span>
+                            <h3 id="statAvgScore" class="text-3xl font-poppins font-bold text-white mt-1">--%</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-brandPurple/20 border border-brandPurple/30 flex items-center justify-center text-brandLime text-2xl">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Alertas</span>
+                            <h3 id="statAlerts" class="text-3xl font-poppins font-bold text-red-400 mt-1">--</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-2xl">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                    </div>
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Sincro</span>
+                            <h3 class="text-xl font-poppins font-bold text-emerald-400 mt-1">OK</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="coachesSummaryList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
                 <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
-                    <h3 class="font-poppins font-semibold text-white mb-4">Últimas Auditorías (38 Col)</h3>
+                    <h3 class="font-poppins font-semibold text-white mb-4">Historial de Auditorías</h3>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>
                                 <tr class="border-b border-brandBorder text-[11px] text-brandText uppercase font-semibold">
-                                    <th class="pb-3">Fecha</th>
+                                    <th class="pb-3 pl-2">Fecha</th>
                                     <th class="pb-3">Coach</th>
                                     <th class="pb-3">Alumno</th>
                                     <th class="pb-3 text-center">Score</th>
@@ -82,16 +132,16 @@
                 <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="space-y-6">
                     <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Coach</label>
-                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white"></select>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Coach Responsable</label>
+                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white focus:outline-none focus:border-brandPurple"></select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Alumno</label>
-                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white"></select>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Alumno / Cliente</label>
+                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white focus:outline-none focus:border-brandPurple"></select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Fecha</label>
-                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white">
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Fecha de Auditoría</label>
+                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 text-white focus:outline-none focus:border-brandPurple">
                         </div>
                     </div>
 
@@ -100,7 +150,6 @@
                         <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">1. Gestión y Programa</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-4">
-                                <!-- Punto con Observación -->
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
                                         <span class="text-xs text-white">Coach asignado en Membr?</span>
@@ -109,7 +158,7 @@
                                             <button type="button" onclick="setParam('p1', 0, this)" class="param-btn-p1 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p1" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p1" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
@@ -119,7 +168,7 @@
                                             <button type="button" onclick="setParam('p2', 0, this)" class="param-btn-p2 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p2" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p2" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-[10px] text-brandText uppercase mb-1">Objetivo del Cliente (Col E)</label>
@@ -135,7 +184,7 @@
                                             <button type="button" onclick="setParam('p3', 0, this)" class="param-btn-p3 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p3" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p3" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
@@ -145,7 +194,7 @@
                                             <button type="button" onclick="setParam('p4', 0, this)" class="param-btn-p4 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p4" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p4" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
@@ -155,7 +204,7 @@
                                             <button type="button" onclick="setParam('p5', 0, this)" class="param-btn-p5 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p5" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p5" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                             </div>
                         </div>
@@ -175,7 +224,7 @@
                                             <button type="button" onclick="setParam('p6', 0, this)" class="param-btn-p6 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p6" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p6" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
@@ -185,7 +234,7 @@
                                             <button type="button" onclick="setParam('p7', 0, this)" class="param-btn-p7 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p7" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p7" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
@@ -195,7 +244,7 @@
                                             <button type="button" onclick="setParam('p8', 0, this)" class="param-btn-p8 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p8" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p8" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                             </div>
                             <div class="space-y-4">
@@ -207,7 +256,7 @@
                                             <button type="button" onclick="setParam('p9', 0, this)" class="param-btn-p9 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p9" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p9" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <textarea id="val_obs_evolt" rows="3" placeholder="Observaciones Evolt (Grasa, Músculo...) Col L..." class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white"></textarea>
                             </div>
@@ -227,7 +276,7 @@
                                             <button type="button" onclick="setParam('p12', 0, this)" class="param-btn-p12 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p12" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p12" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
@@ -237,7 +286,7 @@
                                             <button type="button" onclick="setParam('p13', 0, this)" class="param-btn-p13 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p13" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p13" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                             </div>
                             <div class="space-y-4">
@@ -249,7 +298,7 @@
                                             <button type="button" onclick="setParam('p14', 0, this)" class="param-btn-p14 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p14" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p14" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                                 <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                                     <div class="flex items-center justify-between">
@@ -259,7 +308,7 @@
                                             <button type="button" onclick="setParam('p15', 0, this)" class="param-btn-p15 px-3 py-1 text-[10px] rounded-md text-brandText">NO</button>
                                         </div>
                                     </div>
-                                    <input type="text" id="obs_p15" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white">
+                                    <input type="text" id="obs_p15" placeholder="Observación específica..." class="w-full bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:outline-none">
                                 </div>
                             </div>
                         </div>
@@ -267,11 +316,12 @@
 
                     <div class="flex justify-end gap-4 pb-20">
                         <button type="button" onclick="cambiarSeccion('dashboard')" class="px-8 py-3 text-brandText text-xs font-bold transition">Cancelar</button>
-                        <button type="submit" class="bg-brandPurple text-white px-10 py-3 rounded-xl font-bold text-xs shadow-lg hover:scale-105 transition">Finalizar Registro y Generar Informe</button>
+                        <button type="submit" class="bg-brandPurple text-white px-10 py-3 rounded-xl font-bold text-xs shadow-lg hover:scale-105 transition">Finalizar Auditoría y Ver Informe</button>
                     </div>
                 </form>
             </section>
 
+            <!-- VISTA ENTRENADORES (Fichas Detalladas) -->
             <section id="view-entrenadores" class="hidden space-y-6">
                 <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
             </section>
@@ -282,7 +332,7 @@
     <div id="modalInforme" class="fixed inset-0 bg-brandDark/90 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-brandPanel border border-brandBorder w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
             <div class="p-6 border-b border-brandBorder bg-gradient-to-r from-brandPurple/20 to-transparent flex justify-between items-center text-white">
-                <h3 class="font-poppins font-bold text-lg">Informe de Rendimiento Auditoría</h3>
+                <h3 class="font-poppins font-bold text-lg">Informe de Rendimiento</h3>
                 <button onclick="cerrarModalInforme()"><i class="fa-solid fa-xmark text-xl text-brandText hover:text-white"></i></button>
             </div>
             <div id="contenidoInforme" class="p-8 overflow-y-auto text-sm text-brandText leading-relaxed space-y-6"></div>
