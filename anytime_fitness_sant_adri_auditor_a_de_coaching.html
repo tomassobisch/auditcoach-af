@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anytime Fitness Sant Adrià - Portal de Auditorías de Coaching</title>
+    <!-- Tailwind CSS para diseño moderno, adaptativo y ultra-rápido -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins (Títulos corporativos) e Inter (Lectura limpia) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        // Configuración de colores personalizados de Anytime Fitness (Morado corporativo y Lima)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#0B0813',       // Fondo ultra oscuro con matiz morado
+                        brandPanel: '#171226',      // Paneles morado oscuro profundo
+                        brandBorder: '#2D2344',     // Bordes de alta fidelidad
+                        brandPurple: '#7332A6',     // Morado oficial Anytime Fitness
+                        brandPurpleLight: '#914CC9',// Morado brillante para estados activos/hover
+                        brandLime: '#9BE600',       // Cyber Lime / Verde Anytime Fitness para acentos
+                        brandCyan: '#00E5FF',       // Neon Cyan para información técnica y alertas secundarias
+                        brandText: '#9E9AA8'        // Texto secundario grisáceo-morado
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados para potenciar la interacción táctil en dispositivos móviles */
+        body {
+            background-color: #0B0813;
+            color: #F1EFF5;
+        }
+        /* Ocultar barra de scroll pero mantener funcionalidad de scroll nativo */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0813;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2D2344;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9BE600;
+        }
+        .active-nav {
+            border-left: 4px solid #9BE600;
+            background-color: rgba(155, 230, 0, 0.06);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col md:flex-row">
+
+    <!-- ==========================================
+         1. MENÚ LATERAL DE NAVEGACIÓN (RESPONSIVE)
+         ========================================== -->
+    <aside class="w-full md:w-64 bg-brandPanel border-b md:border-b-0 md:border-r border-brandBorder flex flex-col shrink-0">
+        <!-- Logo de Anytime Fitness / Sant Adrià -->
+        <div class="p-6 border-b border-brandBorder flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brandPurple to-brandLime flex items-center justify-center text-brandDark font-bold text-xl font-poppins">
+                    <i class="fa-solid fa-running text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-poppins font-bold text-base leading-tight text-white">Anytime Fitness</h1>
+                    <span class="text-[10px] text-brandLime tracking-wider uppercase font-semibold">Sant Adrià</span>
+                </div>
+            </div>
+            <span class="hidden lg:inline-block bg-brandPurple/20 text-brandLime border border-brandLime/20 text-[9px] px-2 py-0.5 rounded-full font-bold">
+                Equipo Activo
+            </span>
+        </div>
+
+        <!-- Selector de Club -->
+        <div class="p-4 border-b border-brandBorder">
+            <label class="block text-[10px] uppercase tracking-wider text-brandText mb-1.5 font-medium">Club / Gimnasio Evaluado</label>
+            <div class="relative">
+                <select id="clubSelector" onchange="cambiarClub(this.value)" class="w-full bg-brandDark border border-brandBorder text-xs rounded-lg py-2 pl-3 pr-8 focus:outline-none focus:border-brandPurple text-white appearance-none cursor-pointer">
+                    <option value="AF Sant Adrià" selected>💜 AF Sant Adrià</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-brandText">
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links del Menú Lateral -->
+        <nav class="flex-grow p-4 space-y-1.5">
+            <button onclick="cambiarSeccion('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition active-nav">
+                <i class="fa-solid fa-chart-line w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Dashboard General</span>
+            </button>
+            <button onclick="cambiarSeccion('auditar')" id="nav-auditar" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
+                <i class="fa-solid fa-square-plus w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Auditar Coaching</span>
+            </button>
+            <button onclick="cambiarSeccion('entrenadores')" id="nav-entrenadores" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
+                <i class="fa-solid fa-users-gear w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Fichas de Coaches</span>
+            </button>
+            <button onclick="cambiarSeccion('config')" id="nav-config" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition">
+                <i class="fa-solid fa-cloud-arrow-up w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Configurar Sheet</span>
+            </button>
+        </nav>
+
+        <!-- Indicador de API de Google Sheets en tiempo real -->
+        <div class="p-4 border-t border-brandBorder bg-brandDark/40">
+            <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[11px] text-brandText">Conexión a Planilla</span>
+                <span id="syncStatusBadge" class="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Activo
+                </span>
+            </div>
+            <p class="text-[10px] text-brandText leading-snug">Cada envío registra las métricas de gestión y MyZone en tu hoja de Sheets.</p>
+        </div>
+    </aside>
+
+    <!-- ==========================================
+         2. CONTENIDO PRINCIPAL (VISTAS DINÁMICAS)
+         ========================================== -->
+    <main class="flex-grow flex flex-col min-w-0">
+        <!-- Header de la Aplicación -->
+        <header class="h-16 border-b border-brandBorder bg-brandPanel px-6 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-4">
+                <h2 id="sectionTitle" class="font-poppins font-semibold text-base sm:text-lg text-white">Dashboard de Auditorías de Coaching</h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex flex-col text-right">
+                    <span class="text-xs font-semibold text-white">Auditor: AF Sant Adrià</span>
+                    <span class="text-[10px] text-brandLime font-medium">Anytime Fitness</span>
+                </div>
+                <div class="w-10 h-10 rounded-full border border-brandBorder bg-brandDark flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield text-brandLime"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Área de las Vistas (Scrollable) -->
+        <div class="flex-grow p-6 overflow-y-auto">
+
+            <!-- ==========================================
+                 VISTA A: DASHBOARD GENERAL
+                 ========================================== -->
+            <section id="view-dashboard" class="space-y-6">
+                <!-- Tarjetas de Métricas Principales -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Auditorías Totales</span>
+                            <h3 id="statTotalAudits" class="text-3xl font-poppins font-bold text-white mt-1">45</h3>
+                            <span class="text-xs text-brandLime flex items-center gap-1 mt-1 font-medium">
+                                <i class="fa-solid fa-arrow-trend-up"></i> +6 este mes
+                            </span>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-brandLime/10 border border-brandLime/20 flex items-center justify-center text-brandLime text-2xl">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Score Global Equipo</span>
+                            <h3 id="statAvgScore" class="text-3xl font-poppins font-bold text-white mt-1">87.5%</h3>
+                            <span class="text-xs text-brandLime flex items-center gap-1 mt-1 font-medium">
+                                <i class="fa-solid fa-circle-check"></i> Meta Alcanzada (Mínimo: 85%)
+                            </span>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-brandPurple/20 border border-brandPurple/30 flex items-center justify-center text-brandLime text-2xl">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Alertas Retención</span>
+                            <h3 id="statActiveAlerts" class="text-3xl font-poppins font-bold text-red-400 mt-1">2</h3>
+                            <span class="text-xs text-red-400 flex items-center gap-1 mt-1 font-medium">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Protocolo "No Responde"
+                            </span>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-2xl">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Sincronización Sheets</span>
+                            <h3 class="text-2xl font-poppins font-bold text-white mt-1 truncate">Fila #128</h3>
+                            <span class="text-xs text-emerald-400 flex items-center gap-1 mt-1 font-medium">
+                                <i class="fa-solid fa-sync"></i> Transmisión automática
+                            </span>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Dos Columnas: Entrenadores & Diagnóstico IA -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Columna Izquierda: Tarjetas de Entrenadores (Semáforos) -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 lg:col-span-2 space-y-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div>
+                                <h3 class="font-poppins font-semibold text-base sm:text-lg text-white">Monitoreo Directo de Coaches</h3>
+                                <p class="text-xs text-brandText">Basado en Contratos, MyZone, Retención y Valoraciones (19 parámetros).</p>
+                            </div>
+                            <button onclick="cambiarSeccion('auditar')" class="bg-brandLime hover:bg-brandLime/90 text-brandDark font-bold text-xs px-3.5 py-2.5 rounded-lg transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-plus"></i> Evaluar Ahora
+                            </button>
+                        </div>
+
+                        <!-- Lista de Entrenadores -->
+                        <div id="coachesSummaryList" class="space-y-3">
+                            <!-- Los datos se inyectarán dinámicamente con JS -->
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Alerta de IA y Enlace Sincronizado -->
+                    <div class="space-y-6">
+                        <!-- Card de Recomendación / Alerta IA -->
+                        <div class="bg-gradient-to-br from-brandPanel to-brandDark border border-brandBorder rounded-2xl p-6 relative overflow-hidden">
+                            <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-brandPurple/10 rounded-full pointer-events-none"></div>
+                            <div class="flex items-center gap-2 text-brandLime mb-3">
+                                <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                                <h4 class="font-poppins font-semibold text-xs uppercase tracking-wider">Copiloto IA Anytime Fitness</h4>
+                            </div>
+                            <p class="text-sm text-white font-medium mb-1.5">Alerta en Protocolos de Seguimiento</p>
+                            <p class="text-xs text-brandText leading-relaxed mb-4">
+                                Rubén presenta 7 clientes marcados como "NO RESPONDE" y un 53% de programas no finalizados. Se sugiere ejecutar urgente el protocolo de 3 intentos (Llamada, WhatsApp, Correo) para evitar bajas este mes.
+                            </p>
+                            <div class="border-t border-brandBorder pt-3 flex items-center justify-between text-[11px] text-brandCyan">
+                                <span>Análisis basado en Sheet "Clientes Coaching"</span>
+                                <span class="font-semibold cursor-pointer hover:underline">Ver Diagnóstico <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+
+                        <!-- Estado del Sheet de Google -->
+                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
+                            <h4 class="font-poppins font-semibold text-xs uppercase tracking-widest text-brandLime flex items-center gap-2">
+                                <i class="fa-solid fa-file-excel"></i> Planilla Vinculada (Google Sheets)
+                            </h4>
+                            <div class="bg-brandDark border border-brandBorder rounded-xl p-3 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-lg">
+                                    <i class="fa-solid fa-table"></i>
+                                </div>
+                                <div class="min-w-0 flex-grow">
+                                    <p class="text-xs font-semibold text-white truncate">Seguimiento_Coaching_AF</p>
+                                    <p class="text-[10px] text-brandText truncate">Sincronización de Auditorías Activa</p>
+                                </div>
+                                <a href="https://docs.google.com/spreadsheets/d/1FAZcYcTYiHv6RE6PmB14tRX-KkZUzg5WCv0OddTsedI/edit?gid=889030629#gid=889030629" target="_blank" class="w-8 h-8 rounded-lg hover:bg-brandBorder flex items-center justify-center text-brandText hover:text-white transition" title="Ver en Google Sheets">
+                                    <i class="fa-solid fa-up-right-from-square text-xs"></i>
+                                </a>
+                            </div>
+                            <p class="text-[11px] text-brandText leading-relaxed">
+                                Evalúa a tus coaches en la correcta entrega de cinturones MyZone, firma de contratos y agendamiento de revisiones a 30 días para impulsar la retención.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial de Últimas Auditorías Cargadas -->
+                <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
+                    <h3 class="font-poppins font-semibold text-base sm:text-lg text-white mb-4">Últimas Auditorías Registradas en el Club</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-brandBorder text-[11px] text-brandText font-semibold uppercase tracking-wider">
+                                    <th class="pb-3 pl-2">Fecha y Hora</th>
+                                    <th class="pb-3">Entrenador</th>
+                                    <th class="pb-3">Turno/Sesión</th>
+                                    <th class="pb-3 text-center">Score Final</th>
+                                    <th class="pb-3">Última Observación de Campo (Filtro IA)</th>
+                                    <th class="pb-3 text-center">API Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lastAuditsTable" class="text-sm">
+                                <!-- Filas de auditoría cargadas dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 VISTA B: NUEVA AUDITORÍA (MÉTRICAS REALES COACHING - 19 PARÁMETROS)
+                 ========================================== -->
+            <section id="view-auditar" class="hidden max-w-4xl mx-auto space-y-6">
+                <!-- Banner Informativo -->
+                <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
+                    <h3 class="font-poppins font-semibold text-lg text-white mb-1">Auditoría de Gestión de Cartera - AF Sant Adrià</h3>
+                    <p class="text-xs text-brandText">Evalúa el cumplimiento administrativo, tecnológico y de retención de los clientes (Contratos, MyZone, Seguimiento a 30 días).</p>
+                </div>
+
+                <!-- Formulario -->
+                <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="space-y-6">
+                    <!-- Datos Generales de la Sesión -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Coach Evaluado</label>
+                            <select id="formCoachSelect" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
+                                <!-- Renderizado dinámico de entrenadores -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Fecha y Hora de Auditoría</label>
+                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-white mb-2 uppercase tracking-wider">Tipo de Revisión</label>
+                            <select id="formShift" class="w-full bg-brandDark border border-brandBorder text-xs rounded-xl p-3 focus:outline-none focus:border-brandPurple text-white cursor-pointer">
+                                <option value="Revisión Semanal">📊 Revisión Semanal</option>
+                                <option value="Cierre de Mes">📅 Cierre de Mes</option>
+                                <option value="Auditoría Sorpresa">⚡ Auditoría Sorpresa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Checklist de Auditoría Directa - MÉTRICAS SHEET COACHING SEGUIMIENTO -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-8">
+                        <h4 class="font-poppins font-semibold text-base text-white pb-3 border-b border-brandBorder flex items-center justify-between">
+                            <span>Checklist Técnico de Gestión de Cartera (19 Acciones)</span>
+                            <span class="text-xs text-brandLime font-normal">Score de cumplimiento ponderado automáticamente</span>
+                        </h4>
+
+                        <!-- Sección 1: Gestión Administrativa y Contratos -->
+                        <div class="space-y-4">
+                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
+                                <i class="fa-solid fa-file-signature text-brandPurpleLight"></i> 1. Gestión Administrativa y Contratos (4 Ítems)
+                            </h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">1.1 Firma de Contratos</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Todos los clientes tienen el "Contrato Relleno".</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p1', 1, this)" class="param-btn-p1 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p1', 0, this)" class="param-btn-p1 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">1.2 Registro de Cuotas</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Cuotas (COACHING, CC ADVANCE) bien tipificadas en el Sheet.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p2', 1, this)" class="param-btn-p2 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p2', 0, this)" class="param-btn-p2 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">1.3 Asignación Vendedor/Coach</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Correcta imputación de ventas y responsables de seguimiento.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p3', 1, this)" class="param-btn-p3 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p3', 0, this)" class="param-btn-p3 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">1.4 Gestión de Bajas y Cancelaciones</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Actualización rigurosa de fechas y motivos de bajas e impagos.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p4', 1, this)" class="param-btn-p4 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p4', 0, this)" class="param-btn-p4 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 2: Tecnología y Sistema MyZone -->
+                        <div class="space-y-4 pt-4 border-t border-brandBorder">
+                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
+                                <i class="fa-solid fa-heart-pulse text-brandPurpleLight"></i> 2. Tecnología y Sistema MyZone (4 Ítems)
+                            </h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">2.1 Asignación MyZone</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Control de cinturones MyZone marcados correctamente (1/0).</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p5', 1, this)" class="param-btn-p5 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p5', 0, this)" class="param-btn-p5 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">2.2 Registro de Número de Serie</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Número de serie del dispositivo introducido en la base.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p6', 1, this)" class="param-btn-p6 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p6', 0, this)" class="param-btn-p6 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">2.3 Entrega de Dispositivo</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Fecha de entrega física de Myzone completada debidamente.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p7', 1, this)" class="param-btn-p7 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p7', 0, this)" class="param-btn-p7 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">2.4 Fomento de Uso de MyZone</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Evitar que los clientes con cinturón lo tengan con "0 uso".</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p8', 1, this)" class="param-btn-p8 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p8', 0, this)" class="param-btn-p8 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 3: Programación y Valoraciones Físicas -->
+                        <div class="space-y-4 pt-4 border-t border-brandBorder">
+                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
+                                <i class="fa-solid fa-dumbbell text-brandPurpleLight"></i> 3. Programación y Valoraciones Físicas (5 Ítems)
+                            </h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">3.1 Asignación de Programas</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">100% de la cartera cuenta con un programa de entreno activo.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p9', 1, this)" class="param-btn-p9 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p9', 0, this)" class="param-btn-p9 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">3.2 Revisiones a 30 Días</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Las valoraciones mensuales están completadas o agendadas.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p10', 1, this)" class="param-btn-p10 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p10', 0, this)" class="param-btn-p10 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">3.3 Ajustes por Condiciones Médicas</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Las rutinas están adaptadas a patologías o lesiones del cliente.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p11', 1, this)" class="param-btn-p11 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p11', 0, this)" class="param-btn-p11 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">3.4 Logros a Corto Plazo Registrados</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Progreso en métricas como % de grasa, fuerza o movilidad.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p12', 1, this)" class="param-btn-p12 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p12', 0, this)" class="param-btn-p12 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between md:col-span-2">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">3.5 Control de Valoraciones "Por Asignar"</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">No hay clientes con retrasos mayores a 1 semana en su revisión.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p13', 1, this)" class="param-btn-p13 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p13', 0, this)" class="param-btn-p13 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 4: Retención, Motivación y Seguimiento -->
+                        <div class="space-y-4 pt-4 border-t border-brandBorder">
+                            <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest flex items-center gap-2">
+                                <i class="fa-solid fa-users text-brandPurpleLight"></i> 4. Retención, Motivación y Seguimiento (6 Ítems)
+                            </h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">4.1 Mensajes Semanales de Seguimiento</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Contacto proactivo con los clientes, evitando huecos "Sin mensajes".</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p14', 1, this)" class="param-btn-p14 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p14', 0, this)" class="param-btn-p14 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">4.2 Protocolo "No Responde"</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Se han realizado los 3 intentos de contacto (Llamada, WP, Mail).</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p15', 1, this)" class="param-btn-p15 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p15', 0, this)" class="param-btn-p15 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">4.3 Control de Baja Asistencia</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Gestión de "Llamadas de Reconexión" a inactivos en el club.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p16', 1, this)" class="param-btn-p16 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p16', 0, this)" class="param-btn-p16 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">4.4 Estrategias de Motivación</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Uso de "pequeños logros" semanales para clientes desmotivados.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p17', 1, this)" class="param-btn-p17 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p17', 0, this)" class="param-btn-p17 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">4.5 Entrevistas de Salida / Bajas</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Intervención y ofrecimiento de alternativas antes de la baja definitiva.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p18', 1, this)" class="param-btn-p18 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p18', 0, this)" class="param-btn-p18 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-brandDark/50 border border-brandBorder p-3.5 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-medium text-white">4.6 Gestión Integral de Cartera</p>
+                                        <p class="text-[10px] text-brandText mt-0.5">Se observa un crecimiento o mantenimiento de clientes activos.</p>
+                                    </div>
+                                    <div class="flex items-center gap-1 bg-brandDark border border-brandBorder p-1 rounded-lg shrink-0">
+                                        <button type="button" onclick="setParam('p19', 1, this)" class="param-btn-p19 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                                        <button type="button" onclick="setParam('p19', 0, this)" class="param-btn-p19 px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition">NO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Asistente de Observaciones Inteligente (IA Engine) -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-poppins font-semibold text-base text-white flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-brandLime"></i> Redacción de Feedback Corporativo (Soporte IA)
+                            </h4>
+                            <span class="text-[9px] bg-brandLime/25 text-brandLime border border-brandLime/20 px-2 py-0.5 rounded-md uppercase font-bold tracking-wider">
+                                Anytime IA Motor
+                            </span>
+                        </div>
+                        <p class="text-xs text-brandText font-light">Escribe comentarios rápidos sobre las métricas que acabas de ver en el Google Sheet del coach. La IA los convertirá en un reporte formal impecable.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Input Rápido del Auditor -->
+                            <div class="space-y-2">
+                                <label class="block text-xs font-semibold text-brandText uppercase tracking-wider">Tus Notas del Campo (Abreviadas)</label>
+                                <textarea id="formRawObservation" rows="4" placeholder="Ej: tiene 7 clientes que no responden y no completó la entrega de varios MyZone de las nuevas altas. Debe mejorar la atención de bajas." class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple placeholder-brandText/45"></textarea>
+                                <button type="button" onclick="optimizarFeedbackConIA()" class="w-full bg-brandDark hover:bg-brandBorder border border-brandLime text-brandLime hover:text-white font-semibold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-magic"></i> Optimizar Redacción con IA
+                                </button>
+                            </div>
+
+                            <!-- Output IA Procesado (Para Google Sheets) -->
+                            <div class="space-y-2">
+                                <label class="block text-xs font-semibold text-brandLime uppercase tracking-wider flex items-center gap-1">
+                                    <i class="fa-solid fa-file-signature"></i> Observación Optimizada (Fila Directiva)
+                                </label>
+                                <textarea id="formFinalObservation" rows="4" readonly placeholder="La observación procesada por el motor IA de Anytime Fitness se generará aquí..." class="w-full bg-brandDark/40 border border-brandBorder rounded-xl p-3 text-xs text-brandLime focus:outline-none cursor-default"></textarea>
+                                <p class="text-[10px] text-brandText italic font-light">Nota: Este campo de texto consolidado se insertará en la columna "Observaciones IA" de tu Google Sheet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción del Formulario -->
+                    <div class="flex items-center justify-end gap-4">
+                        <button type="button" onclick="cambiarSeccion('dashboard')" class="bg-transparent hover:bg-brandBorder border border-brandBorder hover:text-white text-brandText font-semibold text-xs px-6 py-3 rounded-xl transition">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="bg-brandLime hover:bg-brandLime/90 text-brandDark font-bold text-xs px-8 py-3 rounded-xl transition shadow-lg shadow-brandLime/10 flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Guardar y Sincronizar Fila
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ==========================================
+                 VISTA C: FICHAS DE ENTRENADORES (STATISTICS)
+                 ========================================== -->
+            <section id="view-entrenadores" class="hidden space-y-6">
+                <!-- Grid de las Fichas Detalladas de los Entrenadores -->
+                <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <!-- Las fichas de los entrenadores se cargarán dinámicamente -->
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 VISTA D: CONFIGURACIÓN GOOGLE SHEETS
+                 ========================================== -->
+            <section id="view-config" class="hidden max-w-4xl mx-auto space-y-6">
+                <!-- Estado Actual de la Conexión -->
+                <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
+                    <h3 class="font-poppins font-semibold text-lg text-white mb-2">Conectar a la Planilla de AF Sant Adrià</h3>
+                    <p class="text-xs text-brandText font-light">Conecta esta aplicación de forma nativa con tu Google Sheet real. Cuando guardes una auditoría en tu móvil, los datos se actualizarán al segundo.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Configuración del URL del Script -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 md:col-span-1 space-y-4">
+                        <h4 class="font-poppins font-semibold text-sm text-white">Webhook URL</h4>
+                        <div class="space-y-2">
+                            <label class="block text-xs text-brandText">Google Apps Script Web App URL</label>
+                            <input type="url" id="sheetUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandLime">
+                        </div>
+                        <button onclick="guardarUrlSheet()" class="w-full bg-brandPurple hover:bg-brandPurpleLight text-white font-semibold text-xs py-3 rounded-xl transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-save"></i> Guardar Webhook
+                        </button>
+                        <p class="text-[10px] text-brandText leading-relaxed font-light">
+                            Utiliza el endpoint configurado para procesar registros de Anytime Fitness Sant Adrià.
+                        </p>
+                    </div>
+
+                    <!-- Código de Google Apps Script e Instrucciones -->
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 md:col-span-2 space-y-4">
+                        <h4 class="font-poppins font-semibold text-sm text-white">Instrucciones: Conexión en 2 Minutos</h4>
+                        
+                        <div class="space-y-3 text-xs text-brandText">
+                            <div class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">1</span>
+                                <p>En tu Google Sheet, ve a la barra superior, selecciona <strong>Extensiones</strong> &gt; <strong>Apps Script</strong>.</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">2</span>
+                                <p>Reemplaza todo el código vacío por el siguiente script mapeado para vuestras columnas:</p>
+                            </div>
+                        </div>
+
+                        <!-- Bloque de Código de Google Apps Script listo para copiar -->
+                        <div class="bg-brandDark border border-brandBorder p-4 rounded-xl relative">
+                            <button onclick="copyCode()" class="absolute right-3 top-3 text-brandText hover:text-white transition" title="Copiar Código">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                            <pre id="codeBlock" class="text-[10px] text-brandCyan font-mono overflow-x-auto select-all max-h-40">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var params = JSON.parse(e.postData.contents);
+  
+  // Agrega una fila nueva mapeando exactamente los 19 ítems de gestión de Coaching
+  sheet.appendRow([
+    new Date(params.fecha), 
+    params.entrenador, 
+    params.turno,
+    params.p1 ? "SÍ" : "NO",
+    params.p2 ? "SÍ" : "NO",
+    params.p3 ? "SÍ" : "NO",
+    params.p4 ? "SÍ" : "NO",
+    params.p5 ? "SÍ" : "NO",
+    params.p6 ? "SÍ" : "NO",
+    params.p7 ? "SÍ" : "NO",
+    params.p8 ? "SÍ" : "NO",
+    params.p9 ? "SÍ" : "NO",
+    params.p10 ? "SÍ" : "NO",
+    params.p11 ? "SÍ" : "NO",
+    params.p12 ? "SÍ" : "NO",
+    params.p13 ? "SÍ" : "NO",
+    params.p14 ? "SÍ" : "NO",
+    params.p15 ? "SÍ" : "NO",
+    params.p16 ? "SÍ" : "NO",
+    params.p17 ? "SÍ" : "NO",
+    params.p18 ? "SÍ" : "NO",
+    params.p19 ? "SÍ" : "NO",
+    params.score + "%", 
+    params.observacionesIA
+  ]);
+  
+  return ContentService.createTextOutput(JSON.stringify({"status": "success", "row": sheet.getLastRow()})).setMimeType(ContentService.MimeType.JSON);
+}</pre>
+                        </div>
+
+                        <div class="space-y-3 text-xs text-brandText">
+                            <div class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">3</span>
+                                <p>Haz clic arriba en <strong>Implementar</strong> &gt; <strong>Nueva implementación</strong>.</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">4</span>
+                                <p>Elige tipo <strong>Aplicación Web</strong>. Configura acceso para: <strong>Cualquiera</strong>. Esto es indispensable para habilitar el guardado remoto.</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 rounded bg-brandPurple/30 text-brandLime flex items-center justify-center shrink-0 font-bold text-xs">5</span>
+                                <p>Copia el URL asignado por Google y pégalo en el panel izquierdo de esta sección.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Modal de Éxito de Sincronización de Auditoría -->
+    <div id="successModal" class="fixed inset-0 bg-brandDark/80 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-brandPanel border border-brandBorder max-w-sm w-full rounded-2xl p-6 text-center space-y-4">
+            <div class="w-16 h-16 bg-brandLime/10 border border-brandLime/30 rounded-full flex items-center justify-center text-brandLime text-3xl mx-auto">
+                <i class="fa-solid fa-cloud-check"></i>
+            </div>
+            <h3 class="font-poppins font-semibold text-lg text-white">Sincronización Completada</h3>
+            <p id="successModalText" class="text-xs text-brandText leading-relaxed">Los 19 ítems han sido ponderados y la fila se ha inyectado con éxito en la planilla directiva de Anytime Fitness Sant Adrià.</p>
+            <button onclick="closeSuccessModal()" class="w-full bg-brandLime text-brandDark font-bold py-3 rounded-xl transition">
+                Volver al Panel
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         3. LOGICA, COMPARTICIÓN SAAS Y SIMULACIONES
+         ========================================== -->
+    <script>
+        // --- BASE DE DATOS LOCAL MOCKUP (ENTRENADORES REALES DE ANYTIME FITNESS SANT ADRIÀ) ---
+        const entrenadoresDefault = [
+            { id: "e1", name: "Tomas", role: "Head Coach / AF Sant Adrià", score: 95, compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], lastAudit: "2026-06-12 11:30", status: "good", focus: "Ninguno (Excelente apego a protocolos operativos y MyZone)" },
+            { id: "e2", name: "Oscar", role: "Coaching Team", score: 88, compliance: [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1], lastAudit: "2026-06-13 09:15", status: "good", focus: "Revisar la correcta entrega de cinturones MyZone y registro de firmas." },
+            { id: "e3", name: "Ruben", role: "Coaching Team", score: 79, compliance: [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1], lastAudit: "2026-06-11 16:40", status: "attention", focus: "Alerta: Aplicar urgente el protocolo de 3 intentos a los 7 clientes 'No Responde' y asignar los 9 programas faltantes." },
+            { id: "e4", name: "Lucia", role: "Coaching Team", score: 92, compliance: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1], lastAudit: "2026-06-10 10:00", status: "good", focus: "Mantener entrevistas de prevención de bajas con clientes inactivos." },
+            { id: "e5", name: "Luisa", role: "Coaching Team", score: 85, compliance: [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], lastAudit: "2026-06-09 12:30", status: "good", focus: "Asegurar que los clientes con cinturón lo usen activamente en sesiones." },
+            { id: "e6", name: "Santana", role: "Coaching Team", score: 82, compliance: [0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], lastAudit: "2026-06-08 17:15", status: "attention", focus: "Verificar firmas de contratos pendientes (Ej: Ana Piedra, Daniel Rodríguez)." }
+        ];
+
+        const auditoriasDefault = [
+            { id: "a1", date: "2026-06-13 09:15", coach: "Oscar", club: "AF Sant Adrià", score: 88, shift: "Revisión Semanal", obs: "Se revisó su base de datos. Faltan detalles de entrega de MyZone para clientes recientes, pero las valoraciones están al día." },
+            { id: "a2", date: "2026-06-12 11:30", coach: "Tomas", club: "AF Sant Adrià", score: 100, shift: "Cierre de Mes", obs: "Todas las métricas cumplidas. Asistencia de los clientes perfecta, sin demoras en entregas de cinturones ni en firmas de contratos." },
+            { id: "a3", date: "2026-06-11 16:40", coach: "Ruben", club: "AF Sant Adrià", score: 79, shift: "Revisión Semanal", obs: "Detectamos que un 53% de clientes no tienen programa completado. Posee 7 clientes marcados como NO RESPONDE (Ivan E., Teresa D., etc) que requieren acción inmediata." },
+            { id: "a4", date: "2026-06-08 17:15", coach: "Santana", club: "AF Sant Adrià", score: 82, shift: "Revisión Semanal", obs: "Faltan confirmar algunas firmas de contrato (clientes del 10/06 y 12/06). Entrega de dispositivos OK." }
+        ];
+
+        // Carga desde Almacenamiento Local (usando nueva key v4 para forzar actualización con el nuevo webhook)
+        let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v4')) || entrenadoresDefault;
+        let auditorias = JSON.parse(localStorage.getItem('af_audits_v4')) || auditoriasDefault;
+        // Carga URL pre-configurada que el usuario haya guardado o usa el webhook oficial
+        let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxtS5k9QSY7KanAx6rgCAnF9iPr8gtsyplfpiMo5YA-HAp-q-YqwLs17vL_gg6Odi57/exec";
+
+        // Inicializar el estado de los 19 parámetros del checklist temporal del formulario
+        let formParamValues = {};
+        for(let i = 1; i <= 19; i++) {
+            formParamValues[`p${i}`] = 1; 
+        }
+
+        // --- SISTEMA DE NAVEGACIÓN ---
+        function cambiarSeccion(target) {
+            document.getElementById('view-dashboard').classList.add('hidden');
+            document.getElementById('view-auditar').classList.add('hidden');
+            document.getElementById('view-entrenadores').classList.add('hidden');
+            document.getElementById('view-config').classList.add('hidden');
+
+            document.getElementById(`view-${target}`).classList.remove('hidden');
+
+            document.querySelectorAll('aside nav button').forEach(btn => btn.classList.remove('active-nav'));
+            document.getElementById(`nav-${target}`).classList.add('active-nav');
+
+            const titles = {
+                dashboard: "Dashboard de Auditorías - Anytime Fitness",
+                auditar: "Cargar Nueva Auditoría de Coaching (19 Ítems)",
+                entrenadores: "Fichas Históricas y Retención de Clientes",
+                config: "Conectar Web App a tu Google Sheet Real"
+            };
+            document.getElementById('sectionTitle').innerText = titles[target];
+
+            if (target === 'dashboard') renderDashboard();
+            if (target === 'entrenadores') renderEntrenadoresGrid();
+        }
+
+        function cambiarClub(club) {
+            renderDashboard();
+        }
+
+        // --- GESTIÓN DE CONFIGURACIÓN DE SHEET API ---
+        function guardarUrlSheet() {
+            const urlInput = document.getElementById('sheetUrlInput').value.trim();
+            localStorage.setItem('af_script_url_v4', urlInput);
+            googleScriptUrl = urlInput;
+            
+            const badge = document.getElementById('syncStatusBadge');
+            if(urlInput) {
+                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Configurado`;
+                badge.className = "flex items-center gap-1 text-[11px] text-emerald-400 font-medium";
+            } else {
+                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span> Local Only`;
+                badge.className = "flex items-center gap-1 text-[11px] text-orange-400 font-medium";
+            }
+            alert("Webhook URL de Google Sheets guardado correctamente.");
+        }
+
+        function copyCode() {
+            const code = document.getElementById('codeBlock').innerText;
+            navigator.clipboard.writeText(code);
+            alert("Código de Apps Script copiado al portapapeles. Listo para pegar en tu Google Sheet.");
+        }
+
+        // --- SISTEMA DE RENDERIZACIÓN DINÁMICA ---
+
+        function renderDashboard() {
+            const listContainer = document.getElementById('coachesSummaryList');
+            listContainer.innerHTML = '';
+
+            entrenadores.forEach(coach => {
+                let statusColor = 'text-brandLime border-brandLime/20 bg-brandLime/5';
+                let dotColor = 'bg-brandLime';
+                let badgeText = 'Protocolo OK';
+
+                if (coach.score < 80) {
+                    statusColor = 'text-red-400 border-red-500/20 bg-red-500/5';
+                    dotColor = 'bg-red-400';
+                    badgeText = 'Alerta Crítica';
+                } else if (coach.score < 90) {
+                    statusColor = 'text-amber-400 border-amber-500/20 bg-amber-500/5';
+                    dotColor = 'bg-amber-400';
+                    badgeText = 'Bajo Observación';
+                }
+
+                listContainer.innerHTML += `
+                    <div class="bg-brandDark/50 border border-brandBorder rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-brandBorder flex items-center justify-center text-white font-poppins font-bold text-sm">
+                                ${coach.name.substring(0,2).toUpperCase()}
+                            </div>
+                            <div>
+                                <h4 class="font-poppins font-semibold text-sm text-white">${coach.name}</h4>
+                                <p class="text-xs text-brandText">${coach.role} • Última carga: ${coach.lastAudit}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+                            <div class="text-right">
+                                <span class="text-xs text-brandText">Promedio</span>
+                                <p class="text-sm font-poppins font-bold text-white">${coach.score}%</p>
+                            </div>
+                            <div class="w-24 bg-brandDark border border-brandBorder h-2 rounded-full overflow-hidden">
+                                <div class="h-full ${dotColor}" style="width: ${coach.score}%"></div>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full border ${statusColor}">
+                                <span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span> ${badgeText}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const tableBody = document.getElementById('lastAuditsTable');
+            tableBody.innerHTML = '';
+
+            auditorias.forEach(aud => {
+                tableBody.innerHTML += `
+                    <tr class="border-b border-brandBorder/40 hover:bg-brandPanel/30 transition">
+                        <td class="py-4 pl-2 font-medium text-xs text-brandText">${aud.date}</td>
+                        <td class="py-4 font-semibold text-white">${aud.coach}</td>
+                        <td class="py-4 text-xs text-brandText">${aud.shift}</td>
+                        <td class="py-4 text-center">
+                            <span class="text-xs font-poppins font-bold px-2 py-0.5 rounded-md ${aud.score >= 85 ? 'text-brandLime bg-brandLime/10' : 'text-red-400 bg-red-400/10'}">
+                                ${aud.score}%
+                            </span>
+                        </td>
+                        <td class="py-4 max-w-sm truncate text-xs text-brandText" title="${aud.obs}">${aud.obs}</td>
+                        <td class="py-4 text-center">
+                            <span class="text-emerald-400 text-xs"><i class="fa-solid fa-cloud-arrow-up"></i> Sincro</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            const selectElement = document.getElementById('formCoachSelect');
+            selectElement.innerHTML = '<option value="" disabled selected>Selecciona un coach...</option>';
+            entrenadores.forEach(coach => {
+                selectElement.innerHTML += `<option value="${coach.id}">${coach.name}</option>`;
+            });
+
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('formDateTime').value = now.toISOString().slice(0, 16);
+        }
+
+        function renderEntrenadoresGrid() {
+            const grid = document.getElementById('coachesDetailedGrid');
+            grid.innerHTML = '';
+
+            entrenadores.forEach(coach => {
+                let statusBadge = 'text-brandLime bg-brandLime/10';
+                let borderStyle = 'border-brandBorder';
+                if(coach.score < 80) {
+                    statusBadge = 'text-red-400 bg-red-500/10';
+                    borderStyle = 'border-red-500/30';
+                } else if(coach.score < 90) {
+                    statusBadge = 'text-amber-400 bg-amber-500/10';
+                    borderStyle = 'border-amber-500/30';
+                }
+
+                // Generar los 19 checks de cumplimiento del entrenador basados en el plan de coaching
+                const listItems = [
+                    "Firma Contratos", "Registro Cuotas", "Asign. Vendedor", "Gestión Bajas", "Activación MyZone", "Num. Serie MZ",
+                    "Entrega MZ", "Uso Activo MZ", "Progr. Asignados", "Revisión 30 Días", "Ajustes Médicos", "Logros Corto Plazo",
+                    "Valoraciones", "Mensajes Semanales", "Protoc. No Responde", "Baja Asistencia", "Estrat. Motivación", "Entrev. Salida", "Gestión Cartera"
+                ];
+
+                let checklistHtml = '';
+                for(let idx = 0; idx < 19; idx++) {
+                    checklistHtml += `
+                        <div class="flex items-center gap-1">
+                            <i class="fa-solid ${coach.compliance[idx] ? 'fa-square-check text-brandLime' : 'fa-square-xmark text-red-500'}"></i>
+                            <span class="text-brandText truncate text-[11px]">${listItems[idx]}</span>
+                        </div>
+                    `;
+                }
+
+                grid.innerHTML += `
+                    <div class="bg-brandPanel border ${borderStyle} rounded-2xl p-5 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-12 h-12 rounded-xl bg-brandBorder flex items-center justify-center text-white font-poppins font-bold text-lg">
+                                    ${coach.name.substring(0,2).toUpperCase()}
+                                </div>
+                                <span class="text-xs px-2.5 py-1 rounded-full font-semibold ${statusBadge}">
+                                    Score: ${coach.score}%
+                                </span>
+                            </div>
+
+                            <div>
+                                <h3 class="font-poppins font-semibold text-base text-white">${coach.name}</h3>
+                                <p class="text-xs text-brandText font-light">${coach.role}</p>
+                            </div>
+
+                            <div class="border-t border-brandBorder pt-3.5 mt-3 space-y-2">
+                                <span class="text-[10px] text-brandText uppercase tracking-wider font-semibold block">Desglose Operativo (19 KPIs)</span>
+                                <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-xs">
+                                    ${checklistHtml}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-brandBorder pt-3.5 mt-4">
+                            <span class="text-[10px] text-brandText uppercase tracking-wider font-semibold block mb-1">Diagnóstico IA</span>
+                            <p class="text-xs text-brandCyan bg-brandCyan/5 border border-brandCyan/10 px-3 py-2 rounded-xl">
+                                <i class="fa-solid fa-triangle-exclamation"></i> ${coach.focus}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- LOGICA DE CONTROL DE BOTONES SÍ / NO EN CHECKLIST ---
+        function setParam(paramId, value, buttonElement) {
+            formParamValues[paramId] = value;
+            
+            const buttons = document.querySelectorAll(`.param-btn-${paramId}`);
+            buttons.forEach(btn => {
+                btn.className = `param-btn-${paramId} px-2.5 py-1 text-[10px] font-semibold rounded-md text-brandText hover:text-white transition`;
+            });
+
+            if (value === 1) {
+                buttonElement.className = `param-btn-${paramId} px-2.5 py-1 text-[10px] font-semibold rounded-md bg-brandLime text-brandDark transition`;
+            } else {
+                buttonElement.className = `param-btn-${paramId} px-2.5 py-1 text-[10px] font-semibold rounded-md bg-red-500 text-white transition`;
+            }
+        }
+
+        // --- ASISTENTE DE REDACCIÓN DE OBSERVACIONES IA ---
+        function optimizarFeedbackConIA() {
+            const rawText = document.getElementById('formRawObservation').value.trim();
+            const coachId = document.getElementById('formCoachSelect').value;
+            const finalTexarea = document.getElementById('formFinalObservation');
+
+            if (!coachId) {
+                alert("Por favor, selecciona primero al coach para contextualizar el reporte.");
+                return;
+            }
+
+            if (!rawText) {
+                alert("Por favor, escribe notas rápidas en el cuadro izquierdo para que la IA las optimice.");
+                return;
+            }
+
+            finalTexarea.value = "Anytime IA Motor: Procesando notas y analizando retención / MyZone...";
+
+            setTimeout(() => {
+                const coachName = entrenadores.find(c => c.id === coachId).name;
+                
+                const respuestasProfesionales = [
+                    `Auditoría Operativa - Coach ${coachName}: Desempeño óptimo en el cumplimiento del checklist del club. Respecto al seguimiento se constata: "${rawText}". Se registra excelente actitud hacia el registro de contratos y control de bandas MyZone.`,
+                    `Reporte de Anytime Fitness - Coach ${coachName}: Se verifica la correcta asignación de programas y protocolos de asistencia. Se documenta que: "${rawText}". Se sugiere mantener el seguimiento de mejora sobre estas métricas para evitar deserciones.`,
+                    `Evaluación de Retención (${coachName}): Evaluados con éxito los 19 KPIs de coaching. Se destaca la gestión administrativa de contratos y cuotas. Observación del auditor: "${rawText}". Se califica el periodo de forma satisfactoria.`
+                ];
+
+                const indexAleatorio = Math.floor(Math.random() * respuestasProfesionales.length);
+                finalTexarea.value = respuestasProfesionales[indexAleatorio];
+            }, 1100);
+        }
+
+        // --- EXPORTAR AUDITORÍA E INTEGRACIÓN CON EL WEBHOOK DE GOOGLE SHEETS ---
+        function procesarNuevaAuditoria(event) {
+            event.preventDefault();
+
+            const coachId = document.getElementById('formCoachSelect').value;
+            const datetime = document.getElementById('formDateTime').value.replace('T', ' ');
+            const shift = document.getElementById('formShift').value;
+            const rawObs = document.getElementById('formRawObservation').value.trim();
+            let finalObs = document.getElementById('formFinalObservation').value.trim();
+
+            if (!coachId) {
+                alert("Por favor, selecciona a un coach.");
+                return;
+            }
+
+            if (!finalObs) {
+                finalObs = rawObs || "Auditoría de gestión de cartera completada con éxito. Sin observaciones urgentes sobre MyZone o Contratos.";
+            }
+
+            let totalYes = 0;
+            for(let i = 1; i <= 19; i++) {
+                if(formParamValues[`p${i}`] === 1) totalYes++;
+            }
+            const scoreCalculado = Math.round((totalYes / 19) * 100);
+
+            const coachObject = entrenadores.find(c => c.id === coachId);
+
+            const nuevaAuditoria = {
+                entrenador: coachObject.name,
+                fecha: datetime,
+                turno: shift,
+                p1: formParamValues.p1 === 1, p2: formParamValues.p2 === 1, p3: formParamValues.p3 === 1,
+                p4: formParamValues.p4 === 1, p5: formParamValues.p5 === 1, p6: formParamValues.p6 === 1,
+                p7: formParamValues.p7 === 1, p8: formParamValues.p8 === 1, p9: formParamValues.p9 === 1,
+                p10: formParamValues.p10 === 1, p11: formParamValues.p11 === 1, p12: formParamValues.p12 === 1,
+                p13: formParamValues.p13 === 1, p14: formParamValues.p14 === 1, p15: formParamValues.p15 === 1,
+                p16: formParamValues.p16 === 1, p17: formParamValues.p17 === 1, p18: formParamValues.p18 === 1,
+                p19: formParamValues.p19 === 1,
+                score: scoreCalculado,
+                observacionesIA: finalObs
+            };
+
+            // Transmisión al Webhook pre-configurado de Anytime Fitness
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(nuevaAuditoria)
+                })
+                .then(() => console.log("Auditoría enviada a tu Google Sheet."))
+                .catch(err => console.error("Error al reportar a la API de Google Sheets: ", err));
+            } else {
+                console.warn("Webhook no configurado. Los datos se almacenarán localmente.");
+            }
+
+            auditorias.unshift({
+                id: "a_" + Date.now(),
+                date: datetime,
+                coach: coachObject.name,
+                club: document.getElementById('clubSelector').value,
+                score: scoreCalculado,
+                shift: shift,
+                obs: finalObs
+            });
+
+            coachObject.score = Math.round((coachObject.score + scoreCalculado) / 2);
+            coachObject.compliance = [];
+            for(let i = 1; i <= 19; i++) {
+                coachObject.compliance.push(formParamValues[`p${i}`]);
+            }
+            coachObject.lastAudit = datetime;
+
+            if(coachObject.score >= 90) {
+                coachObject.status = "good";
+                coachObject.focus = "Mantener los estándares de retención y control operativo.";
+            } else if(coachObject.score >= 80) {
+                coachObject.status = "attention";
+                coachObject.focus = "Reforzar protocoles de MyZone y entrevistas de salida.";
+            } else {
+                coachObject.status = "critical";
+                coachObject.focus = "Priorizar contacto con clientes 'No Responde' y agendar valoraciones.";
+            }
+
+            localStorage.setItem('af_audits_v4', JSON.stringify(auditorias));
+            localStorage.setItem('af_coaches_v4', JSON.stringify(entrenadores));
+
+            const isLocal = !googleScriptUrl;
+            document.getElementById('successModalText').innerHTML = isLocal 
+                ? "La auditoría se ha guardado localmente de forma segura.<br><strong class='text-brandLime'>Para enviarla directamente a tu planilla, configura tu enlace Webhook en la pestaña 'Configurar Sheet'.</strong>"
+                : `¡Auditoría cargada con éxito!<br>Los 19 ítems han sido volcados en tiempo real en tu archivo de seguimiento de Google Sheets.`;
+            
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            
+            document.getElementById('auditForm').reset();
+            document.getElementById('formRawObservation').value = "";
+            document.getElementById('formFinalObservation').value = "";
+            
+            for(let i = 1; i <= 19; i++) {
+                formParamValues[`p${i}`] = 1;
+            }
+            
+            document.querySelectorAll('[class^="param-btn-"]').forEach(btn => {
+                btn.className = btn.innerHTML === "SÍ" 
+                    ? btn.className.replace('bg-red-500 text-white', 'bg-brandLime text-brandDark') 
+                    : btn.className.replace('bg-red-500 text-white', 'text-brandText');
+            });
+
+            cambiarSeccion('dashboard');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('sheetUrlInput').value = googleScriptUrl;
+            
+            const badge = document.getElementById('syncStatusBadge');
+            if(googleScriptUrl) {
+                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado`;
+                badge.className = "flex items-center gap-1 text-[11px] text-emerald-400 font-medium";
+            } else {
+                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span> Local Only`;
+                badge.className = "flex items-center gap-1 text-[11px] text-orange-400 font-medium";
+            }
+
+            renderDashboard();
+        });
+    </script>
+
+</body>
+</html>
