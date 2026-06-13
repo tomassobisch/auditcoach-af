@@ -1,0 +1,25 @@
+/* Estilos personalizados para potenciar la interacción táctil en dispositivos móviles */
+body {
+    background-color: #0B0813;
+    color: #F1EFF5;
+}
+/* Ocultar barra de scroll pero mantener funcionalidad de scroll nativo */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0B0813;
+}
+::-webkit-scrollbar-thumb {
+    background: #2D2344;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #9BE600;
+}
+.active-nav {
+    border-left: 4px solid #9BE600;
+    background-color: rgba(155, 230, 0, 0.06);
+    color: #ffffff;
+}
