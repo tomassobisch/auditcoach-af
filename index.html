@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anytime Fitness Sant Adrià - Portal de Auditorías</title>
+    <title>Anytime Fitness Sant Adrià - Auditoría Completa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col md:flex-row bg-[#0B0813]">
 
-    <!-- BARRA LATERAL (Estética Original) -->
+    <!-- BARRA LATERAL -->
     <aside class="w-full md:w-64 bg-brandPanel border-b md:border-b-0 md:border-r border-brandBorder flex flex-col shrink-0">
         <div class="p-6 border-b border-brandBorder flex items-center gap-3">
             <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brandPurple to-brandLime flex items-center justify-center text-brandDark font-bold text-xl font-poppins">
@@ -44,7 +44,7 @@
             </button>
             <a href="https://docs.google.com/spreadsheets/d/1FAZcYcTYiHv6RE6PmB14tRX-KkZUzg5WCv0OddTsedI/edit?usp=sharing" target="_blank" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-emerald-400 hover:bg-emerald-500/10 transition mt-4 border border-emerald-500/20 bg-emerald-500/5">
                 <i class="fa-solid fa-file-excel w-5 text-center text-lg"></i>
-                <span class="font-bold text-sm">Ver Planilla Real</span>
+                <span class="font-bold text-sm">Conexión con Sheet</span>
             </a>
         </nav>
 
@@ -70,16 +70,15 @@
 
         <div class="flex-grow p-6 overflow-y-auto">
 
-            <!-- VISTA DASHBOARD -->
+            <!-- DASHBOARD -->
             <section id="view-dashboard" class="space-y-6">
-                <!-- Estadísticas Superiores -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
-                        <div><p class="text-xs text-brandText uppercase font-bold">Total Auditorías</p><h3 id="statTotal" class="text-3xl font-poppins font-bold text-white mt-1">0</h3></div>
+                        <div><p class="text-xs text-brandText uppercase font-bold">Total Auditorías</p><h3 id="statTotalAudits" class="text-3xl font-poppins font-bold text-white mt-1">0</h3></div>
                         <div class="text-brandLime text-2xl"><i class="fa-solid fa-clipboard-check"></i></div>
                     </div>
                     <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
-                        <div><p class="text-xs text-brandText uppercase font-bold">Score Promedio</p><h3 id="statAvg" class="text-3xl font-poppins font-bold text-white mt-1">0%</h3></div>
+                        <div><p class="text-xs text-brandText uppercase font-bold">Score Promedio</p><h3 id="statAvgScore" class="text-3xl font-poppins font-bold text-white mt-1">0%</h3></div>
                         <div class="text-brandPurpleLight text-2xl"><i class="fa-solid fa-chart-line"></i></div>
                     </div>
                     <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
@@ -87,17 +86,15 @@
                         <div class="text-red-400 text-2xl"><i class="fa-solid fa-bell"></i></div>
                     </div>
                 </div>
-
-                <!-- Tarjetas Coaches -->
+                
                 <div id="coachesSummaryList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-                <!-- Tabla de Historial -->
                 <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
-                    <h3 class="font-poppins font-semibold text-white mb-4 text-sm uppercase">Historial de Evaluaciones (38 Col)</h3>
+                    <h3 class="font-poppins font-semibold text-white mb-4 text-sm uppercase">Historial Reciente</h3>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>
-                                <tr class="border-b border-brandBorder text-[11px] text-brandText uppercase">
+                                <tr class="border-b border-brandBorder text-[11px] text-brandText uppercase font-semibold">
                                     <th class="pb-3 pl-2">Fecha</th>
                                     <th class="pb-3">Coach</th>
                                     <th class="pb-3">Alumno</th>
@@ -111,25 +108,16 @@
                 </div>
             </section>
 
-            <!-- VISTA AUDITAR -->
-            <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-6 pb-32">
+            <!-- AUDITAR -->
+            <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-6 pb-24">
                 <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="space-y-6">
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Entrenador</label>
-                            <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:border-brandPurple outline-none"></select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Alumno</label>
-                            <select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:border-brandPurple outline-none"></select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-white mb-2 uppercase">Fecha</label>
-                            <input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:border-brandPurple outline-none">
-                        </div>
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Coach</label><select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple"></select></div>
+                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Alumno</label><select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple"></select></div>
+                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Fecha</label><input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple"></div>
                     </div>
 
-                    <div class="space-y-8" id="auditSectionsContainer">
+                    <div id="dynamicAuditSections" class="space-y-8">
                         <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
                             <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">1. Gestión de Membr y Programa</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="seccion-1-puntos"></div>
@@ -148,42 +136,45 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-end gap-4">
-                        <button type="button" onclick="cambiarSeccion('dashboard')" class="px-8 py-3 text-brandText text-xs font-bold">Cancelar</button>
-                        <button type="submit" class="bg-brandPurple text-white px-10 py-4 rounded-2xl font-bold text-xs shadow-xl hover:scale-[1.02] transition">Finalizar Auditoría</button>
+                    <div class="flex justify-end gap-4 pb-24">
+                        <button type="button" onclick="cambiarSeccion('dashboard')" class="px-8 py-3 text-brandText text-xs font-bold transition">Cancelar</button>
+                        <button type="submit" class="bg-brandPurple text-white px-10 py-3 rounded-xl font-bold text-xs shadow-lg hover:scale-105 transition flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Finalizar y Ver Informe
+                        </button>
                     </div>
                 </form>
             </section>
 
-            <!-- VISTA CONFIG -->
-            <section id="view-config" class="hidden max-w-2xl mx-auto">
+            <!-- CONFIGURACIÓN -->
+            <section id="view-config" class="hidden max-w-2xl mx-auto space-y-6">
                 <div class="bg-brandPanel border border-brandBorder rounded-3xl p-8 space-y-6">
                     <h3 class="text-white font-poppins font-bold text-xl text-center">Configuración</h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs text-brandText uppercase font-bold mb-2">Webhook URL Google Sheets</label>
-                            <input type="url" id="sheetUrlInput" class="w-full bg-brandDark border border-brandBorder rounded-xl p-4 text-sm text-white focus:border-brandLime outline-none">
+                            <label class="block text-xs text-brandText uppercase font-bold mb-2">Google Apps Script Webhook URL</label>
+                            <input type="url" id="sheetUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-brandDark border border-brandBorder rounded-xl p-4 text-sm text-white focus:border-brandLime outline-none">
                         </div>
                         <button onclick="guardarUrlSheet()" class="w-full bg-brandLime text-brandDark py-4 rounded-xl font-bold transition">Vincular Planilla</button>
                     </div>
                 </div>
             </section>
 
-            <section id="view-entrenadores" class="hidden">
-                <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            <!-- VISTA ENTRENADORES -->
+            <section id="view-entrenadores" class="hidden space-y-6">
+                <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
             </section>
         </div>
     </main>
 
-    <!-- MODAL INFORME -->
-    <div id="modalInforme" class="fixed inset-0 bg-brandDark/95 z-50 flex items-center justify-center p-4 hidden">
+    <!-- MODAL DE INFORME -->
+    <div id="modalInforme" class="fixed inset-0 bg-brandDark/90 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-brandPanel border border-brandBorder w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
             <div class="p-6 border-b border-brandBorder bg-gradient-to-r from-brandPurple/20 to-transparent flex justify-between items-center text-white">
                 <h3 class="font-poppins font-bold text-lg">Informe Ejecutivo</h3>
-                <button onclick="cerrarModalInforme()"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <button onclick="cerrarModalInforme()"><i class="fa-solid fa-xmark text-xl text-brandText hover:text-white"></i></button>
             </div>
             <div id="contenidoInforme" class="p-8 overflow-y-auto text-sm text-brandText leading-relaxed space-y-6"></div>
-            <div class="p-6 border-t border-brandBorder"><button onclick="cerrarModalInforme()" class="w-full bg-brandLime text-brandDark py-4 rounded-2xl font-bold text-xs">Cerrar Informe</button></div>
+            <div class="p-6 border-t border-brandBorder"><button onclick="cerrarModalInforme()" class="w-full bg-brandLime text-brandDark py-3 rounded-xl font-bold text-xs">Entendido</button></div>
         </div>
     </div>
 

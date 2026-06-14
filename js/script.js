@@ -1,4 +1,4 @@
-// Configuración de colores corporativos
+// Configuración de colores corporativos AF
 tailwind.config = {
     theme: {
         extend: {
@@ -81,8 +81,8 @@ const entrenadoresDefault = [
     ] }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v20')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v20')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v21')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v21')) || [];
 let formValues = {}; 
 let formObservations = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxcIOljiPraQq2mgtyMLwj0PQ3Nzrd5Qcuawg1L1FdvCqsaQhTF7o_-fH-9T2mf1kyx/exec";
@@ -127,13 +127,13 @@ function renderPuntosAuditoria() {
             }
 
             container.innerHTML += `
-                <div class="bg-brandDark/40 p-4 rounded-2xl border border-brandBorder space-y-3">
+                <div class="bg-brandDark/40 p-4 rounded-xl border border-brandBorder space-y-3">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <span class="text-xs text-white font-medium">${p.label}</span>
                         ${controlHtml}
                     </div>
                     <div class="pt-1">
-                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Escribir observación..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple">
+                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Observación específica..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple placeholder-brandText/30">
                     </div>
                 </div>`;
         });
@@ -171,8 +171,9 @@ function renderDashboard() {
     const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
     const alrt = auditorias.filter(a=>a.score < 80).length;
     
-    document.getElementById('statTotal').innerText = total;
-    document.getElementById('statAvg').innerText = avg + "%";
+    // IDs corregidos para el Dashboard
+    document.getElementById('statTotalAudits').innerText = total;
+    document.getElementById('statAvgScore').innerText = avg + "%";
     document.getElementById('statAlerts').innerText = alrt;
 
     const list = document.getElementById('coachesSummaryList');
@@ -228,8 +229,8 @@ function procesarNuevaAuditoria(e) {
     client.lastScore = score;
     coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
 
-    localStorage.setItem('af_audits_v20', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v20', JSON.stringify(entrenadores));
+    localStorage.setItem('af_audits_v21', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v21', JSON.stringify(entrenadores));
 
     if (supabase) {
         supabase.from('auditorias').insert([{
