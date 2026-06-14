@@ -11,7 +11,7 @@ tailwind.config = {
     }
 }
 
-// --- CONFIGURACIÓN DE SUPABASE (BASE DE DATOS EN LA NUBE) ---
+// --- CONFIGURACIÓN DE SUPABASE ---
 const SUPABASE_URL = "https://ovbaukzafvrfymkmpdhh.supabase.co";
 const SUPABASE_KEY = "sb_publishable_0pFvPEWbBh7cWMb2KSFWwA_hudVfPrv";
 const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
@@ -73,10 +73,11 @@ const entrenadoresDefault = [
     { id: "e4", name: "Anna", role: "Coach", score: 90, clients: [{id:"ca1", name:"LUISA FERNANDA GOMEZ"}] }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v18')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v18')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v19')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v19')) || [];
 let formValues = {};
 let formObservations = {};
+let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxcIOljiPraQq2mgtyMLwj0PQ3Nzrd5Qcuawg1L1FdvCqsaQhTF7o_-fH-9T2mf1kyx/exec";
 
 function resetFormParams() { 
     CONFIG_AUDIT.forEach(p => { 
@@ -91,16 +92,19 @@ function cambiarSeccion(target) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`view-${target}`).classList.remove('hidden');
     document.querySelectorAll('aside nav button').forEach(btn => btn.classList.remove('active-nav'));
-    document.getElementById(`nav-${target}`).classList.add('active-nav');
+    const navBtn = document.getElementById(`nav-${target}`);
+    if (navBtn) navBtn.classList.add('active-nav');
+    
     if (target === 'dashboard') renderDashboard();
     if (target === 'auditar') { renderCoachSelect(); renderPuntosAuditoria(); }
-    if (target === 'entrenadores') renderEntrenadoresGrid();
+    if (target === 'config') document.getElementById('sheetUrlInput').value = googleScriptUrl;
 }
 
 // --- RENDERIZADO DINÁMICO ---
 function renderPuntosAuditoria() {
     for (let i = 1; i <= 4; i++) {
         const container = document.getElementById(`seccion-${i}-puntos`);
+        if (!container) continue;
         container.innerHTML = "";
         CONFIG_AUDIT.filter(p => p.section === i).forEach(p => {
             let controlHtml = "";
@@ -122,7 +126,7 @@ function renderPuntosAuditoria() {
                         ${controlHtml}
                     </div>
                     <div class="pt-1">
-                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Añadir observación para este punto..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple">
+                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Observación para este punto..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple">
                     </div>
                 </div>`;
         });
@@ -152,12 +156,11 @@ function actualizarListaAlumnos(id) {
 }
 
 function renderDashboard() {
-    // Estadísticas
     const total = auditorias.length;
     const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
     const alrt = auditorias.filter(a=>a.score < 80).length;
-    document.getElementById('statTotal').innerText = total;
-    document.getElementById('statAvg').innerText = avg + "%";
+    document.getElementById('statTotalAudits').innerText = total;
+    document.getElementById('statAvgScore').innerText = avg + "%";
     document.getElementById('statAlerts').innerText = alrt;
 
     const list = document.getElementById('coachesSummaryList');
@@ -168,9 +171,9 @@ function renderDashboard() {
             <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-3">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold">${e.name[0]}</div>
-                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p></div>
+                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase">${e.role}</p></div>
                 </div>
-                <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Compliance: ${e.score}%</span></div>
+                <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Score: ${e.score}%</span></div>
                 <div class="w-full bg-brandDark h-1.5 rounded-full overflow-hidden border border-brandBorder"><div class="h-full ${color}" style="width: ${e.score}%"></div></div>
             </div>`;
     });
@@ -179,7 +182,7 @@ function renderDashboard() {
     table.innerHTML = auditorias.length ? '' : '<tr><td colspan="5" class="py-4 text-brandText pl-2">Sin registros.</td></tr>';
     auditorias.slice(0, 10).forEach(a => {
         table.innerHTML += `
-            <tr class="border-b border-brandBorder/40 hover:bg-brandPanel/30 transition">
+            <tr class="border-b border-brandBorder/40 hover:bg-brandPanel/30 transition text-xs">
                 <td class="py-4 pl-2 text-brandText">${a.date.split('T')[0]}</td>
                 <td class="py-4 font-bold text-white">${a.coach}</td>
                 <td class="py-4 text-white">${a.client}</td>
@@ -214,21 +217,24 @@ function procesarNuevaAuditoria(e) {
     coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
 
     // Guardado en LocalStorage
-    localStorage.setItem('af_audits_v18', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v18', JSON.stringify(entrenadores));
+    localStorage.setItem('af_audits_v19', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v19', JSON.stringify(entrenadores));
 
-    // GUARDADO EN SUPABASE (Base de datos real)
+    // GUARDADO EN SUPABASE
     if (supabase) {
         supabase.from('auditorias').insert([{
-            coach: coach.name,
-            client: client.name,
-            score: score,
-            compliance_data: formValues,
-            observations_data: formObservations,
+            coach: coach.name, client: client.name, score: score,
+            compliance_data: formValues, observations_data: formObservations,
             created_at: new Date()
-        }]).then(({error}) => {
-            if (error) console.error("Error guardando en Supabase:", error);
-            else console.log("Auditoría sincronizada con Supabase con éxito.");
+        }]).then(({error}) => { if (error) console.error("Supabase Error:", error); });
+    }
+
+    // ENVÍO A GOOGLE SHEET
+    if (googleScriptUrl) {
+        fetch(googleScriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({...nuevaAuditoria, action: "updateAndHighlight"})
         });
     }
 
@@ -243,36 +249,31 @@ function generarInformeFinal(aud) {
 
     container.innerHTML = `
         <div class="flex justify-between border-b border-brandBorder pb-4">
-            <div><p class="text-[10px] text-brandText uppercase font-bold">Audit Alumno</p><h4 class="text-2xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
+            <div><p class="text-[10px] text-brandText uppercase font-bold">Resumen Audit</p><h4 class="text-2xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
             <div class="text-right text-[10px] text-brandText font-bold">${tendencia}<br>${aud.date.replace('T', ' ')}</div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
             <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
             <div class="space-y-3"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[10px] space-y-3">${fallos.map(f=>`<li><span class="text-white font-medium">${f.label}</span>${aud.observations[f.id] ? `<br><em class="text-brandText/60 italic">Nota: "${aud.observations[f.id]}"</em>` : ''}</li>`).join('')}</ul></div>
+        </div>
+        <div class="bg-brandDark/40 p-5 rounded-2xl border border-brandBorder italic text-[11px] text-brandText">
+            Diagnóstico: La gestión de <strong>${aud.coach}</strong> con <strong>${aud.client}</strong> ha sido registrada y sincronizada.
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
 }
 
-function cerrarModalInforme() { document.getElementById('modalInforme').classList.add('hidden'); cambiarSeccion('dashboard'); }
-function verInformePrevio(id) { const a = auditorias.find(aud => aud.id === id); if (a) generarInformeFinal(a); }
-function renderEntrenadoresGrid() { cambiarSeccion('dashboard'); }
-
-async function sincronizarConSupabase() {
-    if (!supabase) return;
-    
-    const { data, error } = await supabase
-        .from('auditorias')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(20);
-
-    if (!error && data) {
-        console.log("Datos recuperados de Supabase:", data);
-        // Podríamos integrar estos datos en la lista de auditorías si fuera necesario
-    }
+function guardarUrlSheet() {
+    const url = document.getElementById('sheetUrlInput').value.trim();
+    if (!url) return alert("Ingresa URL");
+    localStorage.setItem('af_script_url_v4', url);
+    googleScriptUrl = url;
+    alert("¡Vinculado con éxito!");
+    cambiarSeccion('dashboard');
 }
 
+function cerrarModalInforme() { document.getElementById('modalInforme').classList.add('hidden'); cambiarSeccion('dashboard'); }
+function verInformePrevio(id) { const a = auditorias.find(aud => aud.id === id); if (a) generarInformeFinal(a); }
+
 document.addEventListener('DOMContentLoaded', () => { 
-    renderDashboard(); 
-    sincronizarConSupabase();
+    renderDashboard();
 });
