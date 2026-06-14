@@ -1,4 +1,4 @@
-// Configuración de colores corporativos AF
+// Configuración de colores corporativos AF (Consistente con la estética Vercel)
 tailwind.config = {
     theme: {
         extend: {
@@ -57,6 +57,7 @@ const CONFIG_AUDIT = [
     { id: 38, label: "38. Valoración Genérica Coach", section: 4, type: "text" }
 ];
 
+// --- BASE DE DATOS REAL COMPLETA AF SANT ADRIÀ ---
 const entrenadoresDefault = [
     { id: "e1", name: "Tomas", role: "Head Coach", score: 95, clients: [
         {id:"ct1", name:"JOSE LUIS GIMENEZ"}, {id:"ct2", name:"MARIA CARMEN RUIZ"}, {id:"ct3", name:"ANTONIO LOPEZ"}, {id:"ct4", name:"FRANCISCO JAVIER GARCIA"}, {id:"ct5", name:"MARIA DOLORES MARTINEZ"}
@@ -81,8 +82,8 @@ const entrenadoresDefault = [
     ] }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v21')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v21')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v23')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v23')) || [];
 let formValues = {}; 
 let formObservations = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxcIOljiPraQq2mgtyMLwj0PQ3Nzrd5Qcuawg1L1FdvCqsaQhTF7o_-fH-9T2mf1kyx/exec";
@@ -95,6 +96,7 @@ function resetFormParams() {
 }
 resetFormParams();
 
+// --- NAVEGACIÓN ---
 function cambiarSeccion(target) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`view-${target}`).classList.remove('hidden');
@@ -108,6 +110,7 @@ function cambiarSeccion(target) {
     if (target === 'config') document.getElementById('sheetUrlInput').value = googleScriptUrl;
 }
 
+// --- RENDERIZADO DINÁMICO DE LOS 38 PUNTOS ---
 function renderPuntosAuditoria() {
     for (let i = 1; i <= 4; i++) {
         const container = document.getElementById(`seccion-${i}-puntos`);
@@ -133,7 +136,7 @@ function renderPuntosAuditoria() {
                         ${controlHtml}
                     </div>
                     <div class="pt-1">
-                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Observación específica..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple placeholder-brandText/30">
+                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Añadir observación específica..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple placeholder-brandText/30">
                     </div>
                 </div>`;
         });
@@ -173,9 +176,14 @@ function renderDashboard() {
     const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
     const alrt = auditorias.filter(a=>a.score < 80).length;
     
-    document.getElementById('statTotalAudits').innerText = total;
-    document.getElementById('statAvgScore').innerText = avg + "%";
-    document.getElementById('statAlerts').innerText = alrt;
+    // Unificación de IDs para estadísticas
+    const stT = document.getElementById('statTotalAudits');
+    const stA = document.getElementById('statAvgScore');
+    const stL = document.getElementById('statAlerts');
+    
+    if(stT) stT.innerText = total;
+    if(stA) stA.innerText = avg + "%";
+    if(stL) stL.innerText = alrt;
 
     const list = document.getElementById('coachesSummaryList');
     if (!list) return;
@@ -205,7 +213,7 @@ function renderDashboard() {
 
     const table = document.getElementById('lastAuditsTable');
     if (!table) return;
-    table.innerHTML = auditorias.length ? '' : '<tr><td colspan="5" class="py-4 text-brandText pl-2">Sin registros.</td></tr>';
+    table.innerHTML = auditorias.length ? '' : '<tr><td colspan="5" class="py-6 text-brandText pl-2">Sin auditorías registradas aún.</td></tr>';
     auditorias.slice(0, 10).forEach(a => {
         table.innerHTML += `
             <tr class="border-b border-brandBorder/40 hover:bg-brandPanel/30 transition text-xs">
@@ -213,7 +221,7 @@ function renderDashboard() {
                 <td class="py-4 font-bold text-white">${a.coach}</td>
                 <td class="py-4 text-white">${a.client}</td>
                 <td class="py-4 text-center"><span class="px-2 py-1 rounded-lg text-[10px] font-bold ${a.score >= 85 ? 'bg-brandLime/10 text-brandLime' : 'bg-red-500/10 text-red-500'}">${a.score}%</span></td>
-                <td class="py-4 text-center"><button onclick="verInformePrevio('${a.id}')" class="text-brandPurple hover:text-white transition"><i class="fa-solid fa-file-invoice"></i></button></td>
+                <td class="py-4 text-center"><button onclick="verInformePrevio('${a.id}')" class="text-brandPurple hover:text-white transition"><i class="fa-solid fa-file-invoice text-xl"></i></button></td>
             </tr>`;
     });
 }
@@ -223,7 +231,7 @@ function procesarNuevaAuditoria(e) {
     const coachId = document.getElementById('formCoachSelect').value;
     const clientId = document.getElementById('formClientSelect').value;
     const dateInput = document.getElementById('formDateTime').value;
-    if (!coachId || !clientId || !dateInput) return alert("Faltan datos obligatorios.");
+    if (!coachId || !clientId || !dateInput) return alert("Por favor completa los campos de Coach, Alumno y Fecha.");
 
     const coach = entrenadores.find(e => e.id === coachId);
     const client = coach.clients.find(c => c.id === clientId);
@@ -243,15 +251,15 @@ function procesarNuevaAuditoria(e) {
     client.lastScore = score;
     coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
 
-    localStorage.setItem('af_audits_v21', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v21', JSON.stringify(entrenadores));
+    localStorage.setItem('af_audits_v23', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v23', JSON.stringify(entrenadores));
 
     if (supabase) {
         supabase.from('auditorias').insert([{
             coach: coach.name, client: client.name, score: score,
             compliance_data: formValues, observations_data: formObservations,
             created_at: new Date()
-        }]).then(({error}) => { if (error) console.error("Supabase Error:", error); });
+        }]).then(({error}) => { if (error) console.error("Supabase Sync Error:", error); });
     }
 
     if (googleScriptUrl) {
@@ -269,26 +277,26 @@ function generarInformeFinal(aud) {
     const container = document.getElementById('contenidoInforme');
     const fallos = CONFIG_AUDIT.filter(p => p.type === "bool" && aud.compliance[p.id] === 0);
     const fortalezas = CONFIG_AUDIT.filter(p => p.type === "bool" && aud.compliance[p.id] === 1);
-    const tendencia = aud.prevScore ? (aud.score > aud.prevScore ? "📈 Mejora" : "📉 Descenso") : "🆕 Inicial";
+    const tendencia = aud.prevScore ? (aud.score > aud.prevScore ? "📈 Mejora detectada" : "📉 Descenso detectado") : "🆕 Auditoría Inicial";
 
     container.innerHTML = `
-        <div class="flex justify-between border-b border-brandBorder pb-4">
-            <div><p class="text-[10px] text-brandText uppercase font-bold">Resumen Alumno</p><h4 class="text-2xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
-            <div class="text-right text-[10px] text-brandText font-bold">${tendencia}<br>${aud.date.replace('T', ' ')}</div>
+        <div class="flex justify-between border-b border-brandBorder pb-6">
+            <div><p class="text-[10px] text-brandText uppercase font-bold tracking-widest">Resultado Alumno</p><h4 class="text-3xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
+            <div class="text-right"><p class="text-xs text-brandLime font-bold">${tendencia}</p><p class="text-[10px] text-brandText uppercase">${aud.date.replace('T', ' ')}</p></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
-            <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
-            <div class="space-y-4"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[10px] space-y-3">${fallos.map(f=>`<li><span class="text-white font-medium">${f.label}</span>${aud.observations[f.id] ? `<br><em class="text-brandText/60 italic">Nota: "${aud.observations[f.id]}"</em>` : ''}</li>`).join('')}</ul></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 py-6">
+            <div class="space-y-3"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[11px] space-y-2">${fortalezas.slice(0,8).map(f=>`<li><i class="fa-solid fa-check-circle mr-2 text-brandLime"></i>${f.label}</li>`).join('')}</ul></div>
+            <div class="space-y-4"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Oportunidades de Mejora</h5><ul class="text-[11px] space-y-4">${fallos.map(f=>`<li><span class="text-white font-semibold flex items-center"><i class="fa-solid fa-triangle-exclamation mr-2 text-red-400"></i>${f.label}</span>${aud.observations[f.id] ? `<div class="mt-1 pl-6 text-brandText italic border-l border-brandBorder">Nota: "${aud.observations[f.id]}"</div>` : ''}</li>`).join('')}</ul></div>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
 }
 
 function guardarUrlSheet() {
     const url = document.getElementById('sheetUrlInput').value.trim();
-    if (!url) return alert("Ingresa una URL válida");
+    if (!url) return alert("Por favor ingresa una URL válida de Google Apps Script.");
     localStorage.setItem('af_script_url_v4', url);
     googleScriptUrl = url;
-    alert("¡Google Sheet vinculado con éxito!");
+    alert("¡Google Sheet vinculado correctamente!");
     cambiarSeccion('dashboard');
 }
 
@@ -301,13 +309,13 @@ function renderEntrenadoresGrid() {
     grid.innerHTML = "";
     entrenadores.forEach(e => {
         grid.innerHTML += `
-            <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-brandBorder pb-2">${e.name}</h3>
-                <p class="text-[10px] text-brandText uppercase tracking-widest font-bold">Total Clientes: ${e.clients.length}</p>
-                <div class="space-y-2 max-h-60 overflow-y-auto pr-1">
+            <div class="bg-brandPanel border border-brandBorder rounded-[2rem] p-8 space-y-6 shadow-2xl">
+                <h3 class="font-bold text-white text-lg border-b border-brandBorder pb-4">${e.name}</h3>
+                <p class="text-[10px] text-brandText uppercase tracking-widest font-bold">Cartera de Clientes (${e.clients.length})</p>
+                <div class="space-y-3 max-h-72 overflow-y-auto pr-2 custom-scroll">
                     ${e.clients.map(c => `
-                        <div class="flex justify-between items-center text-[10px] bg-brandDark/30 p-2 rounded-lg border border-brandBorder/50">
-                            <span class="text-white truncate">${c.name}</span>
+                        <div class="flex justify-between items-center text-xs bg-brandDark/40 p-3 rounded-xl border border-brandBorder/50">
+                            <span class="text-white font-medium truncate pr-2">${c.name}</span>
                             <span class="font-bold text-brandLime">${c.lastScore || '--'}%</span>
                         </div>
                     `).join('')}
