@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anytime Fitness Sant Adrià - Auditoría</title>
+    <title>Anytime Fitness Sant Adrià - Portal de Auditorías</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos de FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Estilos Personalizados -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col md:flex-row bg-[#0B0813] text-white">
+<body class="font-sans antialiased min-h-screen flex flex-col md:flex-row bg-[#0B0813] text-white text-sm">
 
-    <!-- BARRA LATERAL -->
+    <!-- 1. BARRA LATERAL (Estética Vercel Exacta) -->
     <aside class="w-full md:w-72 bg-[#171226] border-b md:border-b-0 md:border-r border-[#2D2344] flex flex-col shrink-0">
         <div class="p-8 border-b border-[#2D2344]">
             <div class="flex items-center gap-3">
@@ -45,6 +49,11 @@
                 <i class="fa-solid fa-file-excel text-xl w-6"></i>
                 <span class="font-bold text-sm">Conexión con Sheet</span>
             </a>
+
+            <button onclick="cambiarSeccion('config')" id="nav-config" class="w-full flex items-center gap-4 px-5 py-3 rounded-xl text-left text-[#9E9AA8]/50 hover:text-white transition mt-2">
+                <i class="fa-solid fa-gear text-lg w-6"></i>
+                <span class="font-medium text-xs">Configuración</span>
+            </button>
         </nav>
 
         <div class="p-6 border-t border-[#2D2344] bg-[#0B0813]/20">
@@ -58,7 +67,7 @@
     </aside>
 
     <main class="flex-grow flex flex-col min-w-0">
-        <!-- HEADER SUPERIOR -->
+        <!-- 2. HEADER SUPERIOR -->
         <header class="h-20 flex items-center justify-between px-10 border-b border-[#2D2344]">
             <h2 id="sectionTitle" class="font-poppins font-semibold text-2xl">Dashboard de Auditorías</h2>
             <div class="w-12 h-12 rounded-full border border-[#2D2344] bg-[#171226] flex items-center justify-center">
@@ -68,9 +77,11 @@
 
         <div class="flex-grow p-10 overflow-y-auto">
 
-            <!-- VISTA DASHBOARD -->
+            <!-- ==========================================
+                 VISTA DASHBOARD
+                 ========================================== -->
             <section id="view-dashboard" class="space-y-10">
-                <!-- TARJETAS MÉTRICAS (Estilo Screenshot) -->
+                <!-- Tarjetas Métricas (IDs unificados con script.js) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-[#171226] border border-[#2D2344] rounded-3xl p-8 flex items-center justify-between shadow-2xl">
                         <div class="space-y-2">
@@ -101,9 +112,10 @@
                     </div>
                 </div>
 
+                <!-- Lista de Coaches (Tarjetas con Semáforos) -->
                 <div id="coachesSummaryList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-                <!-- TABLA HISTORIAL (Estilo Screenshot) -->
+                <!-- Tabla de Historial (Diseño Screenshot) -->
                 <div class="bg-[#171226] border border-[#2D2344] rounded-[2rem] p-10 shadow-2xl">
                     <h3 class="font-poppins font-semibold text-lg mb-8 uppercase tracking-widest text-[#9E9AA8]">Historial de Auditorías (38 Puntos)</h3>
                     <div class="overflow-x-auto">
@@ -123,14 +135,27 @@
                 </div>
             </section>
 
-            <!-- VISTA AUDITAR -->
+            <!-- ==========================================
+                 VISTA AUDITAR (CON 38 PUNTOS DINÁMICOS)
+                 ========================================== -->
             <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-8 pb-32">
+                <!-- Cabecera de Selección -->
                 <div class="bg-[#171226] border border-[#2D2344] rounded-3xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 shadow-2xl">
-                    <div><label class="block text-[10px] text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Entrenador</label><select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-4 text-xs text-white focus:border-[#7332A6] outline-none"></select></div>
-                    <div><label class="block text-[10px] text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Alumno</label><select id="formClientSelect" required class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-4 text-xs text-white focus:border-[#7332A6] outline-none"></select></div>
-                    <div><label class="block text-[10px] text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Fecha Evaluación</label><input type="datetime-local" id="formDateTime" required class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-4 text-xs text-white focus:border-[#7332A6] outline-none"></div>
+                    <div>
+                        <label class="block text-[10px] text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Entrenador</label>
+                        <select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-4 text-xs text-white focus:border-[#7332A6] outline-none"></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Alumno / Cliente</label>
+                        <select id="formClientSelect" required class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-4 text-xs text-white focus:border-[#7332A6] outline-none"></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Fecha Evaluación</label>
+                        <input type="datetime-local" id="formDateTime" required class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-4 text-xs text-white focus:border-[#7332A6] outline-none">
+                    </div>
                 </div>
 
+                <!-- Secciones de Auditoría (Se llenan dinámicamente) -->
                 <div id="auditSectionsContainer" class="space-y-10">
                     <div class="bg-[#171226] border border-[#2D2344] rounded-3xl p-8 space-y-6 shadow-xl">
                         <h4 class="text-[#9BE600] font-bold text-xs uppercase tracking-[0.2em] border-b border-[#2D2344] pb-4">1. Gestión de Membr y Programa</h4>
@@ -145,29 +170,49 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="seccion-3-puntos"></div>
                     </div>
                     <div class="bg-[#171226] border border-[#2D2344] rounded-3xl p-8 space-y-6 shadow-xl">
-                        <h4 class="text-[#9BE600] font-bold text-xs uppercase tracking-[0.2em] border-b border-[#2D2344] pb-4">4. Seguimiento Mensajes App</h4>
+                        <h4 class="text-[#9BE600] font-bold text-xs uppercase tracking-[0.2em] border-b border-[#2D2344] pb-4">4. Seguimiento Semanal App</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="seccion-4-puntos"></div>
                     </div>
                 </div>
 
+                <!-- Acciones Finales -->
                 <div class="flex justify-end gap-6 pb-20">
-                    <button type="button" onclick="cambiarSeccion('dashboard')" class="px-10 py-4 text-[#9E9AA8] text-xs font-bold uppercase tracking-widest">Cancelar</button>
-                    <button type="submit" onclick="document.getElementById('auditForm').requestSubmit()" class="bg-[#7332A6] text-white px-12 py-4 rounded-2xl font-bold text-xs shadow-2xl hover:scale-105 transition uppercase tracking-widest">Finalizar Auditoría</button>
+                    <button type="button" onclick="cambiarSeccion('dashboard')" class="px-10 py-4 text-[#9E9AA8] text-xs font-bold uppercase tracking-widest hover:text-white transition">Cancelar</button>
+                    <button type="submit" onclick="document.getElementById('auditForm').dispatchEvent(new Event('submit'))" class="bg-[#7332A6] text-white px-12 py-4 rounded-2xl font-bold text-xs shadow-2xl hover:scale-105 transition uppercase tracking-widest">Finalizar Auditoría</button>
                 </div>
-            </section>
-
-            <section id="view-config" class="hidden max-w-2xl mx-auto"><div class="bg-[#171226] border border-[#2D2344] rounded-[2rem] p-12 text-center space-y-8 shadow-2xl"><h3 class="text-white font-poppins font-bold text-2xl">Configuración de Webhook</h3><div class="space-y-6 text-left"><div><label class="block text-xs text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Google Script URL</label><input type="url" id="sheetUrlInput" class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-5 text-sm text-white focus:border-[#9BE600] outline-none"></div><button onclick="guardarUrlSheet()" class="w-full bg-[#9BE600] text-[#0B0813] py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl transition hover:scale-[1.02]">Vincular Planilla</button></div></div></section>
-            
-            <section id="view-entrenadores" class="hidden space-y-8 pb-32"><div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"></div></section>
+            </form>
+            <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="hidden"></form>
         </div>
     </main>
 
-    <!-- MODAL DE INFORME -->
+    <!-- 3. VISTA CONFIGURACIÓN -->
+    <section id="view-config" class="hidden fixed inset-0 flex items-center justify-center p-10 z-10">
+        <div class="bg-[#171226] border border-[#2D2344] rounded-[2rem] p-12 text-center space-y-8 shadow-2xl max-w-2xl w-full">
+            <h3 class="text-white font-poppins font-bold text-2xl uppercase tracking-widest">Configuración Técnica</h3>
+            <div class="space-y-6 text-left">
+                <div>
+                    <label class="block text-xs text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Webhook URL Google Sheets</label>
+                    <input type="url" id="sheetUrlInput" placeholder="https://script.google.com/..." class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-5 text-sm text-white focus:border-[#9BE600] outline-none">
+                </div>
+                <button onclick="guardarUrlSheet()" class="w-full bg-[#9BE600] text-[#0B0813] py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl transition hover:scale-[1.02]">Vincular Planilla Real</button>
+            </div>
+            <button onclick="cambiarSeccion('dashboard')" class="text-xs text-[#9E9AA8] font-bold uppercase tracking-widest hover:text-white transition">Cerrar</button>
+        </div>
+    </section>
+
+    <!-- 4. MODAL DE INFORME -->
     <div id="modalInforme" class="fixed inset-0 bg-[#0B0813]/95 backdrop-blur-md z-50 flex items-center justify-center p-6 hidden">
         <div class="bg-[#171226] border border-[#2D2344] w-full max-w-2xl rounded-[2.5rem] overflow-hidden flex flex-col max-h-[90vh] shadow-2xl">
-            <div class="p-10 border-b border-[#2D2344] bg-gradient-to-r from-[#7332A6]/10 to-transparent flex justify-between items-center"><h3 class="font-poppins font-bold text-2xl">Informe Ejecutivo</h3><button onclick="cerrarModalInforme()" class="w-10 h-10 rounded-full hover:bg-[#2D2344] transition flex items-center justify-center text-2xl"><i class="fa-solid fa-xmark text-[#9E9AA8]"></i></button></div>
+            <div class="p-10 border-b border-[#2D2344] bg-gradient-to-r from-[#7332A6]/10 to-transparent flex justify-between items-center">
+                <h3 class="font-poppins font-bold text-2xl text-white">Informe Ejecutivo</h3>
+                <button onclick="cerrarModalInforme()" class="w-10 h-10 rounded-full hover:bg-[#2D2344] transition flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-xmark text-[#9E9AA8]"></i>
+                </button>
+            </div>
             <div id="contenidoInforme" class="p-10 overflow-y-auto text-sm text-[#9E9AA8] leading-relaxed space-y-8"></div>
-            <div class="p-10 border-t border-[#2D2344]"><button onclick="cerrarModalInforme()" class="w-full bg-[#9BE600] text-[#0B0813] py-5 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl">Entendido, Volver</button></div>
+            <div class="p-10 border-t border-[#2D2344]">
+                <button onclick="cerrarModalInforme()" class="w-full bg-[#9BE600] text-[#0B0813] py-5 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl hover:scale-[1.01] transition">Entendido, Volver</button>
+            </div>
         </div>
     </div>
 
