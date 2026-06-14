@@ -18,64 +18,72 @@ const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SU
 
 // --- DEFINICIÓN DE LOS 38 PUNTOS REALES DEL SHEET ---
 const CONFIG_AUDIT = [
-    { id: 3, label: "Coach asignado en Membr?", section: 1, type: "bool" },
-    { id: 4, label: "Valoración Fitness Realizada?", section: 1, type: "bool" },
-    { id: 5, label: "Objetivo del Cliente", section: 1, type: "text" },
-    { id: 6, label: "Programa Asignado?", section: 1, type: "bool" },
-    { id: 7, label: "Obs Programa (Tipo/Opinión)", section: 1, type: "text" },
-    { id: 8, label: "Enviado por App?", section: 1, type: "bool" },
-    { id: 9, label: "Está completando programas?", section: 1, type: "bool" },
-    { id: 10, label: "Observaciones Generales", section: 1, type: "text" },
-    { id: 11, label: "Se hizo el Escaneo Evolt?", section: 2, type: "bool" },
-    { id: 12, label: "Obs Escaneo (Grasa/Músculo)", section: 2, type: "text" },
-    { id: 13, label: "Test de Movilidad Realizado?", section: 2, type: "bool" },
-    { id: 14, label: "Observaciones del Test", section: 2, type: "text" },
-    { id: 15, label: "Mejora desde última evaluación?", section: 2, type: "bool" },
-    { id: 16, label: "Fecha Valoración/Escaneo", section: 2, type: "date" },
-    { id: 17, label: "Añadida Entrevista en Notas?", section: 2, type: "bool" },
-    { id: 18, label: "Fecha Próximo Escaneo (4 sem)", section: 2, type: "date" },
-    { id: 19, label: "Fecha Próxima Revisión (6 sem)", section: 2, type: "date" },
-    { id: 20, label: "Apps Descargadas (MZ, Evolt, AF)?", section: 3, type: "bool" },
-    { id: 21, label: "Observaciones Apps", section: 3, type: "text" },
-    { id: 22, label: "Uso de MyZone Regular?", section: 3, type: "bool" },
-    { id: 23, label: "Participación en Reto?", section: 3, type: "bool" },
-    { id: 24, label: "Logros alcanzados", section: 3, type: "text" },
-    { id: 25, label: "Introducido en Grupo MZ?", section: 3, type: "bool" },
-    { id: 26, label: "Status MyZone (Active/Inc)", section: 3, type: "text" },
-    { id: 27, label: "Interacción Grupal?", section: 3, type: "bool" },
-    { id: 28, label: "Comunidad Individual (Msgs)?", section: 3, type: "bool" },
-    { id: 29, label: "Interacción de Likes?", section: 3, type: "bool" },
-    { id: 30, label: "Observaciones MyZone", section: 3, type: "text" },
-    { id: 31, label: "Prueba Esfuerzo Realizada?", section: 3, type: "bool" },
-    { id: 32, label: "Resultados Prueba Esfuerzo", section: 3, type: "text" },
-    { id: 33, label: "Seguimiento Semanal 1", section: 4, type: "bool" },
-    { id: 34, label: "Seguimiento Semanal 2", section: 4, type: "bool" },
-    { id: 35, label: "Seguimiento Semanal 3", section: 4, type: "bool" },
-    { id: 36, label: "Seguimiento Semanal 4", section: 4, type: "bool" },
-    { id: 37, label: "Método de Contacto", section: 4, type: "text" },
-    { id: 38, label: "Valoración Genérica Coach", section: 4, type: "text" }
+    { id: 3, label: "3. Coach asignado en Membr?", section: 1, type: "bool" },
+    { id: 4, label: "4. Valoración Fitness Realizada?", section: 1, type: "bool" },
+    { id: 5, label: "5. Objetivo del Cliente", section: 1, type: "text" },
+    { id: 6, label: "6. Programa Asignado?", section: 1, type: "bool" },
+    { id: 7, label: "7. Obs Programa (Tipo/Opinión)", section: 1, type: "text" },
+    { id: 8, label: "8. Enviado por App?", section: 1, type: "bool" },
+    { id: 9, label: "9. Está completando programas?", section: 1, type: "bool" },
+    { id: 10, label: "10. Observaciones Generales", section: 1, type: "text" },
+    { id: 11, label: "11. Se hizo el Escaneo Evolt?", section: 2, type: "bool" },
+    { id: 12, label: "12. Obs Escaneo (Grasa/Músculo)", section: 2, type: "text" },
+    { id: 13, label: "13. Test de Movilidad Realizado?", section: 2, type: "bool" },
+    { id: 14, label: "14. Observaciones del Test", section: 2, type: "text" },
+    { id: 15, label: "15. Mejora desde última evaluación?", section: 2, type: "bool" },
+    { id: 16, label: "16. Fecha Valoración/Escaneo", section: 2, type: "date" },
+    { id: 17, label: "17. Añadida Entrevista en Notas?", section: 2, type: "bool" },
+    { id: 18, label: "18. Fecha Próximo Escaneo (4 sem)", section: 2, type: "date" },
+    { id: 19, label: "19. Fecha Próxima Revisión (6 sem)", section: 2, type: "date" },
+    { id: 20, label: "20. Apps Descargadas (MZ, Evolt, AF)?", section: 3, type: "bool" },
+    { id: 21, label: "21. Observaciones Apps", section: 3, type: "text" },
+    { id: 22, label: "22. Uso de MyZone Regular?", section: 3, type: "bool" },
+    { id: 23, label: "23. Participación en Reto?", section: 3, type: "bool" },
+    { id: 24, label: "24. Logros alcanzados", section: 3, type: "text" },
+    { id: 25, label: "25. Introducido en Grupo MZ?", section: 3, type: "bool" },
+    { id: 26, label: "26. Status MyZone (Active/Inc)", section: 3, type: "text" },
+    { id: 27, label: "27. Interacción Grupal?", section: 3, type: "bool" },
+    { id: 28, label: "28. Comunidad Individual (Msgs)?", section: 3, type: "bool" },
+    { id: 29, label: "29. Interacción de Likes?", section: 3, type: "bool" },
+    { id: 30, label: "30. Observaciones MyZone", section: 3, type: "text" },
+    { id: 31, label: "31. Prueba Esfuerzo Realizada?", section: 3, type: "bool" },
+    { id: 32, label: "32. Resultados Prueba Esfuerzo", section: 3, type: "text" },
+    { id: 33, label: "33. Seguimiento Semanal 1", section: 4, type: "bool" },
+    { id: 34, label: "34. Seguimiento Semanal 2", section: 4, type: "bool" },
+    { id: 35, label: "35. Seguimiento Semanal 3", section: 4, type: "bool" },
+    { id: 36, label: "36. Seguimiento Semanal 4", section: 4, type: "bool" },
+    { id: 37, label: "37. Método de Contacto", section: 4, type: "text" },
+    { id: 38, label: "38. Valoración Genérica Coach", section: 4, type: "text" }
 ];
 
 // --- BASE DE DATOS REAL AF SANT ADRIÀ ---
 const entrenadoresDefault = [
-    { id: "e1", name: "Tomas", role: "Head Coach", score: 95, clients: [{id:"ct1", name:"JOSE LUIS GIMENEZ"}] },
+    { id: "e1", name: "Tomas", role: "Head Coach", score: 95, clients: [
+        {id:"ct1", name:"JOSE LUIS GIMENEZ"}, {id:"ct2", name:"MARIA CARMEN RUIZ"}, {id:"ct3", name:"ANTONIO LOPEZ"}, {id:"ct4", name:"FRANCISCO JAVIER GARCIA"}, {id:"ct5", name:"MARIA DOLORES MARTINEZ"}
+    ] },
     { id: "e2", name: "Oscar", role: "Coach", score: 88, clients: [
-        {id:"co1", name:"JOSE ANTONIO GONZALEZ ARROYO"}, {id:"co2", name:"MONTSERRAT AGUILAR"}, {id:"co3", name:"SHEILA DE CARMEN"}
+        {id:"co1", name:"JOSE ANTONIO GONZALEZ ARROYO"}, {id:"co2", name:"MONTSERRAT AGUILAR"}, {id:"co3", name:"SHEILA DE CARMEN"}, {id:"co4", name:"ORIOL BACELLS"}, {id:"co5", name:"LISANDRO MELENDEZ"},
+        {id:"co6", name:"JORGE MANUEL DOMINGUEZ"}, {id:"co7", name:"MIBEL RIBAS"}, {id:"co8", name:"YOLANDA FERNANDEZ"}, {id:"co9", name:"ANA MARIN MARTIN"}, {id:"co10", name:"RAUL VEGA GARCIA"},
+        {id:"co11", name:"XAVI CATALAN"}, {id:"co12", name:"SELENE FERRER"}, {id:"co13", name:"MONTSERRAT GARRIGA"}, {id:"co14", name:"LLUIS GASSO"}, {id:"co15", name:"LAURA MASSOT"},
+        {id:"co16", name:"SAMUEL RODRIGUEZ DA SILVA"}, {id:"co17", name:"MONTSERRAT RUIZ GRIBAU"}, {id:"co18", name:"GUILLERMO VERA"}, {id:"co19", name:"EDUARD FALCON"}, {id:"co20", name:"SEIDY GARCIA ISISDRO"},
+        {id:"co21", name:"CLAUDIA SOUZA DA SILVA"}, {id:"co22", name:"MONICA ESCAÑO VIAN"}, {id:"co23", name:"CESAR DAVID SOLORZANO QUIÑE"}, {id:"co24", name:"AUDRY DOTEL"}, {id:"co25", name:"CRISTINA BATALLER BATALLER"},
+        {id:"co26", name:"ALEX GIL RAFELS"}, {id:"co27", name:"YERAY MELLADO GARCIA"}, {id:"co28", name:"NATALIA BELEN DIAZ"}, {id:"co29", name:"ADOLFO ROSA RUIZ"}, {id:"co30", name:"PAOLA ALONZO ALVAREZ"},
+        {id:"co31", name:"CHAYMAE HOUNAINE"}, {id:"co32", name:"WISAL KHAN"}, {id:"co33", name:"LIZ PAOLA CANDIA"}
     ]},
     { id: "e3", name: "Ruben", role: "Coach", score: 82, clients: [
-        {id:"cr1", name:"Ivan sanchez mont"}, {id:"cr2", name:"Sandra Carolina Benitez"}, {id:"cr3", name:"ANNa Bollo Albos"},
-        {id:"cr4", name:"Xavier Guerrero Garcia"}, {id:"cr5", name:"Carlos javier gallego mateo"}, {id:"cr6", name:"Cristina rodriguez valero"},
-        {id:"cr7", name:"Alex pino palau"}, {id:"cr8", name:"biel serrano"}, {id:"cr9", name:"daniel rodriguez"},
-        {id:"cr10", name:"ana celia"}, {id:"cr11", name:"gustavo rocha"}, {id:"cr12", name:"cristina molina rosales"},
-        {id:"cr13", name:"Manuel Rodrigez Fernandez"}, {id:"cr14", name:"Mohamed Rougui"}, {id:"cr15", name:"albert lastra"},
+        {id:"cr1", name:"Ivan sanchez mont"}, {id:"cr2", name:"Sandra Carolina Benitez"}, {id:"cr3", name:"ANNa Bollo Albos"}, {id:"cr4", name:"Xavier Guerrero Garcia"}, {id:"cr5", name:"Carlos javier gallego mateo"},
+        {id:"cr6", name:"Cristina rodriguez valero"}, {id:"cr7", name:"Alex pino palau"}, {id:"cr8", name:"biel serrano"}, {id:"cr9", name:"daniel rodriguez"}, {id:"cr10", name:"ana celia"},
+        {id:"cr11", name:"gustavo rocha"}, {id:"cr12", name:"cristina molina rosales"}, {id:"cr13", name:"Manuel Rodrigez Fernandez"}, {id:"cr14", name:"Mohamed Rougui"}, {id:"cr15", name:"albert lastra"},
         {id:"cr16", name:"David mula"}, {id:"cr17", name:"Miriam gasca"}
     ]},
-    { id: "e4", name: "Anna", role: "Coach", score: 90, clients: [{id:"ca1", name:"LUISA FERNANDA GOMEZ"}] }
+    { id: "e4", name: "Anna", role: "Coach", score: 90, clients: [
+        {id:"ca1", name:"ANA MARIN MARTIN"}, {id:"ca2", name:"MONTSERRAT GARRIGA"}, {id:"ca3", name:"SELENE FERRER"}, {id:"ca4", name:"MONTSERRAT RUIZ GRIBAU"}, {id:"ca5", name:"GUILLERMO VERA"}, {id:"ca6", name:"CESAR DAVID SOLORZANO QUIÑE"}, {id:"ca7", name:"CRISTINA BATALLER BATALLER"}
+    ] }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v19')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v19')) || [];
-let formValues = {};
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v20')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v20')) || [];
+let formValues = {}; 
 let formObservations = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxcIOljiPraQq2mgtyMLwj0PQ3Nzrd5Qcuawg1L1FdvCqsaQhTF7o_-fH-9T2mf1kyx/exec";
 
@@ -87,7 +95,6 @@ function resetFormParams() {
 }
 resetFormParams();
 
-// --- NAVEGACIÓN ---
 function cambiarSeccion(target) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`view-${target}`).classList.remove('hidden');
@@ -97,10 +104,10 @@ function cambiarSeccion(target) {
     
     if (target === 'dashboard') renderDashboard();
     if (target === 'auditar') { renderCoachSelect(); renderPuntosAuditoria(); }
+    if (target === 'entrenadores') renderEntrenadoresGrid();
     if (target === 'config') document.getElementById('sheetUrlInput').value = googleScriptUrl;
 }
 
-// --- RENDERIZADO DINÁMICO ---
 function renderPuntosAuditoria() {
     for (let i = 1; i <= 4; i++) {
         const container = document.getElementById(`seccion-${i}-puntos`);
@@ -111,8 +118,8 @@ function renderPuntosAuditoria() {
             if (p.type === "bool") {
                 controlHtml = `
                     <div class="flex gap-1 bg-brandDark p-1 rounded-lg border border-brandBorder">
-                        <button type="button" onclick="setVal(${p.id}, 1, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark transition">SÍ</button>
-                        <button type="button" onclick="setVal(${p.id}, 0, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md text-brandText transition">NO</button>
+                        <button type="button" onclick="setVal(${p.id}, 1, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark transition font-bold">SÍ</button>
+                        <button type="button" onclick="setVal(${p.id}, 0, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md text-brandText transition font-bold">NO</button>
                     </div>`;
             } else {
                 const inputType = p.type === "date" ? "date" : "text";
@@ -126,7 +133,7 @@ function renderPuntosAuditoria() {
                         ${controlHtml}
                     </div>
                     <div class="pt-1">
-                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Observación para este punto..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple">
+                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Escribir observación..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple">
                     </div>
                 </div>`;
         });
@@ -136,8 +143,8 @@ function renderPuntosAuditoria() {
 function setVal(id, val, btn) {
     formValues[id] = val;
     if (btn) {
-        document.querySelectorAll(`.btn-val-${id}`).forEach(b => b.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md text-brandText transition`);
-        btn.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md transition ${val === 1 ? 'bg-brandLime text-brandDark' : 'bg-red-500 text-white'}`;
+        document.querySelectorAll(`.btn-val-${id}`).forEach(b => b.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md text-brandText transition font-bold`);
+        btn.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md transition font-bold ${val === 1 ? 'bg-brandLime text-brandDark' : 'bg-red-500 text-white'}`;
     }
 }
 function setObs(id, val) { formObservations[id] = val; }
@@ -152,15 +159,20 @@ function actualizarListaAlumnos(id) {
     const s = document.getElementById('formClientSelect');
     s.innerHTML = '<option value="" disabled selected>Selecciona Alumno...</option>';
     const coach = entrenadores.find(e => e.id === id);
-    if (coach) coach.clients.forEach(c => s.innerHTML += `<option value="${c.id}">${c.name}</option>`);
+    if (coach) {
+        coach.clients.sort((a,b) => a.name.localeCompare(b.name)).forEach(c => {
+            s.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+        });
+    }
 }
 
 function renderDashboard() {
     const total = auditorias.length;
     const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
     const alrt = auditorias.filter(a=>a.score < 80).length;
-    document.getElementById('statTotalAudits').innerText = total;
-    document.getElementById('statAvgScore').innerText = avg + "%";
+    
+    document.getElementById('statTotal').innerText = total;
+    document.getElementById('statAvg').innerText = avg + "%";
     document.getElementById('statAlerts').innerText = alrt;
 
     const list = document.getElementById('coachesSummaryList');
@@ -171,9 +183,9 @@ function renderDashboard() {
             <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-3">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold">${e.name[0]}</div>
-                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase">${e.role}</p></div>
+                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p></div>
                 </div>
-                <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Score: ${e.score}%</span></div>
+                <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Cumplimiento: ${e.score}%</span></div>
                 <div class="w-full bg-brandDark h-1.5 rounded-full overflow-hidden border border-brandBorder"><div class="h-full ${color}" style="width: ${e.score}%"></div></div>
             </div>`;
     });
@@ -216,11 +228,9 @@ function procesarNuevaAuditoria(e) {
     client.lastScore = score;
     coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
 
-    // Guardado en LocalStorage
-    localStorage.setItem('af_audits_v19', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v19', JSON.stringify(entrenadores));
+    localStorage.setItem('af_audits_v20', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v20', JSON.stringify(entrenadores));
 
-    // GUARDADO EN SUPABASE
     if (supabase) {
         supabase.from('auditorias').insert([{
             coach: coach.name, client: client.name, score: score,
@@ -229,7 +239,6 @@ function procesarNuevaAuditoria(e) {
         }]).then(({error}) => { if (error) console.error("Supabase Error:", error); });
     }
 
-    // ENVÍO A GOOGLE SHEET
     if (googleScriptUrl) {
         fetch(googleScriptUrl, {
             method: 'POST',
@@ -254,10 +263,7 @@ function generarInformeFinal(aud) {
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
             <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
-            <div class="space-y-3"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[10px] space-y-3">${fallos.map(f=>`<li><span class="text-white font-medium">${f.label}</span>${aud.observations[f.id] ? `<br><em class="text-brandText/60 italic">Nota: "${aud.observations[f.id]}"</em>` : ''}</li>`).join('')}</ul></div>
-        </div>
-        <div class="bg-brandDark/40 p-5 rounded-2xl border border-brandBorder italic text-[11px] text-brandText">
-            Diagnóstico: La gestión de <strong>${aud.coach}</strong> con <strong>${aud.client}</strong> ha sido registrada y sincronizada.
+            <div class="space-y-4"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[10px] space-y-3">${fallos.map(f=>`<li><span class="text-white font-medium">${f.label}</span>${aud.observations[f.id] ? `<br><em class="text-brandText/60 italic">Nota: "${aud.observations[f.id]}"</em>` : ''}</li>`).join('')}</ul></div>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
 }
@@ -274,6 +280,24 @@ function guardarUrlSheet() {
 function cerrarModalInforme() { document.getElementById('modalInforme').classList.add('hidden'); cambiarSeccion('dashboard'); }
 function verInformePrevio(id) { const a = auditorias.find(aud => aud.id === id); if (a) generarInformeFinal(a); }
 
-document.addEventListener('DOMContentLoaded', () => { 
-    renderDashboard();
-});
+function renderEntrenadoresGrid() {
+    const grid = document.getElementById('coachesDetailedGrid');
+    grid.innerHTML = "";
+    entrenadores.forEach(e => {
+        grid.innerHTML += `
+            <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-4">
+                <h3 class="font-bold text-white text-sm border-b border-brandBorder pb-2">${e.name}</h3>
+                <p class="text-[10px] text-brandText uppercase tracking-widest font-bold">Total Clientes: ${e.clients.length}</p>
+                <div class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                    ${e.clients.map(c => `
+                        <div class="flex justify-between items-center text-[10px] bg-brandDark/30 p-2 rounded-lg border border-brandBorder/50">
+                            <span class="text-white truncate">${c.name}</span>
+                            <span class="font-bold text-brandLime">${c.lastScore || '--'}%</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => { renderDashboard(); });
