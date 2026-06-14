@@ -1,4 +1,4 @@
-// Configuración de colores corporativos AF
+// Configuración de colores corporativos
 tailwind.config = {
     theme: {
         extend: {
@@ -6,114 +6,137 @@ tailwind.config = {
                 brandDark: '#0B0813', brandPanel: '#171226', brandBorder: '#2D2344',
                 brandPurple: '#7332A6', brandPurpleLight: '#914CC9', brandLime: '#9BE600',
                 brandCyan: '#00E5FF', brandText: '#9E9AA8'
-            },
-            fontFamily: { sans: ['Inter', 'sans-serif'], poppins: ['Poppins', 'sans-serif'] }
+            }
         }
     }
 }
 
-const PUNTOS_LABELS = {
-    p1: "Coach en Membr", p2: "Valoración Fitness", p3: "Programa Asignado", p4: "Enviado por App", p5: "Completa Programas",
-    p6: "Escaneo Evolt", p7: "Test Movilidad", p8: "Mejora Física", p9: "Registro Notas",
-    p12: "Uso MyZone", p13: "Participación Reto", p14: "Grupo MyZone", p15: "Interacción Grupal"
-};
+// --- CONFIGURACIÓN DE SUPABASE (BASE DE DATOS EN LA NUBE) ---
+const SUPABASE_URL = "https://ovbaukzafvrfymkmpdhh.supabase.co";
+const SUPABASE_KEY = "sb_publishable_0pFvPEWbBh7cWMb2KSFWwA_hudVfPrv";
+const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
-const entrenadoresDefault = [
-    { 
-        id: "e1", name: "Tomas", role: "Head Coach", score: 95,
-        clients: [
-            { id: "c_t1", name: "JOSE LUIS GIMENEZ", compliance: Array(22).fill(1) },
-            { id: "c_t2", name: "MARIA CARMEN RUIZ", compliance: Array(22).fill(1) },
-            { id: "c_t3", name: "ANTONIO LOPEZ", compliance: Array(22).fill(1) }
-        ]
-    },
-    { 
-        id: "e2", name: "Oscar", role: "Coach", score: 88,
-        clients: [
-            { id: "c_o1", name: "JOSE ANTONIO GONZALEZ ARROYO", compliance: Array(22).fill(1) },
-            { id: "c_o2", name: "MONTSERRAT AGUILAR", compliance: Array(22).fill(1) },
-            { id: "c_o3", name: "SHEILA DE CARMEN", compliance: Array(22).fill(1) },
-            { id: "c_o4", name: "ORIOL BACELLS", compliance: Array(22).fill(1) },
-            { id: "c_o5", name: "LISANDRO MELENDEZ", compliance: Array(22).fill(1) },
-            { id: "c_o6", name: "JORGE MANUEL DOMINGUEZ", compliance: Array(22).fill(1) },
-            { id: "c_o7", name: "MIBEL RIBAS", compliance: Array(22).fill(1) },
-            { id: "c_o8", name: "YOLANDA FERNANDEZ", compliance: Array(22).fill(1) },
-            { id: "c_o9", name: "ANA MARIN MARTIN", compliance: Array(22).fill(1) },
-            { id: "c_o10", name: "RAUL VEGA GARCIA", compliance: Array(22).fill(1) },
-            { id: "c_o11", name: "XAVI CATALAN", compliance: Array(22).fill(1) },
-            { id: "c_o12", name: "SELENE FERRER", compliance: Array(22).fill(1) },
-            { id: "c_o13", name: "MONTSERRAT GARRIGA", compliance: Array(22).fill(1) },
-            { id: "c_o14", name: "LLUIS GASSO", compliance: Array(22).fill(1) },
-            { id: "c_o15", name: "LAURA MASSOT", compliance: Array(22).fill(1) },
-            { id: "c_o16", name: "SAMUEL RODRIGUEZ DA SILVA", compliance: Array(22).fill(1) },
-            { id: "c_o17", name: "MONTSERRAT RUIZ GRIBAU", compliance: Array(22).fill(1) },
-            { id: "c_o18", name: "GUILLERMO VERA", compliance: Array(22).fill(1) },
-            { id: "c_o19", name: "EDUARD FALCON", compliance: Array(22).fill(1) },
-            { id: "c_o20", name: "SEIDY GARCIA ISISDRO", compliance: Array(22).fill(1) },
-            { id: "c_o21", name: "CLAUDIA SOUZA DA SILVA", compliance: Array(22).fill(1) },
-            { id: "c_o22", name: "MONICA ESCAÑO VIAN", compliance: Array(22).fill(1) },
-            { id: "c_o23", name: "CESAR DAVID SOLORZANO QUIÑE", compliance: Array(22).fill(1) },
-            { id: "c_o24", name: "AUDRY DOTEL", compliance: Array(22).fill(1) },
-            { id: "c_o25", name: "CRISTINA BATALLER BATALLER", compliance: Array(22).fill(1) },
-            { id: "c_o26", name: "ALEX GIL RAFELS", compliance: Array(22).fill(1) },
-            { id: "c_o27", name: "YERAY MELLADO GARCIA", compliance: Array(22).fill(1) },
-            { id: "c_o28", name: "NATALIA BELEN DIAZ", compliance: Array(22).fill(1) },
-            { id: "c_o29", name: "ADOLFO ROSA RUIZ", compliance: Array(22).fill(1) },
-            { id: "c_o30", name: "PAOLA ALONZO ALVAREZ", compliance: Array(22).fill(1) },
-            { id: "c_o31", name: "CHAYMAE HOUNAINE", compliance: Array(22).fill(1) },
-            { id: "c_o32", name: "WISAL KHAN", compliance: Array(22).fill(1) },
-            { id: "c_o33", name: "LIZ PAOLA CANDIA", compliance: Array(22).fill(1) }
-        ]
-    },
-    { 
-        id: "e3", name: "Ruben", role: "Coach", score: 85,
-        clients: [
-            { id: "c_r1", name: "Ivan sanchez mont", compliance: Array(22).fill(1) },
-            { id: "c_r2", name: "Sandra Carolina Benitez", compliance: Array(22).fill(1) },
-            { id: "c_r3", name: "ANNa Bollo Albos", compliance: Array(22).fill(1) },
-            { id: "c_r4", name: "Xavier Guerrero Garcia", compliance: Array(22).fill(1) },
-            { id: "c_r5", name: "Carlos javier gallego mateo", compliance: Array(22).fill(1) },
-            { id: "c_r6", name: "Cristina rodriguez valero", compliance: Array(22).fill(1) },
-            { id: "c_r7", name: "Alex pino palau", compliance: Array(22).fill(1) },
-            { id: "c_r8", name: "biel serrano", compliance: Array(22).fill(1) },
-            { id: "c_r9", name: "daniel rodriguez", compliance: Array(22).fill(1) },
-            { id: "c_r10", name: "ana celia", compliance: Array(22).fill(1) },
-            { id: "c_r11", name: "gustavo rocha", compliance: Array(22).fill(1) },
-            { id: "c_r12", name: "cristina molina rosales", compliance: Array(22).fill(1) },
-            { id: "c_r13", name: "Manuel Rodrigez Fernandez", compliance: Array(22).fill(1) },
-            { id: "c_r14", name: "Mohamed Rougui", compliance: Array(22).fill(1) },
-            { id: "c_r15", name: "albert lastra", compliance: Array(22).fill(1) },
-            { id: "c_r16", name: "David mula", compliance: Array(22).fill(1) },
-            { id: "c_r17", name: "Miriam gasca", compliance: Array(22).fill(1) }
-        ]
-    },
-    { 
-        id: "e4", name: "Anna", role: "Coach", score: 90,
-        clients: [
-            { id: "c_a1", name: "LUISA FERNANDA GOMEZ", compliance: Array(22).fill(1) },
-            { id: "c_a2", name: "MARIA ISABEL PEREZ", compliance: Array(22).fill(1) },
-            { id: "c_a3", name: "JUAN CARLOS RODRIGUEZ", compliance: Array(22).fill(1) }
-        ]
-    }
+// --- DEFINICIÓN DE LOS 38 PUNTOS REALES DEL SHEET ---
+const CONFIG_AUDIT = [
+    { id: 3, label: "Coach asignado en Membr?", section: 1, type: "bool" },
+    { id: 4, label: "Valoración Fitness Realizada?", section: 1, type: "bool" },
+    { id: 5, label: "Objetivo del Cliente", section: 1, type: "text" },
+    { id: 6, label: "Programa Asignado?", section: 1, type: "bool" },
+    { id: 7, label: "Obs Programa (Tipo/Opinión)", section: 1, type: "text" },
+    { id: 8, label: "Enviado por App?", section: 1, type: "bool" },
+    { id: 9, label: "Está completando programas?", section: 1, type: "bool" },
+    { id: 10, label: "Observaciones Generales", section: 1, type: "text" },
+    { id: 11, label: "Se hizo el Escaneo Evolt?", section: 2, type: "bool" },
+    { id: 12, label: "Obs Escaneo (Grasa/Músculo)", section: 2, type: "text" },
+    { id: 13, label: "Test de Movilidad Realizado?", section: 2, type: "bool" },
+    { id: 14, label: "Observaciones del Test", section: 2, type: "text" },
+    { id: 15, label: "Mejora desde última evaluación?", section: 2, type: "bool" },
+    { id: 16, label: "Fecha Valoración/Escaneo", section: 2, type: "date" },
+    { id: 17, label: "Añadida Entrevista en Notas?", section: 2, type: "bool" },
+    { id: 18, label: "Fecha Próximo Escaneo (4 sem)", section: 2, type: "date" },
+    { id: 19, label: "Fecha Próxima Revisión (6 sem)", section: 2, type: "date" },
+    { id: 20, label: "Apps Descargadas (MZ, Evolt, AF)?", section: 3, type: "bool" },
+    { id: 21, label: "Observaciones Apps", section: 3, type: "text" },
+    { id: 22, label: "Uso de MyZone Regular?", section: 3, type: "bool" },
+    { id: 23, label: "Participación en Reto?", section: 3, type: "bool" },
+    { id: 24, label: "Logros alcanzados", section: 3, type: "text" },
+    { id: 25, label: "Introducido en Grupo MZ?", section: 3, type: "bool" },
+    { id: 26, label: "Status MyZone (Active/Inc)", section: 3, type: "text" },
+    { id: 27, label: "Interacción Grupal?", section: 3, type: "bool" },
+    { id: 28, label: "Comunidad Individual (Msgs)?", section: 3, type: "bool" },
+    { id: 29, label: "Interacción de Likes?", section: 3, type: "bool" },
+    { id: 30, label: "Observaciones MyZone", section: 3, type: "text" },
+    { id: 31, label: "Prueba Esfuerzo Realizada?", section: 3, type: "bool" },
+    { id: 32, label: "Resultados Prueba Esfuerzo", section: 3, type: "text" },
+    { id: 33, label: "Seguimiento Semanal 1", section: 4, type: "bool" },
+    { id: 34, label: "Seguimiento Semanal 2", section: 4, type: "bool" },
+    { id: 35, label: "Seguimiento Semanal 3", section: 4, type: "bool" },
+    { id: 36, label: "Seguimiento Semanal 4", section: 4, type: "bool" },
+    { id: 37, label: "Método de Contacto", section: 4, type: "text" },
+    { id: 38, label: "Valoración Genérica Coach", section: 4, type: "text" }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v14')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v14')) || [];
-let formParamValues = {};
-let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxtS5k9QSY7KanAx6rgCAnF9iPr8gtsyplfpiMo5YA-HAp-q-YqwLs17vL_gg6Odi57/exec";
+// --- BASE DE DATOS REAL AF SANT ADRIÀ ---
+const entrenadoresDefault = [
+    { id: "e1", name: "Tomas", role: "Head Coach", score: 95, clients: [{id:"ct1", name:"JOSE LUIS GIMENEZ"}] },
+    { id: "e2", name: "Oscar", role: "Coach", score: 88, clients: [
+        {id:"co1", name:"JOSE ANTONIO GONZALEZ ARROYO"}, {id:"co2", name:"MONTSERRAT AGUILAR"}, {id:"co3", name:"SHEILA DE CARMEN"}
+    ]},
+    { id: "e3", name: "Ruben", role: "Coach", score: 82, clients: [
+        {id:"cr1", name:"Ivan sanchez mont"}, {id:"cr2", name:"Sandra Carolina Benitez"}, {id:"cr3", name:"ANNa Bollo Albos"},
+        {id:"cr4", name:"Xavier Guerrero Garcia"}, {id:"cr5", name:"Carlos javier gallego mateo"}, {id:"cr6", name:"Cristina rodriguez valero"},
+        {id:"cr7", name:"Alex pino palau"}, {id:"cr8", name:"biel serrano"}, {id:"cr9", name:"daniel rodriguez"},
+        {id:"cr10", name:"ana celia"}, {id:"cr11", name:"gustavo rocha"}, {id:"cr12", name:"cristina molina rosales"},
+        {id:"cr13", name:"Manuel Rodrigez Fernandez"}, {id:"cr14", name:"Mohamed Rougui"}, {id:"cr15", name:"albert lastra"},
+        {id:"cr16", name:"David mula"}, {id:"cr17", name:"Miriam gasca"}
+    ]},
+    { id: "e4", name: "Anna", role: "Coach", score: 90, clients: [{id:"ca1", name:"LUISA FERNANDA GOMEZ"}] }
+];
 
-function resetFormParams() { for(let i = 1; i <= 22; i++) formParamValues[`p${i}`] = 1; }
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v18')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v18')) || [];
+let formValues = {};
+let formObservations = {};
+
+function resetFormParams() { 
+    CONFIG_AUDIT.forEach(p => { 
+        formValues[p.id] = p.type === "bool" ? 1 : ""; 
+        formObservations[p.id] = ""; 
+    });
+}
 resetFormParams();
 
+// --- NAVEGACIÓN ---
 function cambiarSeccion(target) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`view-${target}`).classList.remove('hidden');
     document.querySelectorAll('aside nav button').forEach(btn => btn.classList.remove('active-nav'));
     document.getElementById(`nav-${target}`).classList.add('active-nav');
     if (target === 'dashboard') renderDashboard();
+    if (target === 'auditar') { renderCoachSelect(); renderPuntosAuditoria(); }
     if (target === 'entrenadores') renderEntrenadoresGrid();
-    if (target === 'auditar') renderCoachSelect();
 }
+
+// --- RENDERIZADO DINÁMICO ---
+function renderPuntosAuditoria() {
+    for (let i = 1; i <= 4; i++) {
+        const container = document.getElementById(`seccion-${i}-puntos`);
+        container.innerHTML = "";
+        CONFIG_AUDIT.filter(p => p.section === i).forEach(p => {
+            let controlHtml = "";
+            if (p.type === "bool") {
+                controlHtml = `
+                    <div class="flex gap-1 bg-brandDark p-1 rounded-lg border border-brandBorder">
+                        <button type="button" onclick="setVal(${p.id}, 1, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark transition">SÍ</button>
+                        <button type="button" onclick="setVal(${p.id}, 0, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md text-brandText transition">NO</button>
+                    </div>`;
+            } else {
+                const inputType = p.type === "date" ? "date" : "text";
+                controlHtml = `<input type="${inputType}" oninput="setVal(${p.id}, this.value)" class="bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:border-brandPurple outline-none w-full sm:w-40">`;
+            }
+
+            container.innerHTML += `
+                <div class="bg-brandDark/40 p-4 rounded-2xl border border-brandBorder space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="text-xs text-white font-medium">${p.label}</span>
+                        ${controlHtml}
+                    </div>
+                    <div class="pt-1">
+                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Añadir observación para este punto..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple">
+                    </div>
+                </div>`;
+        });
+    }
+}
+
+function setVal(id, val, btn) {
+    formValues[id] = val;
+    if (btn) {
+        document.querySelectorAll(`.btn-val-${id}`).forEach(b => b.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md text-brandText transition`);
+        btn.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md transition ${val === 1 ? 'bg-brandLime text-brandDark' : 'bg-red-500 text-white'}`;
+    }
+}
+function setObs(id, val) { formObservations[id] = val; }
 
 function renderCoachSelect() {
     const s = document.getElementById('formCoachSelect');
@@ -128,20 +151,14 @@ function actualizarListaAlumnos(id) {
     if (coach) coach.clients.forEach(c => s.innerHTML += `<option value="${c.id}">${c.name}</option>`);
 }
 
-function setParam(id, val, btn) {
-    formParamValues[id] = val;
-    document.querySelectorAll(`.param-btn-${id}`).forEach(b => b.className = `param-btn-${id} px-3 py-1 text-[10px] rounded-md text-brandText transition`);
-    btn.className = `param-btn-${id} px-3 py-1 text-[10px] rounded-md transition ${val === 1 ? 'bg-brandLime text-brandDark' : 'bg-red-500 text-white'}`;
-}
-
 function renderDashboard() {
-    const totalAudits = auditorias.length;
-    const avgScore = totalAudits > 0 ? Math.round(auditorias.reduce((acc, a) => acc + a.score, 0) / totalAudits) : 0;
-    const alerts = auditorias.filter(a => a.score < 80).length;
-
-    document.getElementById('statTotalAudits').innerText = totalAudits;
-    document.getElementById('statAvgScore').innerText = avgScore + "%";
-    document.getElementById('statAlerts').innerText = alerts;
+    // Estadísticas
+    const total = auditorias.length;
+    const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
+    const alrt = auditorias.filter(a=>a.score < 80).length;
+    document.getElementById('statTotal').innerText = total;
+    document.getElementById('statAvg').innerText = avg + "%";
+    document.getElementById('statAlerts').innerText = alrt;
 
     const list = document.getElementById('coachesSummaryList');
     list.innerHTML = "";
@@ -151,7 +168,7 @@ function renderDashboard() {
             <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-3">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold">${e.name[0]}</div>
-                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase">${e.role}</p></div>
+                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p></div>
                 </div>
                 <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Compliance: ${e.score}%</span></div>
                 <div class="w-full bg-brandDark h-1.5 rounded-full overflow-hidden border border-brandBorder"><div class="h-full ${color}" style="width: ${e.score}%"></div></div>
@@ -166,7 +183,7 @@ function renderDashboard() {
                 <td class="py-4 pl-2 text-brandText">${a.date.split('T')[0]}</td>
                 <td class="py-4 font-bold text-white">${a.coach}</td>
                 <td class="py-4 text-white">${a.client}</td>
-                <td class="py-4 text-center"><span class="px-2 py-1 rounded-lg text-[10px] font-bold ${a.score >= 85 ? 'text-brandLime bg-brandLime/10' : 'text-red-400 bg-red-400/10'}">${a.score}%</span></td>
+                <td class="py-4 text-center"><span class="px-2 py-1 rounded-lg text-[10px] font-bold ${a.score >= 85 ? 'bg-brandLime/10 text-brandLime' : 'bg-red-500/10 text-red-500'}">${a.score}%</span></td>
                 <td class="py-4 text-center"><button onclick="verInformePrevio('${a.id}')" class="text-brandPurple hover:text-white transition"><i class="fa-solid fa-file-invoice"></i></button></td>
             </tr>`;
     });
@@ -176,115 +193,86 @@ function procesarNuevaAuditoria(e) {
     e.preventDefault();
     const coachId = document.getElementById('formCoachSelect').value;
     const clientId = document.getElementById('formClientSelect').value;
-    if (!coachId || !clientId) return alert("Faltan datos.");
+    if (!coachId || !clientId) return alert("Selecciona coach y alumno.");
 
     const coach = entrenadores.find(e => e.id === coachId);
     const client = coach.clients.find(c => c.id === clientId);
 
-    let complianceArray = [];
-    let observations = {};
-    for(let i = 1; i <= 22; i++) {
-        complianceArray.push(formParamValues[`p${i}`] || 1);
-        const obsInput = document.getElementById(`obs_p${i}`);
-        if (obsInput) observations[`p${i}`] = obsInput.value;
-    }
-    
-    const score = Math.round((complianceArray.filter(v => v === 1).length / 22) * 100);
-    const prevScore = client.lastScore || null;
-
-    client.compliance = complianceArray;
-    client.lastScore = score;
-    coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
+    const boolPoints = CONFIG_AUDIT.filter(p => p.type === "bool");
+    const score = Math.round((boolPoints.filter(p => formValues[p.id] === 1).length / boolPoints.length) * 100);
 
     const nuevaAuditoria = {
         id: "a_" + Date.now(),
         date: document.getElementById('formDateTime').value,
-        coach: coach.name,
-        client: client.name,
-        score: score,
-        prevScore: prevScore,
-        compliance: complianceArray,
-        observations: observations,
-        techData: {
-            objetivo: document.getElementById('val_objetivo').value,
-            obs_programa: document.getElementById('val_obs_programa').value,
-            obs_evolt: document.getElementById('val_obs_evolt').value
-        }
+        coach: coach.name, client: client.name, score: score,
+        compliance: {...formValues}, observations: {...formObservations},
+        prevScore: client.lastScore || null
     };
 
     auditorias.unshift(nuevaAuditoria);
+    client.lastScore = score;
+    coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
 
-    if (googleScriptUrl) {
-        fetch(googleScriptUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify({...nuevaAuditoria, action: "updateAndHighlight"})
+    // Guardado en LocalStorage
+    localStorage.setItem('af_audits_v18', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v18', JSON.stringify(entrenadores));
+
+    // GUARDADO EN SUPABASE (Base de datos real)
+    if (supabase) {
+        supabase.from('auditorias').insert([{
+            coach: coach.name,
+            client: client.name,
+            score: score,
+            compliance_data: formValues,
+            observations_data: formObservations,
+            created_at: new Date()
+        }]).then(({error}) => {
+            if (error) console.error("Error guardando en Supabase:", error);
+            else console.log("Auditoría sincronizada con Supabase con éxito.");
         });
     }
 
-    localStorage.setItem('af_audits_v13', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v13', JSON.stringify(entrenadores));
-
-    generarInforme(nuevaAuditoria);
+    generarInformeFinal(nuevaAuditoria);
 }
 
-function generarInforme(aud) {
+function generarInformeFinal(aud) {
     const container = document.getElementById('contenidoInforme');
-    const fallos = [];
-    const fortalezas = [];
-
-    aud.compliance.forEach((val, index) => {
-        const id = index + 1;
-        const label = PUNTOS_LABELS[`p${id}`];
-        if (!label) return;
-        if (val === 1) fortalezas.push(label);
-        else fallos.push({ label, obs: aud.observations[`p${id}`] });
-    });
-
-    const tendencia = aud.prevScore !== null ? (aud.score > aud.prevScore ? "📈 Mejora detectada" : "📉 Descenso detectado") : "🆕 Auditoría Inicial";
+    const fallos = CONFIG_AUDIT.filter(p => p.type === "bool" && aud.compliance[p.id] === 0);
+    const fortalezas = CONFIG_AUDIT.filter(p => p.type === "bool" && aud.compliance[p.id] === 1);
+    const tendencia = aud.prevScore ? (aud.score > aud.prevScore ? "📈 Mejora" : "📉 Descenso") : "🆕 Inicial";
 
     container.innerHTML = `
-        <div class="flex justify-between items-center border-b border-brandBorder pb-4">
-            <div><p class="text-[10px] text-brandText uppercase font-bold">Score Final</p><h4 class="text-3xl font-bold text-white">${aud.score}%</h4></div>
-            <div class="text-right"><p class="text-xs text-brandLime font-bold">${tendencia}</p><p class="text-[10px] text-brandText">${aud.date.replace('T', ' ')}</p></div>
+        <div class="flex justify-between border-b border-brandBorder pb-4">
+            <div><p class="text-[10px] text-brandText uppercase font-bold">Audit Alumno</p><h4 class="text-2xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
+            <div class="text-right text-[10px] text-brandText font-bold">${tendencia}<br>${aud.date.replace('T', ' ')}</div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
-            <div class="space-y-3">
-                <h5 class="text-xs font-bold text-brandLime uppercase tracking-widest"><i class="fa-solid fa-circle-check mr-2"></i>Puntos Fuertes</h5>
-                <ul class="text-[11px] space-y-2">${fortalezas.slice(0, 5).map(f => `<li class="flex items-center gap-2"><span class="w-1 h-1 bg-brandLime rounded-full"></span>${f}</li>`).join('')}</ul>
-            </div>
-            <div class="space-y-3">
-                <h5 class="text-xs font-bold text-red-400 uppercase tracking-widest"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Áreas de Mejora</h5>
-                <ul class="text-[11px] space-y-2">
-                    ${fallos.length ? fallos.map(f => `<li class="space-y-1"><div class="flex items-center gap-2"><span class="w-1 h-1 bg-red-400 rounded-full"></span>${f.label}</div>${f.obs ? `<div class="pl-3 text-brandText/60 italic">"${f.obs}"</div>` : ''}</li>`).join('') : '<li>No se detectaron fallos.</li>'}
-                </ul>
-            </div>
-        </div>
-        <div class="bg-brandDark/40 p-5 rounded-2xl border border-brandBorder space-y-2">
-            <h5 class="text-xs font-bold text-white uppercase tracking-widest">Diagnóstico AF Sant Adrià</h5>
-            <p class="text-[11px] italic text-brandText">Gestión de <strong>${aud.coach}</strong> con <strong>${aud.client}</strong> calificada como ${aud.score >= 85 ? 'Satisfactoria' : 'Revisable'}.</p>
+            <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
+            <div class="space-y-3"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[10px] space-y-3">${fallos.map(f=>`<li><span class="text-white font-medium">${f.label}</span>${aud.observations[f.id] ? `<br><em class="text-brandText/60 italic">Nota: "${aud.observations[f.id]}"</em>` : ''}</li>`).join('')}</ul></div>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
 }
 
 function cerrarModalInforme() { document.getElementById('modalInforme').classList.add('hidden'); cambiarSeccion('dashboard'); }
-function verInformePrevio(id) { const a = auditorias.find(aud => aud.id === id); if (a) generarInforme(a); }
+function verInformePrevio(id) { const a = auditorias.find(aud => aud.id === id); if (a) generarInformeFinal(a); }
+function renderEntrenadoresGrid() { cambiarSeccion('dashboard'); }
 
-function renderEntrenadoresGrid() {
-    const grid = document.getElementById('coachesDetailedGrid');
-    grid.innerHTML = "";
-    entrenadores.forEach(e => {
-        const clientsHtml = e.clients.map(c => `
-            <div class="flex justify-between items-center text-[10px] bg-brandDark/30 p-2 rounded-lg border border-brandBorder/50">
-                <span class="text-white truncate">${c.name}</span>
-                <span class="font-bold text-brandLime">${c.lastScore || 100}%</span>
-            </div>`).join('');
-        grid.innerHTML += `
-            <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-brandBorder pb-2">${e.name}</h3>
-                <div class="space-y-2 max-h-40 overflow-y-auto">${clientsHtml}</div>
-            </div>`;
-    });
+async function sincronizarConSupabase() {
+    if (!supabase) return;
+    
+    const { data, error } = await supabase
+        .from('auditorias')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(20);
+
+    if (!error && data) {
+        console.log("Datos recuperados de Supabase:", data);
+        // Podríamos integrar estos datos en la lista de auditorías si fuera necesario
+    }
 }
 
-document.addEventListener('DOMContentLoaded', () => { renderDashboard(); });
+document.addEventListener('DOMContentLoaded', () => { 
+    renderDashboard(); 
+    sincronizarConSupabase();
+});
