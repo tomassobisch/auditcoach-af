@@ -57,7 +57,6 @@ const CONFIG_AUDIT = [
     { id: 38, label: "38. Valoración Genérica Coach", section: 4, type: "text" }
 ];
 
-// --- BASE DE DATOS REAL AF SANT ADRIÀ ---
 const entrenadoresDefault = [
     { id: "e1", name: "Tomas", role: "Head Coach", score: 95, clients: [
         {id:"ct1", name:"JOSE LUIS GIMENEZ"}, {id:"ct2", name:"MARIA CARMEN RUIZ"}, {id:"ct3", name:"ANTONIO LOPEZ"}, {id:"ct4", name:"FRANCISCO JAVIER GARCIA"}, {id:"ct5", name:"MARIA DOLORES MARTINEZ"}
@@ -174,14 +173,9 @@ function renderDashboard() {
     const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
     const alrt = auditorias.filter(a=>a.score < 80).length;
     
-    // IDs Unificados con el HTML
-    const stT = document.getElementById('statTotalAudits');
-    const stA = document.getElementById('statAvgScore');
-    const stL = document.getElementById('statAlerts');
-    
-    if(stT) stT.innerText = total;
-    if(stA) stA.innerText = avg + "%";
-    if(stL) stL.innerText = alrt;
+    document.getElementById('statTotalAudits').innerText = total;
+    document.getElementById('statAvgScore').innerText = avg + "%";
+    document.getElementById('statAlerts').innerText = alrt;
 
     const list = document.getElementById('coachesSummaryList');
     if (!list) return;
@@ -189,13 +183,23 @@ function renderDashboard() {
     entrenadores.forEach(e => {
         const color = e.score < 80 ? 'bg-red-500' : (e.score < 90 ? 'bg-amber-500' : 'bg-brandLime');
         list.innerHTML += `
-            <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-3">
+            <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold text-lg">${e.name[0]}</div>
-                    <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p></div>
+                    <div class="w-12 h-12 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold text-lg">${e.name[0]}</div>
+                    <div>
+                        <h4 class="text-white font-bold text-base">${e.name}</h4>
+                        <p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p>
+                    </div>
                 </div>
-                <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Cumplimiento Global: ${e.score}%</span></div>
-                <div class="w-full bg-brandDark h-1.5 rounded-full overflow-hidden border border-brandBorder"><div class="h-full ${color}" style="width: ${e.score}%"></div></div>
+                <div class="flex items-center gap-6">
+                    <div class="text-right">
+                        <p class="text-[10px] text-brandText uppercase font-bold">Compliance</p>
+                        <p class="text-white font-bold text-lg">${e.score}%</p>
+                    </div>
+                    <div class="w-32 bg-brandDark border border-brandBorder h-2 rounded-full overflow-hidden">
+                        <div class="h-full ${color}" style="width: ${e.score}%"></div>
+                    </div>
+                </div>
             </div>`;
     });
 
@@ -273,7 +277,7 @@ function generarInformeFinal(aud) {
             <div class="text-right text-[10px] text-brandText font-bold">${tendencia}<br>${aud.date.replace('T', ' ')}</div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
-            <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Puntos Fuertes</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
+            <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
             <div class="space-y-4"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[10px] space-y-3">${fallos.map(f=>`<li><span class="text-white font-medium">${f.label}</span>${aud.observations[f.id] ? `<br><em class="text-brandText/60 italic">Nota: "${aud.observations[f.id]}"</em>` : ''}</li>`).join('')}</ul></div>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');

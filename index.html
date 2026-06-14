@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anytime Fitness Sant Adrià - Portal de Auditorías</title>
-    <!-- Estética Original: Tailwind + Fuentes Corporativas -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos de FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Estilos Personalizados -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col md:flex-row bg-[#0B0813]">
 
-    <!-- 1. BARRA LATERAL (Diseño Original Aprobado) -->
+    <!-- ==========================================
+         1. MENÚ LATERAL DE NAVEGACIÓN
+         ========================================== -->
     <aside class="w-full md:w-64 bg-brandPanel border-b md:border-b-0 md:border-r border-brandBorder flex flex-col shrink-0">
         <div class="p-6 border-b border-brandBorder flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -41,26 +46,28 @@
                 <i class="fa-solid fa-users-gear w-5 text-center text-lg"></i>
                 <span class="font-medium text-sm">Fichas de Coaches</span>
             </button>
-            <!-- Botón Conexión Sheet (Requerido) -->
-            <a href="https://docs.google.com/spreadsheets/d/1FAZcYcTYiHv6RE6PmB14tRX-KkZUzg5WCv0OddTsedI/edit?usp=sharing" target="_blank" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-emerald-400 hover:bg-emerald-500/10 transition mt-4 border border-emerald-500/20 bg-emerald-500/5">
-                <i class="fa-solid fa-file-excel w-5 text-center text-lg"></i>
-                <span class="font-bold text-sm">Conexión con Sheet</span>
-            </a>
+            <button onclick="cambiarSeccion('config')" id="nav-config" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-brandText hover:text-white hover:bg-brandBorder/50 transition text-amber-400">
+                <i class="fa-solid fa-gear w-5 text-center text-lg"></i>
+                <span class="font-medium text-sm">Configurar App</span>
+            </button>
         </nav>
 
         <div class="p-4 border-t border-brandBorder bg-brandDark/40">
-            <div class="flex items-center justify-between mb-1.5">
-                <span class="text-[11px] text-brandText">Sincronización</span>
-                <span id="syncBadgeStatus" class="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+            <div class="flex items-center justify-between mb-1.5 text-[11px] text-brandText">
+                <span>Conexión Real</span>
+                <span id="syncBadgeStatus" class="flex items-center gap-1 text-emerald-400 font-medium">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Activo
                 </span>
             </div>
+            <a href="https://docs.google.com/spreadsheets/d/1FAZcYcTYiHv6RE6PmB14tRX-KkZUzg5WCv0OddTsedI/edit?usp=sharing" target="_blank" class="w-full flex items-center gap-2 mt-2 px-3 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 hover:bg-emerald-500/20 transition text-[11px] font-bold">
+                <i class="fa-solid fa-file-excel"></i> Ver Google Sheet
+            </a>
         </div>
     </aside>
 
     <main class="flex-grow flex flex-col min-w-0">
         <header class="h-16 border-b border-brandBorder bg-brandPanel px-6 flex items-center justify-between shrink-0">
-            <h2 id="sectionTitle" class="font-poppins font-semibold text-base sm:text-lg text-white">Dashboard de Auditorías</h2>
+            <h2 id="sectionTitle" class="font-poppins font-semibold text-base sm:text-lg text-white">Dashboard General</h2>
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full border border-brandBorder bg-brandDark flex items-center justify-center text-white">
                     <i class="fa-solid fa-user-shield text-brandLime"></i>
@@ -70,40 +77,66 @@
 
         <div class="flex-grow p-6 overflow-y-auto">
 
-            <!-- VISTA DASHBOARD (Métricas Originales) -->
+            <!-- ==========================================
+                 VISTA DASHBOARD (ESTÉTICA ORIGINAL)
+                 ========================================== -->
             <section id="view-dashboard" class="space-y-6">
+                <!-- Tarjetas de Métricas -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
                         <div>
-                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Auditorías Totales</span>
+                            <span class="text-xs text-brandText uppercase tracking-wider font-bold">Total Auditorías</span>
                             <h3 id="statTotalAudits" class="text-3xl font-poppins font-bold text-white mt-1">0</h3>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-brandLime/10 flex items-center justify-center text-brandLime text-2xl"><i class="fa-solid fa-clipboard-check"></i></div>
                     </div>
                     <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
                         <div>
-                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Score Global</span>
+                            <span class="text-xs text-brandText uppercase tracking-wider font-bold">Score Equipo</span>
                             <h3 id="statAvgScore" class="text-3xl font-poppins font-bold text-white mt-1">0%</h3>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-brandPurple/20 flex items-center justify-center text-brandLime text-2xl"><i class="fa-solid fa-chart-line"></i></div>
                     </div>
                     <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 flex items-center justify-between">
                         <div>
-                            <span class="text-xs text-brandText font-medium uppercase tracking-wider">Alertas</span>
+                            <span class="text-xs text-brandText uppercase tracking-wider font-bold">Alertas</span>
                             <h3 id="statAlerts" class="text-3xl font-poppins font-bold text-red-400 mt-1">0</h3>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-2xl"><i class="fa-solid fa-bell"></i></div>
                     </div>
                 </div>
 
-                <div id="coachesSummaryList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                <!-- Dos Columnas: Coaches y Alertas IA -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 lg:col-span-2 space-y-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-poppins font-semibold text-lg text-white">Monitoreo de Coaches</h3>
+                            <button onclick="cambiarSeccion('auditar')" class="bg-brandLime text-brandDark font-bold text-xs px-4 py-2.5 rounded-lg hover:scale-105 transition"><i class="fa-solid fa-plus mr-1"></i> Auditar</button>
+                        </div>
+                        <!-- LISTA DE COACHES (SEMÁFOROS) -->
+                        <div id="coachesSummaryList" class="space-y-3"></div>
+                    </div>
 
+                    <div class="space-y-6">
+                        <!-- Copiloto IA -->
+                        <div class="bg-gradient-to-br from-brandPanel to-brandDark border border-brandBorder rounded-2xl p-6 space-y-3 relative overflow-hidden">
+                            <div class="flex items-center gap-2 text-brandLime">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <h4 class="font-bold text-xs uppercase tracking-widest">IA Anytime Fitness</h4>
+                            </div>
+                            <p class="text-sm text-white font-semibold">Diagnóstico en Tiempo Real</p>
+                            <p id="iaDiagnosisText" class="text-xs text-brandText leading-relaxed">Analizando cumplimiento operativo de los entrenadores y retención de clientes...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Historial -->
                 <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6">
-                    <h3 class="font-poppins font-semibold text-white mb-4">Historial de Auditorías (38 Puntos)</h3>
+                    <h3 class="font-poppins font-semibold text-white mb-4 uppercase text-sm tracking-wider">Historial de Auditorías</h3>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse text-xs">
+                        <table class="w-full text-left border-collapse">
                             <thead>
-                                <tr class="border-b border-brandBorder text-brandText uppercase font-semibold">
+                                <tr class="border-b border-brandBorder text-[11px] text-brandText uppercase font-semibold">
                                     <th class="pb-3 pl-2">Fecha</th>
                                     <th class="pb-3">Coach</th>
                                     <th class="pb-3">Alumno</th>
@@ -117,67 +150,77 @@
                 </div>
             </section>
 
-            <!-- VISTA AUDITAR (Restaurando 38 Columnas con Observaciones) -->
-            <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-6 pb-20">
+            <!-- VISTA AUDITAR (CON OBSERVACIONES DINÁMICAS) -->
+            <section id="view-auditar" class="hidden max-w-5xl mx-auto space-y-6 pb-24">
                 <form id="auditForm" onsubmit="procesarNuevaAuditoria(event)" class="space-y-6">
-                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Coach</label><select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none"></select></div>
-                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Alumno</label><select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none"></select></div>
-                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Fecha</label><input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none"></div>
+                    <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 shadow-xl">
+                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Entrenador</label><select id="formCoachSelect" required onchange="actualizarListaAlumnos(this.value)" class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple"></select></div>
+                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Alumno</label><select id="formClientSelect" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple"></select></div>
+                        <div><label class="block text-xs font-semibold text-white mb-2 uppercase">Fecha</label><input type="datetime-local" id="formDateTime" required class="w-full bg-brandDark border border-brandBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandPurple"></div>
                     </div>
 
-                    <div id="dynamicAuditSections" class="space-y-8">
-                        <!-- Sección 1: Gestión -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
+                    <div id="auditSectionsContainer" class="space-y-8">
+                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4 shadow-lg">
                             <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">1. Gestión de Membr y Programa</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="seccion-1-puntos"></div>
                         </div>
-                        <!-- Sección 2: Evolt -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
+                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4 shadow-lg">
                             <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">2. Evolt y Movilidad</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="seccion-2-puntos"></div>
                         </div>
-                        <!-- Sección 3: MyZone -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
+                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4 shadow-lg">
                             <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">3. Ecosistema Digital y MyZone</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="seccion-3-puntos"></div>
                         </div>
-                        <!-- Sección 4: Seguimiento -->
-                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4">
-                            <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">4. Seguimiento Semanal</h4>
+                        <div class="bg-brandPanel border border-brandBorder rounded-2xl p-6 space-y-4 shadow-lg">
+                            <h4 class="text-brandLime font-bold text-xs uppercase tracking-widest border-b border-brandBorder pb-2">4. Seguimiento Mensajes App</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="seccion-4-puntos"></div>
                         </div>
                     </div>
 
                     <div class="flex justify-end gap-4 pb-20">
                         <button type="button" onclick="cambiarSeccion('dashboard')" class="px-8 py-3 text-brandText text-xs font-bold transition">Cancelar</button>
-                        <button type="submit" class="bg-brandPurple text-white px-10 py-3 rounded-xl font-bold text-xs shadow-lg hover:scale-105 transition flex items-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Finalizar Registro y Ver Informe
-                        </button>
+                        <button type="submit" class="bg-brandPurple text-white px-10 py-3.5 rounded-xl font-bold text-xs shadow-xl shadow-brandPurple/20 hover:scale-[1.02] transition">Finalizar Registro y Ver Informe</button>
                     </div>
                 </form>
             </section>
 
-            <!-- VISTA FICHAS -->
+            <!-- VISTA CONFIGURACIÓN -->
+            <section id="view-config" class="hidden max-w-2xl mx-auto space-y-6">
+                <div class="bg-brandPanel border border-brandBorder rounded-3xl p-8 space-y-6 shadow-2xl">
+                    <h3 class="text-white font-poppins font-bold text-xl text-center">Configuración del Sistema</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-brandText uppercase font-bold mb-2 tracking-widest">Webhook URL Google Sheets</label>
+                            <input type="url" id="sheetUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-brandDark border border-brandBorder rounded-xl p-4 text-sm text-white focus:border-brandLime outline-none">
+                        </div>
+                        <button onclick="guardarUrlSheet()" class="w-full bg-brandLime text-brandDark py-4 rounded-xl font-bold transition hover:scale-[1.01]">Vincular Planilla Real</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA FICHAS (Semáforos Detallados) -->
             <section id="view-entrenadores" class="hidden space-y-6 pb-20">
                 <div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
             </section>
         </div>
     </main>
 
-    <!-- MODAL DE INFORME FINAL -->
-    <div id="modalInforme" class="fixed inset-0 bg-brandDark/90 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-brandPanel border border-brandBorder w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="p-6 border-b border-brandBorder bg-gradient-to-r from-brandPurple/20 to-transparent flex justify-between items-center text-white">
-                <h3 class="font-poppins font-bold text-lg">Reporte Ejecutivo</h3>
+    <!-- MODAL DE INFORME -->
+    <div id="modalInforme" class="fixed inset-0 bg-brandDark/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden text-white">
+        <div class="bg-brandPanel border border-brandBorder w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh] shadow-2xl">
+            <div class="p-6 border-b border-brandBorder bg-gradient-to-r from-brandPurple/20 to-transparent flex justify-between items-center">
+                <h3 class="font-poppins font-bold text-lg">Informe Ejecutivo</h3>
                 <button onclick="cerrarModalInforme()"><i class="fa-solid fa-xmark text-xl text-brandText hover:text-white"></i></button>
             </div>
             <div id="contenidoInforme" class="p-8 overflow-y-auto text-sm text-brandText leading-relaxed space-y-6"></div>
-            <div class="p-6 border-t border-brandBorder"><button onclick="cerrarModalInforme()" class="w-full bg-brandLime text-brandDark py-3 rounded-xl font-bold text-xs">Cerrar Informe</button></div>
+            <div class="p-6 border-t border-brandBorder">
+                <button onclick="cerrarModalInforme()" class="w-full bg-brandLime text-brandDark py-3 rounded-xl font-bold text-xs uppercase tracking-widest">Entendido, Volver</button>
+            </div>
         </div>
     </div>
 
-    <!-- Supabase SDK -->
+    <!-- SDK Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/script.js"></script>
 </body>
