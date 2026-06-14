@@ -82,8 +82,9 @@ const entrenadoresDefault = [
     ] }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v23')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v23')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v24')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v24')) || [];
+
 let formValues = {}; 
 let formObservations = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxcIOljiPraQq2mgtyMLwj0PQ3Nzrd5Qcuawg1L1FdvCqsaQhTF7o_-fH-9T2mf1kyx/exec";
