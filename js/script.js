@@ -15,7 +15,7 @@ tailwind.config = {
 // --- CONFIGURACIÓN DE SUPABASE ---
 const SUPABASE_URL = "https://ovbaukzafvrfymkmpdhh.supabase.co";
 const SUPABASE_KEY = "sb_publishable_0pFvPEWbBh7cWMb2KSFWwA_hudVfPrv";
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+const supabase = (typeof window.supabase !== 'undefined') ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 // --- DEFINICIÓN DE LOS 38 PUNTOS REALES DEL SHEET ---
 const CONFIG_AUDIT = [
@@ -57,33 +57,33 @@ const CONFIG_AUDIT = [
     { id: 38, label: "38. Valoración Genérica Coach", section: 4, type: "text" }
 ];
 
-// --- BASE DE DATOS REAL COMPLETA AF SANT ADRIÀ ---
+// --- BASE DE DATOS REAL AF SANT ADRIÀ ---
 const entrenadoresDefault = [
     { id: "e1", name: "Tomas", role: "Head Coach", score: 95, clients: [
-        {id:"ct1", name:"JOSE LUIS GIMENEZ"}, {id:"ct2", name:"MARIA CARMEN RUIZ"}, {id:"ct3", name:"ANTONIO LOPEZ"}, {id:"ct4", name:"FRANCISCO JAVIER GARCIA"}, {id:"ct5", name:"MARIA DOLORES MARTINEZ"}
+        {id:"ct1", name:"JOSE LUIS GIMENEZ", compliance: Array(38).fill(1)}, {id:"ct2", name:"MARIA CARMEN RUIZ", compliance: Array(38).fill(1)}, {id:"ct3", name:"ANTONIO LOPEZ", compliance: Array(38).fill(1)}, {id:"ct4", name:"FRANCISCO JAVIER GARCIA", compliance: Array(38).fill(1)}, {id:"ct5", name:"MARIA DOLORES MARTINEZ", compliance: Array(38).fill(1)}
     ] },
     { id: "e2", name: "Oscar", role: "Coach", score: 88, clients: [
-        {id:"co1", name:"JOSE ANTONIO GONZALEZ ARROYO"}, {id:"co2", name:"MONTSERRAT AGUILAR"}, {id:"co3", name:"SHEILA DE CARMEN"}, {id:"co4", name:"ORIOL BACELLS"}, {id:"co5", name:"LISANDRO MELENDEZ"},
-        {id:"co6", name:"JORGE MANUEL DOMINGUEZ"}, {id:"co7", name:"MIBEL RIBAS"}, {id:"co8", name:"YOLANDA FERNANDEZ"}, {id:"co9", name:"ANA MARIN MARTIN"}, {id:"co10", name:"RAUL VEGA GARCIA"},
-        {id:"co11", name:"XAVI CATALAN"}, {id:"co12", name:"SELENE FERRER"}, {id:"co13", name:"MONTSERRAT GARRIGA"}, {id:"co14", name:"LLUIS GASSO"}, {id:"co15", name:"LAURA MASSOT"},
-        {id:"co16", name:"SAMUEL RODRIGUEZ DA SILVA"}, {id:"co17", name:"MONTSERRAT RUIZ GRIBAU"}, {id:"co18", name:"GUILLERMO VERA"}, {id:"co19", name:"EDUARD FALCON"}, {id:"co20", name:"SEIDY GARCIA ISISDRO"},
-        {id:"co21", name:"CLAUDIA SOUZA DA SILVA"}, {id:"co22", name:"MONICA ESCAÑO VIAN"}, {id:"co23", name:"CESAR DAVID SOLORZANO QUIÑE"}, {id:"co24", name:"AUDRY DOTEL"}, {id:"co25", name:"CRISTINA BATALLER BATALLER"},
-        {id:"co26", name:"ALEX GIL RAFELS"}, {id:"co27", name:"YERAY MELLADO GARCIA"}, {id:"co28", name:"NATALIA BELEN DIAZ"}, {id:"co29", name:"ADOLFO ROSA RUIZ"}, {id:"co30", name:"PAOLA ALONZO ALVAREZ"},
-        {id:"co31", name:"CHAYMAE HOUNAINE"}, {id:"co32", name:"WISAL KHAN"}, {id:"co33", name:"LIZ PAOLA CANDIA"}
+        {id:"co1", name:"JOSE ANTONIO GONZALEZ ARROYO", compliance: Array(38).fill(1)}, {id:"co2", name:"MONTSERRAT AGUILAR", compliance: Array(38).fill(1)}, {id:"co3", name:"SHEILA DE CARMEN", compliance: Array(38).fill(1)}, {id:"co4", name:"ORIOL BACELLS", compliance: Array(38).fill(1)}, {id:"co5", name:"LISANDRO MELENDEZ", compliance: Array(38).fill(1)},
+        {id:"co6", name:"JORGE MANUEL DOMINGUEZ", compliance: Array(38).fill(1)}, {id:"co7", name:"MIBEL RIBAS", compliance: Array(38).fill(1)}, {id:"co8", name:"YOLANDA FERNANDEZ", compliance: Array(38).fill(1)}, {id:"co9", name:"ANA MARIN MARTIN", compliance: Array(38).fill(1)}, {id:"co10", name:"RAUL VEGA GARCIA", compliance: Array(38).fill(1)},
+        {id:"co11", name:"XAVI CATALAN", compliance: Array(38).fill(1)}, {id:"co12", name:"SELENE FERRER", compliance: Array(38).fill(1)}, {id:"co13", name:"MONTSERRAT GARRIGA", compliance: Array(38).fill(1)}, {id:"co14", name:"LLUIS GASSO", compliance: Array(38).fill(1)}, {id:"co15", name:"LAURA MASSOT", compliance: Array(38).fill(1)},
+        {id:"co16", name:"SAMUEL RODRIGUEZ DA SILVA", compliance: Array(38).fill(1)}, {id:"co17", name:"MONTSERRAT RUIZ GRIBAU", compliance: Array(38).fill(1)}, {id:"co18", name:"GUILLERMO VERA", compliance: Array(38).fill(1)}, {id:"co19", name:"EDUARD FALCON", compliance: Array(38).fill(1)}, {id:"co20", name:"SEIDY GARCIA ISISDRO", compliance: Array(38).fill(1)},
+        {id:"co21", name:"CLAUDIA SOUZA DA SILVA", compliance: Array(38).fill(1)}, {id:"co22", name:"MONICA ESCAÑO VIAN", compliance: Array(38).fill(1)}, {id:"co23", name:"CESAR DAVID SOLORZANO QUIÑE", compliance: Array(38).fill(1)}, {id:"co24", name:"AUDRY DOTEL", compliance: Array(38).fill(1)}, {id:"co25", name:"CRISTINA BATALLER BATALLER", compliance: Array(38).fill(1)},
+        {id:"co26", name:"ALEX GIL RAFELS", compliance: Array(38).fill(1)}, {id:"co27", name:"YERAY MELLADO GARCIA", compliance: Array(38).fill(1)}, {id:"co28", name:"NATALIA BELEN DIAZ", compliance: Array(38).fill(1)}, {id:"co29", name:"ADOLFO ROSA RUIZ", compliance: Array(38).fill(1)}, {id:"co30", name:"PAOLA ALONZO ALVAREZ", compliance: Array(38).fill(1)},
+        {id:"co31", name:"CHAYMAE HOUNAINE", compliance: Array(38).fill(1)}, {id:"co32", name:"WISAL KHAN", compliance: Array(38).fill(1)}, {id:"co33", name:"LIZ PAOLA CANDIA", compliance: Array(38).fill(1)}
     ]},
     { id: "e3", name: "Ruben", role: "Coach", score: 82, clients: [
-        {id:"cr1", name:"Ivan sanchez mont"}, {id:"cr2", name:"Sandra Carolina Benitez"}, {id:"cr3", name:"ANNa Bollo Albos"}, {id:"cr4", name:"Xavier Guerrero Garcia"}, {id:"cr5", name:"Carlos javier gallego mateo"},
-        {id:"cr6", name:"Cristina rodriguez valero"}, {id:"cr7", name:"Alex pino palau"}, {id:"cr8", name:"biel serrano"}, {id:"cr9", name:"daniel rodriguez"}, {id:"cr10", name:"ana celia"},
-        {id:"cr11", name:"gustavo rocha"}, {id:"cr12", name:"cristina molina rosales"}, {id:"cr13", name:"Manuel Rodrigez Fernandez"}, {id:"cr14", name:"Mohamed Rougui"}, {id:"cr15", name:"albert lastra"},
-        {id:"cr16", name:"David mula"}, {id:"cr17", name:"Miriam gasca"}
+        {id:"cr1", name:"Ivan sanchez mont", compliance: Array(38).fill(1)}, {id:"cr2", name:"Sandra Carolina Benitez", compliance: Array(38).fill(1)}, {id:"cr3", name:"ANNa Bollo Albos", compliance: Array(38).fill(1)}, {id:"cr4", name:"Xavier Guerrero Garcia", compliance: Array(38).fill(1)}, {id:"cr5", name:"Carlos javier gallego mateo", compliance: Array(38).fill(1)},
+        {id:"cr6", name:"Cristina rodriguez valero", compliance: Array(38).fill(1)}, {id:"cr7", name:"Alex pino palau", compliance: Array(38).fill(1)}, {id:"cr8", name:"biel serrano", compliance: Array(38).fill(1)}, {id:"cr9", name:"daniel rodriguez", compliance: Array(38).fill(1)}, {id:"cr10", name:"ana celia", compliance: Array(38).fill(1)},
+        {id:"cr11", name:"gustavo rocha", compliance: Array(38).fill(1)}, {id:"cr12", name:"cristina molina rosales", compliance: Array(38).fill(1)}, {id:"cr13", name:"Manuel Rodrigez Fernandez", compliance: Array(38).fill(1)}, {id:"cr14", name:"Mohamed Rougui", compliance: Array(38).fill(1)}, {id:"cr15", name:"albert lastra", compliance: Array(38).fill(1)},
+        {id:"cr16", name:"David mula", compliance: Array(38).fill(1)}, {id:"cr17", name:"Miriam gasca", compliance: Array(38).fill(1)}
     ]},
     { id: "e4", name: "Anna", role: "Coach", score: 90, clients: [
-        {id:"ca1", name:"ANA MARIN MARTIN"}, {id:"ca2", name:"MONTSERRAT GARRIGA"}, {id:"ca3", name:"SELENE FERRER"}, {id:"ca4", name:"MONTSERRAT RUIZ GRIBAU"}, {id:"ca5", name:"GUILLERMO VERA"}, {id:"ca6", name:"CESAR DAVID SOLORZANO QUIÑE"}, {id:"ca7", name:"CRISTINA BATALLER BATALLER"}
+        {id:"ca1", name:"ANA MARIN MARTIN", compliance: Array(38).fill(1)}, {id:"ca2", name:"MONTSERRAT GARRIGA", compliance: Array(38).fill(1)}, {id:"ca3", name:"SELENE FERRER", compliance: Array(38).fill(1)}, {id:"ca4", name:"MONTSERRAT RUIZ GRIBAU", compliance: Array(38).fill(1)}, {id:"ca5", name:"GUILLERMO VERA", compliance: Array(38).fill(1)}, {id:"ca6", name:"CESAR DAVID SOLORZANO QUIÑE", compliance: Array(38).fill(1)}, {id:"ca7", name:"CRISTINA BATALLER BATALLER", compliance: Array(38).fill(1)}
     ] }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v25')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v25')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v26')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v26')) || [];
 let formValues = {}; 
 let formObservations = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxcIOljiPraQq2mgtyMLwj0PQ3Nzrd5Qcuawg1L1FdvCqsaQhTF7o_-fH-9T2mf1kyx/exec";
@@ -96,7 +96,8 @@ function resetFormParams() {
 }
 resetFormParams();
 
-function cambiarSeccion(target) {
+// --- NAVEGACIÓN ---
+window.cambiarSeccion = function(target) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`view-${target}`).classList.remove('hidden');
     document.querySelectorAll('aside nav button').forEach(btn => btn.classList.remove('active-nav'));
@@ -106,10 +107,6 @@ function cambiarSeccion(target) {
     if (target === 'dashboard') renderDashboard();
     if (target === 'auditar') { renderCoachSelect(); renderPuntosAuditoria(); }
     if (target === 'entrenadores') renderEntrenadoresGrid();
-    if (target === 'config') {
-        document.getElementById('view-config').classList.remove('hidden');
-        document.getElementById('sheetUrlInput').value = googleScriptUrl;
-    }
 }
 
 function renderPuntosAuditoria() {
@@ -137,21 +134,21 @@ function renderPuntosAuditoria() {
                         ${controlHtml}
                     </div>
                     <div class="pt-1">
-                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Añadir observación específica..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple placeholder-brandText/30">
+                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Añadir observación..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple placeholder-brandText/30">
                     </div>
                 </div>`;
         });
     }
 }
 
-function setVal(id, val, btn) {
+window.setVal = function(id, val, btn) {
     formValues[id] = val;
     if (btn) {
         document.querySelectorAll(`.btn-val-${id}`).forEach(b => b.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md text-brandText transition font-bold`);
         btn.className = `btn-val-${id} px-3 py-1 text-[10px] rounded-md transition font-bold ${val === 1 ? 'bg-brandLime text-brandDark' : 'bg-red-500 text-white'}`;
     }
 }
-function setObs(id, val) { formObservations[id] = val; }
+window.setObs = function(id, val) { formObservations[id] = val; }
 
 function renderCoachSelect() {
     const s = document.getElementById('formCoachSelect');
@@ -160,7 +157,7 @@ function renderCoachSelect() {
     entrenadores.forEach(e => s.innerHTML += `<option value="${e.id}">${e.name}</option>`);
 }
 
-function actualizarListaAlumnos(id) {
+window.actualizarListaAlumnos = function(id) {
     const s = document.getElementById('formClientSelect');
     if (!s) return;
     s.innerHTML = '<option value="" disabled selected>Selecciona Alumno...</option>';
@@ -177,7 +174,6 @@ function renderDashboard() {
     const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
     const alrt = auditorias.filter(a=>a.score < 80).length;
     
-    // IDs EXACTOS DEL HTML PARA CARDS
     if(document.getElementById('statTotalAudits')) document.getElementById('statTotalAudits').innerText = total;
     if(document.getElementById('statAvgScore')) document.getElementById('statAvgScore').innerText = avg + "%";
     if(document.getElementById('statAlerts')) document.getElementById('statAlerts').innerText = alrt;
@@ -202,7 +198,7 @@ function renderDashboard() {
                         <p class="text-white font-bold text-2xl">${e.score}%</p>
                     </div>
                     <div class="w-40 bg-brandDark border border-[#2D2344] h-2.5 rounded-full overflow-hidden shadow-inner">
-                        <div class="h-full ${color} shadow-[0_0_15px_rgba(155,230,0,0.3)]" style="width: ${e.score}%"></div>
+                        <div class="h-full ${color}" style="width: ${e.score}%"></div>
                     </div>
                 </div>
             </div>`;
@@ -217,13 +213,13 @@ function renderDashboard() {
                 <td class="py-6 pl-2 text-brandText">${a.date.split('T')[0]}</td>
                 <td class="py-6 font-bold text-white uppercase tracking-tighter">${a.coach}</td>
                 <td class="py-6 text-white font-medium">${a.client}</td>
-                <td class="py-6 text-center"><span class="px-3 py-1.5 rounded-xl text-[11px] font-black ${a.score >= 85 ? 'bg-brandLime/10 text-brandLime border border-brandLime/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}">${a.score}%</span></td>
+                <td class="py-6 text-center"><span class="px-3 py-1.5 rounded-xl text-[11px] font-black ${a.score >= 85 ? 'bg-brandLime/10 text-brandLime' : 'bg-red-500/10 text-red-500'}">${a.score}%</span></td>
                 <td class="py-6 text-center"><button onclick="verInformePrevio('${a.id}')" class="text-brandPurpleLight hover:text-white transition transform hover:scale-110"><i class="fa-solid fa-file-invoice text-xl"></i></button></td>
             </tr>`;
     });
 }
 
-function procesarNuevaAuditoria(e) {
+window.procesarNuevaAuditoria = function(e) {
     e.preventDefault();
     const coachId = document.getElementById('formCoachSelect').value;
     const clientId = document.getElementById('formClientSelect').value;
@@ -248,15 +244,15 @@ function procesarNuevaAuditoria(e) {
     client.lastScore = score;
     coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
 
-    localStorage.setItem('af_audits_v25', JSON.stringify(auditorias));
-    localStorage.setItem('af_coaches_v25', JSON.stringify(entrenadores));
+    localStorage.setItem('af_audits_v26', JSON.stringify(auditorias));
+    localStorage.setItem('af_coaches_v26', JSON.stringify(entrenadores));
 
     if (supabase) {
         supabase.from('auditorias').insert([{
             coach: coach.name, client: client.name, score: score,
             compliance_data: formValues, observations_data: formObservations,
             created_at: new Date()
-        }]).then(({error}) => { if (error) console.error("Supabase Error:", error); });
+        }]).then(({error}) => { if (error) console.error("Supabase Sync Error:", error); });
     }
 
     if (googleScriptUrl) {
@@ -270,31 +266,31 @@ function generarInformeFinal(aud) {
     const container = document.getElementById('contenidoInforme');
     const fallos = CONFIG_AUDIT.filter(p => p.type === "bool" && aud.compliance[p.id] === 0);
     const fortalezas = CONFIG_AUDIT.filter(p => p.type === "bool" && aud.compliance[p.id] === 1);
-    const tendencia = aud.prevScore ? (aud.score > aud.prevScore ? "📈 Mejora detectada" : "📉 Descenso detectado") : "🆕 Auditoría Inicial";
+    const tendencia = aud.prevScore ? (aud.score > aud.prevScore ? "Mejora detectada" : "Descenso detectado") : "Auditoría Inicial";
 
     container.innerHTML = `
-        <div class="flex justify-between border-b border-[#2D2344] pb-8">
-            <div><p class="text-[10px] text-brandText uppercase font-black tracking-[0.2em] mb-2">Resultado Ejecutivo</p><h4 class="text-4xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
+        <div class="flex justify-between border-b border-[#2D2344] pb-8 text-white">
+            <div><p class="text-[10px] text-brandText uppercase font-black tracking-widest mb-2">Resumen Audit</p><h4 class="text-4xl font-bold">${aud.score}% Compliance</h4></div>
             <div class="text-right text-[10px] text-brandText font-bold uppercase tracking-widest">${tendencia}<br>${aud.date.replace('T', ' ')}</div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 py-8">
-            <div class="space-y-4"><h5 class="text-xs font-black text-brandLime uppercase tracking-widest">Fortalezas Identificadas</h5><ul class="text-[11px] space-y-3">${fortalezas.slice(0,10).map(f=>`<li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brandLime"></i>${f.label}</li>`).join('')}</ul></div>
-            <div class="space-y-6"><h5 class="text-xs font-black text-red-400 uppercase tracking-widest">Áreas de Acción Críticas</h5><ul class="text-[11px] space-y-5">${fallos.map(f=>`<li class="space-y-2"><div class="text-white font-bold flex items-center gap-3"><i class="fa-solid fa-triangle-exclamation text-red-400"></i>${f.label}</div>${aud.observations[f.id] ? `<div class="ml-7 pl-4 border-l-2 border-[#2D2344] text-brandText italic">"${aud.observations[f.id]}"</div>` : ''}</li>`).join('')}</ul></div>
+            <div class="space-y-4 text-white"><h5 class="text-xs font-black text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[11px] space-y-3">${fortalezas.slice(0,10).map(f=>`<li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brandLime"></i>${f.label}</li>`).join('')}</ul></div>
+            <div class="space-y-6 text-white"><h5 class="text-xs font-black text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[11px] space-y-5">${fallos.map(f=>`<li class="space-y-2"><div class="font-bold flex items-center gap-3"><i class="fa-solid fa-triangle-exclamation text-red-400"></i>${f.label}</div>${aud.observations[f.id] ? `<div class="ml-7 pl-4 border-l-2 border-[#2D2344] text-brandText italic">"${aud.observations[f.id]}"</div>` : ''}</li>`).join('')}</ul></div>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
 }
 
-function guardarUrlSheet() {
+window.guardarUrlSheet = function() {
     const url = document.getElementById('sheetUrlInput').value.trim();
     if (!url) return alert("Ingresa URL");
     localStorage.setItem('af_script_url_v4', url);
     googleScriptUrl = url;
-    alert("¡Vincualción Exitosa!");
+    alert("¡Vinculado con éxito!");
     cambiarSeccion('dashboard');
 }
 
-function cerrarModalInforme() { document.getElementById('modalInforme').classList.add('hidden'); cambiarSeccion('dashboard'); }
-function verInformePrevio(id) { const a = auditorias.find(aud => aud.id === id); if (a) generarInformeFinal(a); }
+window.cerrarModalInforme = function() { document.getElementById('modalInforme').classList.add('hidden'); cambiarSeccion('dashboard'); }
+window.verInformePrevio = function(id) { const a = auditorias.find(aud => aud.id === id); if (a) generarInformeFinal(a); }
 
 function renderEntrenadoresGrid() {
     const grid = document.getElementById('coachesDetailedGrid');
@@ -317,4 +313,6 @@ function renderEntrenadoresGrid() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => { renderDashboard(); });
+document.addEventListener('DOMContentLoaded', () => { 
+    renderDashboard(); 
+});
