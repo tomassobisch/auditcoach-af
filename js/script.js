@@ -68,37 +68,23 @@ const entrenadoresDefault = [
     { 
         id: "e3", name: "Ruben", role: "Coach", score: 85,
         clients: [
-            { id: "c_r1", name: "SHEILA DE CARMEN", compliance: Array(22).fill(1) },
-            { id: "c_r2", name: "ORIOL BACELLS", compliance: Array(22).fill(1) },
-            { id: "c_r3", name: "LISANDRO MELÉNDEZ", compliance: Array(22).fill(1) },
-            { id: "c_r4", name: "JORGE MANUEL DOMÍNGUEZ", compliance: Array(22).fill(1) },
-            { id: "c_r5", name: "MIBEL RIBAS", compliance: Array(22).fill(1) },
-            { id: "c_r6", name: "YOLANDA FERNÁNDEZ", compliance: Array(22).fill(1) },
-            { id: "c_r7", name: "ANA MARÍN MARTÍN", compliance: Array(22).fill(1) },
-            { id: "c_r8", name: "RAÚL VEGA GARCÍA", compliance: Array(22).fill(1) },
-            { id: "c_r9", name: "XAVI CATALÁN", compliance: Array(22).fill(1) },
-            { id: "c_r10", name: "SELENE FERRER", compliance: Array(22).fill(1) },
-            { id: "c_r11", name: "MONTSERRAT GARRIGA", compliance: Array(22).fill(1) },
-            { id: "c_r12", name: "LLUÍS GASSÓ", compliance: Array(22).fill(1) },
-            { id: "c_r13", name: "LAURA MASSOT", compliance: Array(22).fill(1) },
-            { id: "c_r14", name: "SAMUEL RODRIGUEZ DA SILVA", compliance: Array(22).fill(1) },
-            { id: "c_r15", name: "MONTSERRAT RUIZ GRIBAU", compliance: Array(22).fill(1) },
-            { id: "c_r16", name: "GUILLERMO VERA", compliance: Array(22).fill(1) },
-            { id: "c_r17", name: "EDUARD FALCÓN", compliance: Array(22).fill(1) },
-            { id: "c_r18", name: "SEIDY GARCÍA ISIDRO", compliance: Array(22).fill(1) },
-            { id: "c_r19", name: "CLAUDIA SOUZA DA SILVA", compliance: Array(22).fill(1) },
-            { id: "c_r20", name: "MÓNICA ESCAÑO VIAN", compliance: Array(22).fill(1) },
-            { id: "c_r21", name: "CÉSAR DAVID SOLÓRZANO QUIÑE", compliance: Array(22).fill(1) },
-            { id: "c_r22", name: "AUDRY DOTEL", compliance: Array(22).fill(1) },
-            { id: "c_r23", name: "CRISTINA BATALLER BATALLER", compliance: Array(22).fill(1) },
-            { id: "c_r24", name: "ALEX GIL RAFELS", compliance: Array(22).fill(1) },
-            { id: "c_r25", name: "YERAY MELLADO GARCÍA", compliance: Array(22).fill(1) },
-            { id: "c_r26", name: "NATALIA BELÉN DÍAZ", compliance: Array(22).fill(1) },
-            { id: "c_r27", name: "ADOLFO ROSA RUIZ", compliance: Array(22).fill(1) },
-            { id: "c_r28", name: "PAOLA ALONZO ÁLVAREZ", compliance: Array(22).fill(1) },
-            { id: "c_r29", name: "CHAYMAE HOUNAINE", compliance: Array(22).fill(1) },
-            { id: "c_r30", name: "WISAL KHAN", compliance: Array(22).fill(1) },
-            { id: "c_r31", name: "LIZ PAOLA CANDIA", compliance: Array(22).fill(1) }
+            { id: "c_r1", name: "Ivan sanchez mont", compliance: Array(22).fill(1) },
+            { id: "c_r2", name: "Sandra Carolina Benitez", compliance: Array(22).fill(1) },
+            { id: "c_r3", name: "ANNa Bollo Albos", compliance: Array(22).fill(1) },
+            { id: "c_r4", name: "Xavier Guerrero Garcia", compliance: Array(22).fill(1) },
+            { id: "c_r5", name: "Carlos javier gallego mateo", compliance: Array(22).fill(1) },
+            { id: "c_r6", name: "Cristina rodriguez valero", compliance: Array(22).fill(1) },
+            { id: "c_r7", name: "Alex pino palau", compliance: Array(22).fill(1) },
+            { id: "c_r8", name: "biel serrano", compliance: Array(22).fill(1) },
+            { id: "c_r9", name: "daniel rodriguez", compliance: Array(22).fill(1) },
+            { id: "c_r10", name: "ana celia", compliance: Array(22).fill(1) },
+            { id: "c_r11", name: "gustavo rocha", compliance: Array(22).fill(1) },
+            { id: "c_r12", name: "cristina molina rosales", compliance: Array(22).fill(1) },
+            { id: "c_r13", name: "Manuel Rodrigez Fernandez", compliance: Array(22).fill(1) },
+            { id: "c_r14", name: "Mohamed Rougui", compliance: Array(22).fill(1) },
+            { id: "c_r15", name: "albert lastra", compliance: Array(22).fill(1) },
+            { id: "c_r16", name: "David mula", compliance: Array(22).fill(1) },
+            { id: "c_r17", name: "Miriam gasca", compliance: Array(22).fill(1) }
         ]
     },
     { 
@@ -111,8 +97,8 @@ const entrenadoresDefault = [
     }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v13')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v13')) || [];
+let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v14')) || entrenadoresDefault;
+let auditorias = JSON.parse(localStorage.getItem('af_audits_v14')) || [];
 let formParamValues = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxtS5k9QSY7KanAx6rgCAnF9iPr8gtsyplfpiMo5YA-HAp-q-YqwLs17vL_gg6Odi57/exec";
 
@@ -218,7 +204,12 @@ function procesarNuevaAuditoria(e) {
         score: score,
         prevScore: prevScore,
         compliance: complianceArray,
-        observations: observations
+        observations: observations,
+        techData: {
+            objetivo: document.getElementById('val_objetivo').value,
+            obs_programa: document.getElementById('val_obs_programa').value,
+            obs_evolt: document.getElementById('val_obs_evolt').value
+        }
     };
 
     auditorias.unshift(nuevaAuditoria);
