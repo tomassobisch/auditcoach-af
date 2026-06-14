@@ -6,7 +6,8 @@ tailwind.config = {
                 brandDark: '#0B0813', brandPanel: '#171226', brandBorder: '#2D2344',
                 brandPurple: '#7332A6', brandPurpleLight: '#914CC9', brandLime: '#9BE600',
                 brandCyan: '#00E5FF', brandText: '#9E9AA8'
-            }
+            },
+            fontFamily: { sans: ['Inter', 'sans-serif'], poppins: ['Poppins', 'sans-serif'] }
         }
     }
 }
@@ -151,12 +152,14 @@ function setObs(id, val) { formObservations[id] = val; }
 
 function renderCoachSelect() {
     const s = document.getElementById('formCoachSelect');
+    if (!s) return;
     s.innerHTML = '<option value="" disabled selected>Selecciona Coach...</option>';
     entrenadores.forEach(e => s.innerHTML += `<option value="${e.id}">${e.name}</option>`);
 }
 
 function actualizarListaAlumnos(id) {
     const s = document.getElementById('formClientSelect');
+    if (!s) return;
     s.innerHTML = '<option value="" disabled selected>Selecciona Alumno...</option>';
     const coach = entrenadores.find(e => e.id === id);
     if (coach) {
@@ -171,27 +174,33 @@ function renderDashboard() {
     const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
     const alrt = auditorias.filter(a=>a.score < 80).length;
     
-    // IDs corregidos para el Dashboard
-    document.getElementById('statTotalAudits').innerText = total;
-    document.getElementById('statAvgScore').innerText = avg + "%";
-    document.getElementById('statAlerts').innerText = alrt;
+    // IDs Unificados con el HTML
+    const stT = document.getElementById('statTotalAudits');
+    const stA = document.getElementById('statAvgScore');
+    const stL = document.getElementById('statAlerts');
+    
+    if(stT) stT.innerText = total;
+    if(stA) stA.innerText = avg + "%";
+    if(stL) stL.innerText = alrt;
 
     const list = document.getElementById('coachesSummaryList');
+    if (!list) return;
     list.innerHTML = "";
     entrenadores.forEach(e => {
         const color = e.score < 80 ? 'bg-red-500' : (e.score < 90 ? 'bg-amber-500' : 'bg-brandLime');
         list.innerHTML += `
             <div class="bg-brandPanel border border-brandBorder rounded-2xl p-5 space-y-3">
                 <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold">${e.name[0]}</div>
+                    <div class="w-10 h-10 rounded-xl bg-brandBorder flex items-center justify-center text-white font-bold text-lg">${e.name[0]}</div>
                     <div><h4 class="text-white font-bold text-sm">${e.name}</h4><p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p></div>
                 </div>
-                <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Cumplimiento: ${e.score}%</span></div>
+                <div class="flex justify-between items-center text-[10px] font-bold text-white"><span>Cumplimiento Global: ${e.score}%</span></div>
                 <div class="w-full bg-brandDark h-1.5 rounded-full overflow-hidden border border-brandBorder"><div class="h-full ${color}" style="width: ${e.score}%"></div></div>
             </div>`;
     });
 
     const table = document.getElementById('lastAuditsTable');
+    if (!table) return;
     table.innerHTML = auditorias.length ? '' : '<tr><td colspan="5" class="py-4 text-brandText pl-2">Sin registros.</td></tr>';
     auditorias.slice(0, 10).forEach(a => {
         table.innerHTML += `
@@ -209,7 +218,8 @@ function procesarNuevaAuditoria(e) {
     e.preventDefault();
     const coachId = document.getElementById('formCoachSelect').value;
     const clientId = document.getElementById('formClientSelect').value;
-    if (!coachId || !clientId) return alert("Selecciona coach y alumno.");
+    const dateInput = document.getElementById('formDateTime').value;
+    if (!coachId || !clientId || !dateInput) return alert("Faltan datos obligatorios.");
 
     const coach = entrenadores.find(e => e.id === coachId);
     const client = coach.clients.find(c => c.id === clientId);
@@ -219,7 +229,7 @@ function procesarNuevaAuditoria(e) {
 
     const nuevaAuditoria = {
         id: "a_" + Date.now(),
-        date: document.getElementById('formDateTime').value,
+        date: dateInput,
         coach: coach.name, client: client.name, score: score,
         compliance: {...formValues}, observations: {...formObservations},
         prevScore: client.lastScore || null
@@ -259,11 +269,11 @@ function generarInformeFinal(aud) {
 
     container.innerHTML = `
         <div class="flex justify-between border-b border-brandBorder pb-4">
-            <div><p class="text-[10px] text-brandText uppercase font-bold">Resumen Audit</p><h4 class="text-2xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
+            <div><p class="text-[10px] text-brandText uppercase font-bold">Resumen Alumno</p><h4 class="text-2xl font-bold text-white">${aud.score}% Cumplimiento</h4></div>
             <div class="text-right text-[10px] text-brandText font-bold">${tendencia}<br>${aud.date.replace('T', ' ')}</div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
-            <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Fortalezas</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
+            <div class="space-y-2"><h5 class="text-xs font-bold text-brandLime uppercase tracking-widest">Puntos Fuertes</h5><ul class="text-[10px] space-y-1">${fortalezas.slice(0,6).map(f=>`<li>• ${f.label}</li>`).join('')}</ul></div>
             <div class="space-y-4"><h5 class="text-xs font-bold text-red-400 uppercase tracking-widest">Mejoras Críticas</h5><ul class="text-[10px] space-y-3">${fallos.map(f=>`<li><span class="text-white font-medium">${f.label}</span>${aud.observations[f.id] ? `<br><em class="text-brandText/60 italic">Nota: "${aud.observations[f.id]}"</em>` : ''}</li>`).join('')}</ul></div>
         </div>`;
     document.getElementById('modalInforme').classList.remove('hidden');
@@ -271,10 +281,10 @@ function generarInformeFinal(aud) {
 
 function guardarUrlSheet() {
     const url = document.getElementById('sheetUrlInput').value.trim();
-    if (!url) return alert("Ingresa URL");
+    if (!url) return alert("Ingresa una URL válida");
     localStorage.setItem('af_script_url_v4', url);
     googleScriptUrl = url;
-    alert("¡Vinculado con éxito!");
+    alert("¡Google Sheet vinculado con éxito!");
     cambiarSeccion('dashboard');
 }
 
@@ -283,6 +293,7 @@ function verInformePrevio(id) { const a = auditorias.find(aud => aud.id === id);
 
 function renderEntrenadoresGrid() {
     const grid = document.getElementById('coachesDetailedGrid');
+    if (!grid) return;
     grid.innerHTML = "";
     entrenadores.forEach(e => {
         grid.innerHTML += `
