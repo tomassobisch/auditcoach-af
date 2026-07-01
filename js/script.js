@@ -82,11 +82,32 @@ const entrenadoresDefault = [
     ] }
 ];
 
-let entrenadores = JSON.parse(localStorage.getItem('af_coaches_v26')) || entrenadoresDefault;
-let auditorias = JSON.parse(localStorage.getItem('af_audits_v26')) || [];
+let entrenadores = entrenadoresDefault;
+try {
+    const savedCoaches = localStorage.getItem('af_coaches_v26');
+    if (savedCoaches) {
+        const parsedCoaches = JSON.parse(savedCoaches);
+        if (Array.isArray(parsedCoaches)) entrenadores = parsedCoaches;
+    }
+} catch (e) {
+    console.error("Error parsing af_coaches_v26:", e);
+}
+
+let auditorias = [];
+try {
+    const savedAudits = localStorage.getItem('af_audits_v26');
+    if (savedAudits) {
+        const parsedAudits = JSON.parse(savedAudits);
+        if (Array.isArray(parsedAudits)) auditorias = parsedAudits;
+    }
+} catch (e) {
+    console.error("Error parsing af_audits_v26:", e);
+}
+
 let formValues = {}; 
 let formObservations = {};
 let googleScriptUrl = localStorage.getItem('af_script_url_v4') || "https://script.google.com/macros/s/AKfycbxcIOljiPraQq2mgtyMLwj0PQ3Nzrd5Qcuawg1L1FdvCqsaQhTF7o_-fH-9T2mf1kyx/exec";
+
 
 function resetFormParams() { 
     CONFIG_AUDIT.forEach(p => { 
@@ -141,30 +162,36 @@ window.copyCode = function() {
 
 // --- NAVEGACIÓN ---
 window.cambiarSeccion = function(target) {
-    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-    document.getElementById(`view-${target}`).classList.remove('hidden');
-    document.querySelectorAll('aside nav button').forEach(btn => btn.classList.remove('active-nav'));
-    const navBtn = document.getElementById(`nav-${target}`);
-    if (navBtn) navBtn.classList.add('active-nav');
-    
-    if (target === 'dashboard') renderDashboard();
-    if (target === 'auditar') { 
-        renderCoachSelect(); 
-        renderPuntosAuditoria(); 
-        // Pre-poblar fecha y hora local actual si está vacío
-        const dtInput = document.getElementById('formDateTime');
-        if (dtInput && !dtInput.value) {
-            const now = new Date();
-            const tzOffset = now.getTimezoneOffset() * 60000;
-            const localISOTime = (new Date(now - tzOffset)).toISOString().slice(0, 16);
-            dtInput.value = localISOTime;
+    try {
+        document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+        const viewEl = document.getElementById(`view-${target}`);
+        if (viewEl) viewEl.classList.remove('hidden');
+        
+        document.querySelectorAll('aside nav button').forEach(btn => btn.classList.remove('active-nav'));
+        const navBtn = document.getElementById(`nav-${target}`);
+        if (navBtn) navBtn.classList.add('active-nav');
+        
+        if (target === 'dashboard') renderDashboard();
+        if (target === 'auditar') { 
+            renderCoachSelect(); 
+            renderPuntosAuditoria(); 
+            // Pre-poblar fecha y hora local actual si está vacío
+            const dtInput = document.getElementById('formDateTime');
+            if (dtInput && !dtInput.value) {
+                const now = new Date();
+                const tzOffset = now.getTimezoneOffset() * 60000;
+                const localISOTime = (new Date(now - tzOffset)).toISOString().slice(0, 16);
+                dtInput.value = localISOTime;
+            }
         }
+        if (target === 'config') {
+            const input = document.getElementById('sheetUrlInput');
+            if (input) input.value = googleScriptUrl || "";
+        }
+        if (target === 'entrenadores') renderEntrenadoresGrid();
+    } catch (err) {
+        console.error("Error al cambiar de sección:", err);
     }
-    if (target === 'config') {
-        const input = document.getElementById('sheetUrlInput');
-        if (input) input.value = googleScriptUrl || "";
-    }
-    if (target === 'entrenadores') renderEntrenadoresGrid();
 }
 
 function renderPuntosAuditoria() {
@@ -217,7 +244,13 @@ function renderCoachSelect() {
     const s = document.getElementById('formCoachSelect');
     if (!s) return;
     s.innerHTML = '<option value="" disabled selected>Selecciona Coach...</option>';
-    entrenadores.forEach(e => s.innerHTML += `<option value="${e.id}">${e.name}</option>`);
+    if (Array.isArray(entrenadores)) {
+        entrenadores.forEach(e => {
+            if (e && e.id && e.name) {
+                s.innerHTML += `<option value="${e.id}">${e.name}</option>`;
+            }
+        });
+    }
 }
 
 window.actualizarListaAlumnos = function(id) {
@@ -403,16 +436,20 @@ function renderEntrenadoresGrid() {
     const grid = document.getElementById('coachesDetailedGrid');
     if (!grid) return;
     grid.innerHTML = "";
+    if (!Array.isArray(entrenadores)) return;
+    
     entrenadores.forEach(e => {
+        if (!e) return;
+        const clientsList = Array.isArray(e.clients) ? e.clients : [];
         grid.innerHTML += `
             <div class="bg-[#171226] border border-[#2D2344] rounded-[2.5rem] p-10 space-y-8 shadow-2xl">
-                <h3 class="font-bold text-white text-2xl border-b border-[#2D2344] pb-6">${e.name}</h3>
-                <p class="text-[11px] text-brandText uppercase font-black tracking-[0.2em]">Cartera Activa (${e.clients.length})</p>
+                <h3 class="font-bold text-white text-2xl border-b border-[#2D2344] pb-6">${e.name || 'Sin Nombre'}</h3>
+                <p class="text-[11px] text-brandText uppercase font-black tracking-[0.2em]">Cartera Activa (${clientsList.length})</p>
                 <div class="space-y-4 max-h-[25rem] overflow-y-auto pr-3 custom-scroll">
-                    ${e.clients.map(c => `
+                    ${clientsList.map(c => `
                         <div class="flex justify-between items-center text-sm bg-[#0B0813]/60 p-5 rounded-[1.5rem] border border-[#2D2344]">
-                            <span class="text-white font-semibold truncate pr-4">${c.name}</span>
-                            <span class="font-black text-brandLime text-base">${c.lastScore || '--'}%</span>
+                            <span class="text-white font-semibold truncate pr-4">${c.name || 'Sin Nombre'}</span>
+                            <span class="font-black text-brandLime text-base">${c.lastScore !== undefined && c.lastScore !== null ? c.lastScore : '--'}%</span>
                         </div>
                     `).join('')}
                 </div>
