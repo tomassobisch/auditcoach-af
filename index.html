@@ -41,7 +41,7 @@
                 <span class="font-medium text-sm">Fichas de Coaches</span>
             </button>
             
-            <a href="https://docs.google.com/spreadsheets/d/1FAZcYcTYiHv6RE6PmB14tRX-KkZUzg5WCv0OddTsedI/edit?usp=sharing" target="_blank" class="w-full flex items-center gap-4 px-5 py-4 rounded-xl text-left text-[#9BE600] border border-[#9BE600]/20 bg-[#9BE600]/5 hover:bg-[#9BE600]/10 transition mt-6">
+            <a href="https://docs.google.com/spreadsheets/d/1FAZcYcTYiHv6RE6PmB14tRX-KkZUzg5WCv0OddTsedI/edit?gid=889030629#gid=889030629" target="_blank" class="w-full flex items-center gap-4 px-5 py-4 rounded-xl text-left text-[#9BE600] border border-[#9BE600]/20 bg-[#9BE600]/5 hover:bg-[#9BE600]/10 transition mt-6">
                 <i class="fa-solid fa-file-excel text-xl w-6"></i>
                 <span class="font-bold text-sm">Conexión con Sheet</span>
             </a>
@@ -136,18 +136,178 @@
             </section>
 
             <!-- VISTA CONFIG -->
-            <section id="view-config" class="hidden max-w-2xl mx-auto py-20">
-                <div class="bg-[#171226] border border-[#2D2344] rounded-[2rem] p-12 text-center space-y-8 shadow-2xl">
-                    <h3 class="text-white font-poppins font-bold text-2xl uppercase tracking-widest">Configuración</h3>
-                    <div class="space-y-6 text-left">
-                        <div>
-                            <label class="block text-xs text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Google Script URL</label>
-                            <input type="url" id="sheetUrlInput" class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-5 text-sm text-white focus:border-[#9BE600] outline-none">
+            <section id="view-config" class="hidden max-w-5xl mx-auto py-10 space-y-8 pb-32">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Configuración Webhook -->
+                    <div class="bg-[#171226] border border-[#2D2344] rounded-[2rem] p-8 space-y-6 shadow-2xl lg:col-span-1 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <h3 class="text-white font-poppins font-bold text-xl uppercase tracking-wider">Conexión Sheets</h3>
+                            <p class="text-xs text-[#9E9AA8] leading-relaxed">Vincula esta aplicación con la planilla de control de Anytime Fitness Sant Adrià. Las auditorías se registrarán al instante.</p>
+                            <div>
+                                <label class="block text-[10px] text-[#9E9AA8] uppercase font-bold mb-3 tracking-widest">Google Script URL</label>
+                                <input type="url" id="sheetUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-[#0B0813] border border-[#2D2344] rounded-2xl p-4 text-xs text-white focus:border-[#9BE600] outline-none">
+                            </div>
                         </div>
-                        <button onclick="guardarUrlSheet()" class="w-full bg-[#9BE600] text-[#0B0813] py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl transition hover:scale-[1.02]">Vincular Planilla</button>
+                        <button onclick="guardarUrlSheet()" class="w-full bg-[#9BE600] text-[#0B0813] py-4 rounded-xl font-bold uppercase tracking-widest shadow-xl transition hover:scale-[1.02] text-xs">Vincular Planilla</button>
+                    </div>
+
+                    <!-- Código e Instrucciones Apps Script -->
+                    <div class="bg-[#171226] border border-[#2D2344] rounded-[2rem] p-8 space-y-6 shadow-2xl lg:col-span-2">
+                        <h3 class="text-white font-poppins font-bold text-xl uppercase tracking-wider">Instrucciones de Conexión</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-[#9E9AA8] leading-relaxed">
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-2.5">
+                                    <span class="w-5 h-5 rounded-md bg-[#7332A6]/30 text-[#9BE600] flex items-center justify-center shrink-0 font-bold text-[10px]">1</span>
+                                    <p>En tu Google Sheet, ve a la barra superior y haz clic en <strong>Extensiones &gt; Apps Script</strong>.</p>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <span class="w-5 h-5 rounded-md bg-[#7332A6]/30 text-[#9BE600] flex items-center justify-center shrink-0 font-bold text-[10px]">2</span>
+                                    <p>Reemplaza todo el código vacío por el script de la derecha (mapeado para los 36 puntos de la app).</p>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <span class="w-5 h-5 rounded-md bg-[#7332A6]/30 text-[#9BE600] flex items-center justify-center shrink-0 font-bold text-[10px]">3</span>
+                                    <p>Haz clic en <strong>Implementar &gt; Nueva implementación</strong>.</p>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <span class="w-5 h-5 rounded-md bg-[#7332A6]/30 text-[#9BE600] flex items-center justify-center shrink-0 font-bold text-[10px]">4</span>
+                                    <p>Elige tipo <strong>Aplicación Web</strong>, ejecuta como "Tú" y da acceso a <strong>"Cualquiera"</strong>.</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-[10px] text-[#9BE600] uppercase font-bold tracking-widest">Código de Apps Script</span>
+                                    <button onclick="copyCode()" class="px-3 py-1 bg-[#2D2344] hover:bg-[#7332A6] text-white rounded-lg transition text-[10px] flex items-center gap-1.5 font-bold">
+                                        <i class="fa-solid fa-copy"></i> Copiar Código
+                                    </button>
+                                </div>
+                                <div class="bg-[#0B0813] border border-[#2D2344] p-4 rounded-2xl relative font-mono text-[10px] text-[#00E5FF] overflow-x-auto max-h-48 select-all">
+                                    <pre id="codeBlock" class="whitespace-pre">function doPost(e) {
+  var lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(30000);
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = null;
+    var targetGid = "889030629";
+    var sheets = ss.getSheets();
+    for (var i = 0; i < sheets.length; i++) {
+      if (sheets[i].getSheetId().toString() === targetGid) {
+        sheet = sheets[i];
+        break;
+      }
+    }
+    if (!sheet) {
+      sheet = ss.getActiveSheet();
+    }
+    var data = JSON.parse(e.postData.contents);
+    var studentName = data.client ? data.client.toString().trim() : "";
+    var coachName = data.coach ? data.coach.toString().trim() : "";
+    var score = data.score !== undefined ? data.score : 0;
+    var dateVal = data.date ? new Date(data.date) : new Date();
+    var pointIds = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38];
+    var lastCol = Math.max(sheet.getLastColumn(), 42);
+    var headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+    var colDate = -1, colCoach = -1, colClient = -1, colScore = -1, colConsolidatedObs = -1;
+    var colPoints = {};
+    for (var c = 0; c < headers.length; c++) {
+      var hText = headers[c].toString().toLowerCase().trim();
+      if (hText.indexOf("fecha") !== -1 || hText.indexOf("date") !== -1) {
+        if (colDate === -1) colDate = c + 1;
+      } else if (hText.indexOf("coach") !== -1 || hText.indexOf("entrenador") !== -1) {
+        if (colCoach === -1) colCoach = c + 1;
+      } else if (hText.indexOf("alumno") !== -1 || hText.indexOf("client") !== -1) {
+        if (colClient === -1) colClient = c + 1;
+      } else if (hText.indexOf("score") !== -1 || hText.indexOf("compliance") !== -1 || hText.indexOf("cumplimiento") !== -1) {
+        if (colScore === -1) colScore = c + 1;
+      } else if (hText.indexOf("resumen") !== -1 || hText.indexOf("consolidado") !== -1 || (hText.indexOf("observaciones") !== -1 && hText.indexOf(".") === -1)) {
+        if (colConsolidatedObs === -1) colConsolidatedObs = c + 1;
+      }
+      for (var p = 0; p < pointIds.length; p++) {
+        var pid = pointIds[p];
+        var prefix = pid + ".", prefixAlt = pid + " ";
+        var hOrig = headers[c].toString().trim();
+        if (hOrig.indexOf(prefix) === 0 || hOrig.indexOf(prefixAlt) === 0 || hOrig === pid.toString()) {
+          colPoints[pid] = c + 1;
+        }
+      }
+    }
+    if (colDate === -1) colDate = 1;
+    if (colCoach === -1) colCoach = 2;
+    if (colClient === -1) colClient = 3;
+    if (colScore === -1) colScore = 4;
+    for (var p = 0; p < pointIds.length; p++) {
+      var pid = pointIds[p];
+      if (!colPoints[pid]) colPoints[pid] = pid + 2;
+    }
+    if (colConsolidatedObs === -1) colConsolidatedObs = 41;
+    var targetRowIndex = -1;
+    var values = sheet.getDataRange().getValues();
+    var searchName = studentName.toLowerCase().trim();
+    for (var r = 1; r < values.length; r++) {
+      var colsToSearch = [colClient - 1, 0, 1, 2, 3];
+      for (var idx = 0; idx < colsToSearch.length; idx++) {
+        var colIdx = colsToSearch[idx];
+        if (colIdx >= 0 && colIdx < values[r].length) {
+          var cellVal = values[r][colIdx].toString().toLowerCase().trim();
+          if (cellVal === searchName && searchName !== "") {
+            targetRowIndex = r + 1;
+            break;
+          }
+        }
+      }
+      if (targetRowIndex !== -1) break;
+    }
+    var isNewRow = false;
+    if (targetRowIndex === -1) {
+      targetRowIndex = sheet.getLastRow() + 1;
+      isNewRow = true;
+    }
+    sheet.getRange(targetRowIndex, colDate).setValue(dateVal);
+    sheet.getRange(targetRowIndex, colCoach).setValue(coachName);
+    sheet.getRange(targetRowIndex, colClient).setValue(studentName);
+    sheet.getRange(targetRowIndex, colScore).setValue(score + "%");
+    for (var p = 0; p < pointIds.length; p++) {
+      var pid = pointIds[p];
+      var val = data.compliance[pid];
+      var cellCol = colPoints[pid];
+      var cell = sheet.getRange(targetRowIndex, cellCol);
+      cell.clearNote();
+      if (val === 1 || val === "1") {
+        cell.setValue("SÍ");
+      } else if (val === 0 || val === "0") {
+        cell.setValue("NO");
+      } else {
+        cell.setValue(val !== undefined && val !== null ? val : "");
+      }
+      var obs = data.observations[pid];
+      if (obs && obs.trim() !== "") {
+        cell.setNote(obs.trim());
+      }
+    }
+    var consolidatedComments = [];
+    for (var p = 0; p < pointIds.length; p++) {
+      var pid = pointIds[p];
+      var obs = data.observations[pid];
+      if (obs && obs.trim() !== "") {
+        consolidatedComments.push("Punto " + pid + ": " + obs.trim());
+      }
+    }
+    sheet.getRange(targetRowIndex, colConsolidatedObs).setValue(consolidatedComments.join(" | "));
+    return ContentService.createTextOutput(JSON.stringify({ "status": "success", "action": isNewRow ? "created" : "updated", "row": targetRowIndex })).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": err.toString() })).setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
+  }
+}</pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
+
 
             <!-- VISTA FICHAS -->
             <section id="view-entrenadores" class="hidden space-y-8 pb-32"><div id="coachesDetailedGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"></div></section>
@@ -162,6 +322,9 @@
             <div class="p-10 border-t border-[#2D2344]"><button onclick="cerrarModalInforme()" class="w-full bg-[#9BE600] text-[#0B0813] py-5 rounded-2xl font-black uppercase tracking-[0.2em] shadow-xl">Entendido, Volver</button></div>
         </div>
     </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="fixed top-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/script.js"></script>

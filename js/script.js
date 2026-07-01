@@ -96,6 +96,49 @@ function resetFormParams() {
 }
 resetFormParams();
 
+// --- TOAST NOTIFICATIONS (MENSAJES FLOTANTES PREMIUM) ---
+window.showToast = function(message, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    
+    const toast = document.createElement('div');
+    toast.className = `pointer-events-auto flex items-center gap-3 px-5 py-4 rounded-2xl border text-xs font-semibold shadow-2xl transform translate-y-2 opacity-0 transition-all duration-300 ${
+        type === 'success' 
+        ? 'bg-[#171226]/95 border-brandLime/30 text-white backdrop-blur-md' 
+        : 'bg-[#171226]/95 border-red-500/30 text-white backdrop-blur-md'
+    }`;
+    
+    const icon = type === 'success' 
+        ? '<i class="fa-solid fa-circle-check text-brandLime text-base"></i>' 
+        : '<i class="fa-solid fa-triangle-exclamation text-red-500 text-base"></i>';
+        
+    toast.innerHTML = `${icon} <span>${message}</span>`;
+    container.appendChild(toast);
+    
+    // Force reflow
+    toast.offsetHeight;
+    
+    // Animate in
+    toast.classList.remove('translate-y-2', 'opacity-0');
+    
+    // Auto-remove
+    setTimeout(() => {
+        toast.classList.add('translate-y-[-10px]', 'opacity-0');
+        setTimeout(() => { toast.remove(); }, 300);
+    }, 4000);
+}
+
+// --- COPIAR CÓDIGO APPS SCRIPT ---
+window.copyCode = function() {
+    const code = document.getElementById('codeBlock').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+        showToast("¡Código Apps Script copiado al portapapeles!");
+    }).catch(err => {
+        console.error("Error al copiar: ", err);
+        showToast("No se pudo copiar el código.", "error");
+    });
+}
+
 // --- NAVEGACIÓN ---
 window.cambiarSeccion = function(target) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
@@ -105,7 +148,22 @@ window.cambiarSeccion = function(target) {
     if (navBtn) navBtn.classList.add('active-nav');
     
     if (target === 'dashboard') renderDashboard();
-    if (target === 'auditar') { renderCoachSelect(); renderPuntosAuditoria(); }
+    if (target === 'auditar') { 
+        renderCoachSelect(); 
+        renderPuntosAuditoria(); 
+        // Pre-poblar fecha y hora local actual si está vacío
+        const dtInput = document.getElementById('formDateTime');
+        if (dtInput && !dtInput.value) {
+            const now = new Date();
+            const tzOffset = now.getTimezoneOffset() * 60000;
+            const localISOTime = (new Date(now - tzOffset)).toISOString().slice(0, 16);
+            dtInput.value = localISOTime;
+        }
+    }
+    if (target === 'config') {
+        const input = document.getElementById('sheetUrlInput');
+        if (input) input.value = googleScriptUrl || "";
+    }
     if (target === 'entrenadores') renderEntrenadoresGrid();
 }
 
@@ -116,15 +174,20 @@ function renderPuntosAuditoria() {
         container.innerHTML = "";
         CONFIG_AUDIT.filter(p => p.section === i).forEach(p => {
             let controlHtml = "";
+            const currentVal = formValues[p.id];
+            const currentObs = formObservations[p.id] || "";
+
             if (p.type === "bool") {
+                const isYes = currentVal === 1;
+                const isNo = currentVal === 0;
                 controlHtml = `
                     <div class="flex gap-1 bg-brandDark p-1 rounded-lg border border-brandBorder">
-                        <button type="button" onclick="setVal(${p.id}, 1, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md bg-brandLime text-brandDark transition font-bold">SÍ</button>
-                        <button type="button" onclick="setVal(${p.id}, 0, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md text-brandText transition font-bold">NO</button>
+                        <button type="button" onclick="setVal(${p.id}, 1, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md transition font-bold ${isYes ? 'bg-brandLime text-brandDark' : 'text-brandText'}">SÍ</button>
+                        <button type="button" onclick="setVal(${p.id}, 0, this)" class="btn-val-${p.id} px-3 py-1 text-[10px] rounded-md transition font-bold ${isNo ? 'bg-red-500 text-white' : 'text-brandText'}">NO</button>
                     </div>`;
             } else {
                 const inputType = p.type === "date" ? "date" : "text";
-                controlHtml = `<input type="${inputType}" oninput="setVal(${p.id}, this.value)" class="bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:border-brandPurple outline-none w-full sm:w-40">`;
+                controlHtml = `<input type="${inputType}" value="${currentVal || ''}" oninput="setVal(${p.id}, this.value)" class="bg-brandDark border border-brandBorder rounded-lg p-2 text-[10px] text-white focus:border-brandPurple outline-none w-full sm:w-40">`;
             }
 
             container.innerHTML += `
@@ -134,7 +197,7 @@ function renderPuntosAuditoria() {
                         ${controlHtml}
                     </div>
                     <div class="pt-1">
-                        <input type="text" oninput="setObs(${p.id}, this.value)" placeholder="Añadir observación..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple placeholder-brandText/30">
+                        <input type="text" value="${currentObs}" oninput="setObs(${p.id}, this.value)" placeholder="Añadir observación..." class="w-full bg-brandDark/60 border border-brandBorder/30 rounded-xl p-2.5 text-[10px] text-brandText focus:text-white focus:outline-none focus:border-brandPurple placeholder-brandText/30">
                     </div>
                 </div>`;
         });
@@ -224,7 +287,9 @@ window.procesarNuevaAuditoria = function(e) {
     const coachId = document.getElementById('formCoachSelect').value;
     const clientId = document.getElementById('formClientSelect').value;
     const dateInput = document.getElementById('formDateTime').value;
-    if (!coachId || !clientId || !dateInput) return alert("Error: Selecciona Coach, Alumno y Fecha.");
+    if (!coachId || !clientId || !dateInput) {
+        return showToast("Error: Selecciona Coach, Alumno y Fecha.", "error");
+    }
 
     const coach = entrenadores.find(e => e.id === coachId);
     const client = coach.clients.find(c => c.id === clientId);
@@ -242,24 +307,63 @@ window.procesarNuevaAuditoria = function(e) {
 
     auditorias.unshift(nuevaAuditoria);
     client.lastScore = score;
-    coach.score = Math.round(coach.clients.reduce((acc, c) => acc + (c.lastScore || 100), 0) / coach.clients.length);
+    
+    // Calcular score del coach ignorando clientes sin auditorías (o por lo menos ponderándolo de forma realista)
+    const auditedClients = coach.clients.filter(c => c.lastScore !== undefined);
+    coach.score = auditedClients.length 
+        ? Math.round(auditedClients.reduce((acc, c) => acc + c.lastScore, 0) / auditedClients.length) 
+        : 100;
 
     localStorage.setItem('af_audits_v26', JSON.stringify(auditorias));
     localStorage.setItem('af_coaches_v26', JSON.stringify(entrenadores));
+
+    showToast("Sincronizando auditoría en la nube...");
 
     if (supabase) {
         supabase.from('auditorias').insert([{
             coach: coach.name, client: client.name, score: score,
             compliance_data: formValues, observations_data: formObservations,
             created_at: new Date()
-        }]).then(({error}) => { if (error) console.error("Supabase Sync Error:", error); });
+        }]).then(({error}) => { 
+            if (error) {
+                console.error("Supabase Sync Error:", error);
+                showToast("Fallo al guardar en Base de Datos.", "error");
+            } else {
+                showToast("Base de datos sincronizada.");
+            }
+        });
     }
 
     if (googleScriptUrl) {
-        fetch(googleScriptUrl, { method: 'POST', mode: 'no-cors', body: JSON.stringify({...nuevaAuditoria, action: "updateAndHighlight"}) });
+        fetch(googleScriptUrl, { 
+            method: 'POST', 
+            mode: 'no-cors', 
+            body: JSON.stringify({...nuevaAuditoria, action: "updateAndHighlight"}) 
+        })
+        .then(() => {
+            showToast("Planilla Google Sheets sincronizada.");
+        })
+        .catch(err => {
+            console.error("Sheet Sync Error:", err);
+            showToast("Error de conexión al sincronizar Planilla.", "error");
+        });
     }
 
     generarInformeFinal(nuevaAuditoria);
+    
+    // Limpieza y reseteo completo del formulario y estado de memoria
+    resetFormParams();
+    document.getElementById('auditFormMain').reset();
+    renderPuntosAuditoria();
+    
+    // Repoblar la fecha y hora local actual
+    const dtInput = document.getElementById('formDateTime');
+    if (dtInput) {
+        const now = new Date();
+        const tzOffset = now.getTimezoneOffset() * 60000;
+        const localISOTime = (new Date(now - tzOffset)).toISOString().slice(0, 16);
+        dtInput.value = localISOTime;
+    }
 }
 
 function generarInformeFinal(aud) {
@@ -282,10 +386,10 @@ function generarInformeFinal(aud) {
 
 window.guardarUrlSheet = function() {
     const url = document.getElementById('sheetUrlInput').value.trim();
-    if (!url) return alert("Ingresa URL");
+    if (!url) return showToast("Ingresa una URL válida de Apps Script", "error");
     localStorage.setItem('af_script_url_v4', url);
     googleScriptUrl = url;
-    alert("¡Vinculado con éxito!");
+    showToast("¡Planilla vinculada con éxito!");
     cambiarSeccion('dashboard');
 }
 
