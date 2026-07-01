@@ -234,8 +234,8 @@ window.actualizarListaAlumnos = function(id) {
 
 function renderDashboard() {
     const total = auditorias.length;
-    const avg = total ? Math.round(auditorias.reduce((a,b)=>a+b.score,0)/total) : 0;
-    const alrt = auditorias.filter(a=>a.score < 80).length;
+    const avg = total ? Math.round(auditorias.reduce((acc, b) => acc + (b.score || 0), 0) / total) : 0;
+    const alrt = auditorias.filter(a => (a.score || 0) < 80).length;
     
     if(document.getElementById('statTotalAudits')) document.getElementById('statTotalAudits').innerText = total;
     if(document.getElementById('statAvgScore')) document.getElementById('statAvgScore').innerText = avg + "%";
@@ -245,23 +245,25 @@ function renderDashboard() {
     if (!list) return;
     list.innerHTML = "";
     entrenadores.forEach(e => {
-        const color = e.score < 80 ? 'bg-red-500' : (e.score < 90 ? 'bg-amber-500' : 'bg-brandLime');
+        const scoreVal = e.score !== undefined && e.score !== null ? e.score : 100;
+        const color = scoreVal < 80 ? 'bg-red-500' : (scoreVal < 90 ? 'bg-amber-500' : 'bg-brandLime');
+        const coachInitial = e.name && e.name.length ? e.name[0] : '?';
         list.innerHTML += `
             <div class="bg-[#171226] border border-[#2D2344] rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
                 <div class="flex items-center gap-4">
-                    <div class="w-14 h-14 rounded-2xl bg-[#0B0813] border border-[#2D2344] flex items-center justify-center text-white font-bold text-xl shadow-inner">${e.name[0]}</div>
+                    <div class="w-14 h-14 rounded-2xl bg-[#0B0813] border border-[#2D2344] flex items-center justify-center text-white font-bold text-xl shadow-inner">${coachInitial}</div>
                     <div>
-                        <h4 class="text-white font-bold text-lg">${e.name}</h4>
-                        <p class="text-[10px] text-brandText uppercase tracking-widest">${e.role}</p>
+                        <h4 class="text-white font-bold text-lg">${e.name || 'Sin Nombre'}</h4>
+                        <p class="text-[10px] text-brandText uppercase tracking-widest">${e.role || 'Coach'}</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-8">
                     <div class="text-right">
                         <p class="text-[10px] text-brandText uppercase font-bold tracking-widest">Compliance</p>
-                        <p class="text-white font-bold text-2xl">${e.score}%</p>
+                        <p class="text-white font-bold text-2xl">${scoreVal}%</p>
                     </div>
                     <div class="w-40 bg-brandDark border border-[#2D2344] h-2.5 rounded-full overflow-hidden shadow-inner">
-                        <div class="h-full ${color}" style="width: ${e.score}%"></div>
+                        <div class="h-full ${color}" style="width: ${scoreVal}%"></div>
                     </div>
                 </div>
             </div>`;
@@ -271,12 +273,13 @@ function renderDashboard() {
     if (!table) return;
     table.innerHTML = auditorias.length ? '' : '<tr><td colspan="5" class="py-10 text-brandText text-center tracking-widest uppercase text-[10px]">Sin auditorías registradas</td></tr>';
     auditorias.slice(0, 10).forEach(a => {
+        const displayDate = (a.date && typeof a.date === 'string') ? a.date.split('T')[0] : 'Sin fecha';
         table.innerHTML += `
             <tr class="border-b border-[#2D2344]/40 hover:bg-[#171226]/50 transition text-xs">
-                <td class="py-6 pl-2 text-brandText">${a.date.split('T')[0]}</td>
-                <td class="py-6 font-bold text-white uppercase tracking-tighter">${a.coach}</td>
-                <td class="py-6 text-white font-medium">${a.client}</td>
-                <td class="py-6 text-center"><span class="px-3 py-1.5 rounded-xl text-[11px] font-black ${a.score >= 85 ? 'bg-brandLime/10 text-brandLime' : 'bg-red-500/10 text-red-500'}">${a.score}%</span></td>
+                <td class="py-6 pl-2 text-brandText">${displayDate}</td>
+                <td class="py-6 font-bold text-white uppercase tracking-tighter">${a.coach || 'Sin Coach'}</td>
+                <td class="py-6 text-white font-medium">${a.client || 'Sin Alumno'}</td>
+                <td class="py-6 text-center"><span class="px-3 py-1.5 rounded-xl text-[11px] font-black ${(a.score || 0) >= 85 ? 'bg-brandLime/10 text-brandLime' : 'bg-red-500/10 text-red-500'}">${a.score || 0}%</span></td>
                 <td class="py-6 text-center"><button onclick="verInformePrevio('${a.id}')" class="text-brandPurpleLight hover:text-white transition transform hover:scale-110"><i class="fa-solid fa-file-invoice text-xl"></i></button></td>
             </tr>`;
     });
@@ -418,5 +421,9 @@ function renderEntrenadoresGrid() {
 }
 
 document.addEventListener('DOMContentLoaded', () => { 
-    renderDashboard(); 
+    try {
+        renderDashboard(); 
+    } catch (err) {
+        console.error("Error al inicializar el Dashboard:", err);
+    }
 });
